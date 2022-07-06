@@ -1,0 +1,97 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: VertexColorShadergraph_MatWorkingLerp
+  m_Shader: {fileID: -6465566751694194690, guid: 3cf276da3f806bf4ea4b61c81cf8fc0b,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Dirt:
+        m_Texture: {fileID: 2800000, guid: 1f3b41db342b4ec42b58340febf63afb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Grass:
+        m_Texture: {fileID: 2800000, guid: c00d6646592d28b48afbe867534d307a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Stone:
+        m_Texture: {fileID: 2800000, guid: 1a0625722e11f1c448c7c3bfe4b244c0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - TexBase:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - TexR1:
+        m_Texture: {fileID: 2800000, guid: c00d6646592d28b48afbe867534d307a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - TexR2:
+        m_Texture: {fileID: 2800000, guid: 1f3b41db342b4ec42b58340febf63afb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - TexR3:
+        m_Texture: {fileID: 2800000, guid: 1a0625722e11f1c448c7c3bfe4b244c0, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - TexR4:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - TexR5:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_6a0d48842e774c06baf22336b20d62df_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 9332185eb7098c94bb0f15869b80f1ec, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - Boolean: 0
+    - Brightness: 0
+    - DirtRange: 0
+    - Fuzziness: 0
+    - GrassRange: 0
+    - Opacity: 1
+    - StoneRange: 0
+    - TextureScale: 0.29
+    - _Range: 0.17
+    m_Colors:
+    - DirtColor: {r: 0.44313726, g: 0.16078432, b: 0, a: 0}
+    - DirtReplaceColor: {r: 0.4431373, g: 0.1607843, b: 0, a: 0}
+    - GrassColor: {r: 0, g: 0.28235295, b: 0, a: 0}
+    - GrassReplaceColor: {r: 0, g: 0.28235295, b: 0, a: 0}
+    - StoneReplaceColor: {r: 0.28235295, g: 0.28235295, b: 0.28235295, a: 0}
+    - TexR1ReplaceColor: {r: 0.4431373, g: 0.1607843, b: 0, a: 1}
+    - TexR2ReplaceColor: {r: 0, g: 0, b: 0, a: 0}
+    - TexR3ReplaceColor: {r: 0, g: 0, b: 0, a: 0}
+    - TexR4ReplaceColor: {r: 0, g: 0, b: 0, a: 0}
+    - TexR5ReplaceColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []

@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class PaintFaces : MonoBehaviour
 {
+	[Header("Base?")]
+	public bool isBase = false;
+	public PaintFaces basePaintFaces;
+	[Header("Settings")]
 	public GameObject brushCursor, brushContainer; //The cursor that overlaps the model and our container for the brushes painted
 	public Camera sceneCamera, canvasCam;  //The camera that looks at the model, and the camera that looks at the canvas.
 	public Sprite cursorPaint; // Cursor for the differen functions 
@@ -22,8 +26,10 @@ public class PaintFaces : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		canvasTexture = new RenderTexture(canvasTexture.width, canvasTexture.height, canvasTexture.depth, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB);
-		canvasTexture.antiAliasing = canvasTexture.antiAliasing;
+		if (isBase)
+			return;
+		canvasTexture = new RenderTexture(basePaintFaces.canvasTexture.width, basePaintFaces.canvasTexture.height, basePaintFaces.canvasTexture.depth, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB);
+		canvasTexture.antiAliasing = basePaintFaces.canvasTexture.antiAliasing;
 		canvasCam.targetTexture = canvasTexture;
 		canvasMaterial.SetTexture("_MainTex", canvasTexture);
 		planet.heightMapRT = canvasTexture;
@@ -51,6 +57,9 @@ public class PaintFaces : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (isBase)
+			return;
+
 		timeSinceLastInput += Time.deltaTime;
 		if (timeSinceLastInput > autoSaveTime && hasAutoSaved == false)
 		{
@@ -119,8 +128,6 @@ public class PaintFaces : MonoBehaviour
 		Vector3 uvWorldPosition = Vector3.zero;
 		if (HitTestUVPosition(ref uvWorldPosition) && !saving)
 		{
-			uvWorldPosition.x = uvWorldPosition.x;
-			uvWorldPosition.y = uvWorldPosition.y;
 			brushCursor.SetActive(true);
 			brushCursor.transform.position = uvWorldPosition + brushContainer.transform.position;
 		}

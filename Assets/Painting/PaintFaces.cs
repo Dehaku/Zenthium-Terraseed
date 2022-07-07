@@ -18,7 +18,7 @@ public class PaintFaces : MonoBehaviour
 	public Material canvasMaterial; // The material rendered onto final products.
 
 	public MeshRenderer paintTarget;
-
+	public int RTLayer;
 	public Spherize planet;
 
 	public float brushSize = 1.0f; //The size of our brush
@@ -148,6 +148,7 @@ public class PaintFaces : MonoBehaviour
 			brushObj.transform.parent = brushContainer.transform; //Add the brush to our container to be wiped later
 			brushObj.transform.localPosition = uvWorldPosition; //The position of the brush (in the UVMap)
 			brushObj.transform.localScale = Vector3.one * brushSize;//The size of the brush
+			brushObj.layer = RTLayer;
 		}
 		brushCounter++; //Add to the max brushes
 		if (brushCounter >= MAX_BRUSH_COUNT)

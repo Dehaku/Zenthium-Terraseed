@@ -13,59 +13,91 @@ public class PaintBoss : MonoBehaviour
 
     RaycastHit hit;
 
+    bool _triggerSave = false;
+    bool _isPainting = false;
+    PaintTag targetHit = null;
+
     // Update is called once per frame
     void Update()
     {
-        PaintTag targetHit = null;
-        if (Input.GetMouseButton(0))
-            targetHit = CheckForPaintTargets();
-
         bool brushFull = false;
+        if (Input.GetMouseButton(0))
+        {
+            PaintTag newTarget = CheckForPaintTargets();
+            if(targetHit != null && targetHit != newTarget)
+            {
+                //Debug.Log("Not drawing on same target now!");
+                SaveLastTarget();
+            }
+            
+            targetHit = newTarget;
+            _isPainting = true;
+            brushFull = PaintTarget();
+        }
+        else if(_isPainting)
+        {
+            
+            _isPainting = false;
+            _triggerSave = true;
+        }
+            
+        //Debug.Log("Make it save when you let go of the mouse button.");
+        
 
+        
+
+        if (brushFull || Input.GetMouseButtonDown(1) || _triggerSave)
+        {
+            
+            SaveLastTarget();
+        }
+
+    }
+
+    bool PaintTarget()
+    {
+        bool brushFull = false;
         if (targetHit)
         {
             // Debug.Log("We hit a paint target!" + hit.collider.name);
             // Debug.Log(targetHit.owner.name);
-
-            
-
             if (Input.GetKey(KeyCode.LeftShift))
                 brushFull = targetHit.owner.DoAction(false);
             else
                 brushFull = targetHit.owner.DoAction(true);
-
-            
         }
+        return brushFull;
+    }
 
-        if (brushFull || Input.GetMouseButtonDown(1))
+    void SaveLastTarget()
+    {
+        if (targetHit)
         {
-            if(targetHit)
-            {
-                targetHit.owner.TriggerSaveMethod();
-                
+            targetHit.owner.TriggerSaveMethod();
 
-                if (targetHit.owner.NeighborLeft)
-                    targetHit.owner.NeighborLeft.TriggerSaveMethod();
-                if (targetHit.owner.NeighborUp)
-                    targetHit.owner.NeighborUp.TriggerSaveMethod();
-                if (targetHit.owner.NeighborRight)
-                    targetHit.owner.NeighborRight.TriggerSaveMethod();
-                if (targetHit.owner.NeighborDown)
-                    targetHit.owner.NeighborDown.TriggerSaveMethod();
 
-                StartCoroutine(targetHit.owner.EmptyBrushContainer());
+            if (targetHit.owner.NeighborLeft)
+                targetHit.owner.NeighborLeft.TriggerSaveMethod();
+            if (targetHit.owner.NeighborUp)
+                targetHit.owner.NeighborUp.TriggerSaveMethod();
+            if (targetHit.owner.NeighborRight)
+                targetHit.owner.NeighborRight.TriggerSaveMethod();
+            if (targetHit.owner.NeighborDown)
+                targetHit.owner.NeighborDown.TriggerSaveMethod();
 
-                if (targetHit.owner.NeighborLeft)
-                    StartCoroutine(targetHit.owner.NeighborLeft.EmptyBrushContainer());
-                if (targetHit.owner.NeighborUp)
-                    StartCoroutine(targetHit.owner.NeighborUp.EmptyBrushContainer());
-                if (targetHit.owner.NeighborRight)
-                    StartCoroutine(targetHit.owner.NeighborRight.EmptyBrushContainer());
-                if (targetHit.owner.NeighborDown)
-                    StartCoroutine(targetHit.owner.NeighborDown.EmptyBrushContainer());
-            }
+            StartCoroutine(targetHit.owner.EmptyBrushContainer());
+
+            if (targetHit.owner.NeighborLeft)
+                StartCoroutine(targetHit.owner.NeighborLeft.EmptyBrushContainer());
+            if (targetHit.owner.NeighborUp)
+                StartCoroutine(targetHit.owner.NeighborUp.EmptyBrushContainer());
+            if (targetHit.owner.NeighborRight)
+                StartCoroutine(targetHit.owner.NeighborRight.EmptyBrushContainer());
+            if (targetHit.owner.NeighborDown)
+                StartCoroutine(targetHit.owner.NeighborDown.EmptyBrushContainer());
+
+            _triggerSave = false;
         }
-
     }
 
     PaintTag CheckForPaintTargets()

@@ -13,8 +13,11 @@ public class PaintFaces : MonoBehaviour
 	public Camera sceneCamera, canvasCam;  //The camera that looks at the model, and the camera that looks at the canvas.
 	public Sprite cursorPaint; // Cursor for the differen functions 
 	public RenderTexture canvasTexture; // Render Texture that looks at our Base Texture and the painted brushes
+	public MeshRenderer canvasRenderer;
 	public Material baseMaterial; // The material of our base texture (Were we will save the painted texture)
 	public Material canvasMaterial; // The material rendered onto final products.
+
+	public MeshRenderer paintTarget;
 
 	public Spherize planet;
 
@@ -28,10 +31,26 @@ public class PaintFaces : MonoBehaviour
 	{
 		if (isBase)
 			return;
+
+		baseMaterial = new Material(basePaintFaces.baseMaterial);
+		canvasRenderer.material = baseMaterial;
+
+		canvasMaterial = new Material(basePaintFaces.canvasMaterial);
+		
+
 		canvasTexture = new RenderTexture(basePaintFaces.canvasTexture.width, basePaintFaces.canvasTexture.height, basePaintFaces.canvasTexture.depth, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB);
 		canvasTexture.antiAliasing = basePaintFaces.canvasTexture.antiAliasing;
 		canvasCam.targetTexture = canvasTexture;
 		canvasMaterial.SetTexture("_MainTex", canvasTexture);
+
+		if (paintTarget)
+			paintTarget.sharedMaterial = canvasMaterial;
+
+		if (paintTarget.sharedMaterial != canvasMaterial)
+		{
+			Debug.Log("ZZZZZZNot synced material!" + paintTarget.name);
+		}
+
 		planet.heightMapRT = canvasTexture;
 
 		StartCoroutine(planetFaces());
@@ -69,8 +88,10 @@ public class PaintFaces : MonoBehaviour
 			Invoke("SaveTexture", 0.1f);
 		}
 
-
+		
+		
 		UpdateBrushColor();
+		/*
 		if (Input.GetMouseButton(0))
 		{
 			brushColor = Color.white;
@@ -85,7 +106,9 @@ public class PaintFaces : MonoBehaviour
 			saving = true;
 			Invoke("SaveTexture", 0.1f);
 		}
+		*/
 		UpdateBrushCursor();
+		
 	}
 
 	private void UpdateBrushColor()
@@ -95,8 +118,14 @@ public class PaintFaces : MonoBehaviour
 
 
 	//The main action, instantiates a brush or decal entity at the clicked position on the UV map
-	void DoAction()
+	public void DoAction(bool white = true)
 	{
+		if(white)
+			brushColor = Color.white;
+		else
+			brushColor = Color.black;
+
+
 		timeSinceLastInput = 0;
 		hasAutoSaved = false;
 		if (saving)

@@ -62,7 +62,6 @@ public class PaintBoss : MonoBehaviour
             var paintWork = targetHit.owner.GetComponentInChildren<PaintWorkTag>();
             if (paintWork)
             {
-                Debug.Log("Found paintWork: " + paintWork.name);
                 Vector3 offset = Vector3.one * 100;
                 paintWork.transform.position = targetHit.transform.position+ offset;
                 paintWork.transform.eulerAngles = Vector3.zero;

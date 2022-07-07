@@ -51,9 +51,23 @@ public class Spherize : MonoBehaviour
             newPlane.GetComponent<MeshRenderer>().material = GetComponent<MeshRenderer>().material;
             faces.Add(newPlane);
             newPlane.name = "Face" + p;
-            
-            
-            
+            var ps = newPlane.AddComponent<PlanetSide>();
+            if(p == 0)
+                ps.side = PlanetSide.Side.center;
+            if (p == 1)
+                ps.side = PlanetSide.Side.ddown;
+            if (p == 2)
+                ps.side = PlanetSide.Side.up;
+            if (p == 3)
+                ps.side = PlanetSide.Side.down;
+            if (p == 4)
+                ps.side = PlanetSide.Side.right;
+            if (p == 5)
+                ps.side = PlanetSide.Side.left;
+
+
+
+
             GameObject virginPlane = Instantiate(planePF, transform);
             virginPlane.transform.parent = null;
             virginPlane.transform.localScale = newPlane.transform.localScale;

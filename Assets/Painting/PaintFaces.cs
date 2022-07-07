@@ -25,6 +25,13 @@ public class PaintFaces : MonoBehaviour
 	public Color brushColor; //The selected color
 	int brushCounter = 0, MAX_BRUSH_COUNT = 1000; //To avoid having millions of brushes
 	bool saving = false; //Flag to check if we are saving the texture
+	bool needsDelete = false;
+
+	public PaintFaces NeighborLeft;
+	public PaintFaces NeighborUp;
+	public PaintFaces NeighborRight;
+	public PaintFaces NeighborDown;
+
 
 	// Start is called before the first frame update
 	void Start()
@@ -79,7 +86,7 @@ public class PaintFaces : MonoBehaviour
 		if (isBase)
 			return;
 
-		timeSinceLastInput += Time.deltaTime;
+		//timeSinceLastInput += Time.deltaTime;
 		if (timeSinceLastInput > autoSaveTime && hasAutoSaved == false)
 		{
 			hasAutoSaved = true;
@@ -118,7 +125,7 @@ public class PaintFaces : MonoBehaviour
 
 
 	//The main action, instantiates a brush or decal entity at the clicked position on the UV map
-	public void DoAction(bool white = true)
+	public bool DoAction(bool white = true) // Returns true if brush container is full, use for saving itself and neighbors without clearing.
 	{
 		if(white)
 			brushColor = Color.white;
@@ -128,8 +135,8 @@ public class PaintFaces : MonoBehaviour
 
 		timeSinceLastInput = 0;
 		hasAutoSaved = false;
-		if (saving)
-			return;
+		if (saving || needsDelete)
+			return false;
 		Vector3 uvWorldPosition = Vector3.zero;
 		if (HitTestUVPosition(ref uvWorldPosition))
 		{
@@ -145,17 +152,26 @@ public class PaintFaces : MonoBehaviour
 		brushCounter++; //Add to the max brushes
 		if (brushCounter >= MAX_BRUSH_COUNT)
 		{ //If we reach the max brushes available, flatten the texture and clear the brushes
-			brushCursor.SetActive(false);
-			saving = true;
-			Invoke("SaveTexture", 0.1f);
+			return true;
+
+			
 
 		}
+		return false;
 	}
+
+	public void TriggerSaveMethod()
+    {
+		brushCursor.SetActive(false);
+		saving = true;
+		Invoke("SaveTexture", 0.1f);
+	}
+
 	//To update at realtime the painting cursor on the mesh
 	void UpdateBrushCursor()
 	{
 		Vector3 uvWorldPosition = Vector3.zero;
-		if (HitTestUVPosition(ref uvWorldPosition) && !saving)
+		if (HitTestUVPosition(ref uvWorldPosition) && !saving && !needsDelete)
 		{
 			brushCursor.SetActive(true);
 			brushCursor.transform.position = uvWorldPosition + brushContainer.transform.position;
@@ -193,7 +209,7 @@ public class PaintFaces : MonoBehaviour
 
 	}
 	//Sets the base material with a our canvas texture, then removes all our brushes
-	void SaveTexture()
+	public void SaveTexture()
 	{
 		brushCounter = 0;
 		System.DateTime date = System.DateTime.Now;
@@ -203,13 +219,34 @@ public class PaintFaces : MonoBehaviour
 		tex.Apply();
 		RenderTexture.active = null;
 		baseMaterial.mainTexture = tex; //Put the painted texture as the base
+
+		//StartCoroutine ("SaveTextureToFile"); //Do you want to save the texture? This is your method!
+		needsDelete = true;
+		saving = false;
+
+		brushContainer.SetActive(false); // We disable the brushes so the terrain doesn't flick in the delay it takes to clear it.
+
+		
+	}
+
+	public IEnumerator EmptyBrushContainer()
+    {
+		
+		yield return 0.1f;
+		if (needsDelete == false)
+        {
+			yield return new WaitForSeconds(0.1f);
+		}
+
 		foreach (Transform child in brushContainer.transform)
 		{//Clear brushes
 			Destroy(child.gameObject);
 		}
-		//StartCoroutine ("SaveTextureToFile"); //Do you want to save the texture? This is your method!
+		brushContainer.SetActive(true);
+		needsDelete = false;
 		Invoke("ShowCursor", 0.1f);
 	}
+
 	//Show again the user cursor (To avoid saving it to the texture)
 	void ShowCursor()
 	{

@@ -20,14 +20,52 @@ public class PaintBoss : MonoBehaviour
         if (Input.GetMouseButton(0))
             targetHit = CheckForPaintTargets();
 
-        if(targetHit)
+        bool brushFull = false;
+
+        if (targetHit)
         {
-            Debug.Log("We hit a paint target!" + hit.collider.name);
-            Debug.Log(targetHit.owner.name);
+            // Debug.Log("We hit a paint target!" + hit.collider.name);
+            // Debug.Log(targetHit.owner.name);
+
+            
+
             if (Input.GetKey(KeyCode.LeftShift))
-                targetHit.owner.DoAction(false);
-            targetHit.owner.DoAction(true);
+                brushFull = targetHit.owner.DoAction(false);
+            else
+                brushFull = targetHit.owner.DoAction(true);
+
+            
         }
+
+        if (brushFull || Input.GetMouseButtonDown(1))
+        {
+            if(targetHit)
+            {
+                targetHit.owner.TriggerSaveMethod();
+                
+
+                if (targetHit.owner.NeighborLeft)
+                    targetHit.owner.NeighborLeft.TriggerSaveMethod();
+                if (targetHit.owner.NeighborUp)
+                    targetHit.owner.NeighborUp.TriggerSaveMethod();
+                if (targetHit.owner.NeighborRight)
+                    targetHit.owner.NeighborRight.TriggerSaveMethod();
+                if (targetHit.owner.NeighborDown)
+                    targetHit.owner.NeighborDown.TriggerSaveMethod();
+
+                StartCoroutine(targetHit.owner.EmptyBrushContainer());
+
+                if (targetHit.owner.NeighborLeft)
+                    StartCoroutine(targetHit.owner.NeighborLeft.EmptyBrushContainer());
+                if (targetHit.owner.NeighborUp)
+                    StartCoroutine(targetHit.owner.NeighborUp.EmptyBrushContainer());
+                if (targetHit.owner.NeighborRight)
+                    StartCoroutine(targetHit.owner.NeighborRight.EmptyBrushContainer());
+                if (targetHit.owner.NeighborDown)
+                    StartCoroutine(targetHit.owner.NeighborDown.EmptyBrushContainer());
+            }
+        }
+
     }
 
     PaintTag CheckForPaintTargets()

@@ -65,12 +65,19 @@ public class PaintBoss : MonoBehaviour
                 Debug.Log("Found paintWork: " + paintWork.name);
                 Vector3 offset = Vector3.one * 100;
                 paintWork.transform.position = targetHit.transform.position+ offset;
+                paintWork.transform.eulerAngles = Vector3.zero;
 
                 if(targetHit.owner.NeighborLeft)
                 {
                     var paintWorkNeighbor = targetHit.owner.NeighborLeft.GetComponentInChildren<PaintWorkTag>();
                     paintWorkNeighbor.transform.position = targetHit.transform.position+(Vector3.left*1f)+ offset;
                     paintWorkNeighbor.transform.eulerAngles = targetHit.owner.NeighborLeftRotate;
+                    // Mr. Center's Left: 0
+                    // Mr. Left's   Left: 0
+                    // Mr. Up's     Left: 90
+                    // Mr. Right's  Left: -180
+                    // Mr. Down's   Left: -90
+                    // Mr. DDown's  Left: -180
 
                 }
                 if (targetHit.owner.NeighborUp)
@@ -78,20 +85,37 @@ public class PaintBoss : MonoBehaviour
                     var paintWorkNeighbor = targetHit.owner.NeighborUp.GetComponentInChildren<PaintWorkTag>();
                     paintWorkNeighbor.transform.position = targetHit.transform.position + (Vector3.up * 1f) + offset;
                     paintWorkNeighbor.transform.eulerAngles = targetHit.owner.NeighborUpRotate;
+                    // Mr. Center's Up: 0
+                    // Mr. Left's   Up: -90
+                    // Mr. Up's     Up: 0
+                    // Mr. Right's  Up: 90
+                    // Mr. Down's   Up: 0
+                    // Mr. DDown's  Up: 0
+
                 }
                 if (targetHit.owner.NeighborRight)
                 {
                     var paintWorkNeighbor = targetHit.owner.NeighborRight.GetComponentInChildren<PaintWorkTag>();
                     paintWorkNeighbor.transform.position = targetHit.transform.position + (Vector3.right * 1f) + offset;
                     paintWorkNeighbor.transform.eulerAngles = targetHit.owner.NeighborRightRotate;
+                    // Mr. Center's Right: 0
+                    // Mr. Left's   Right: -180
+                    // Mr. Up's     Right: -90
+                    // Mr. Right's  Right: 0
+                    // Mr. Down's   Right: 90
+                    // Mr. DDown's  Right: -180
                 }
                 if (targetHit.owner.NeighborDown)
                 {
                     var paintWorkNeighbor = targetHit.owner.NeighborDown.GetComponentInChildren<PaintWorkTag>();
                     paintWorkNeighbor.transform.position = targetHit.transform.position + (Vector3.down * 1f) + offset;
                     paintWorkNeighbor.transform.eulerAngles = targetHit.owner.NeighborDownRotate;
-                    // Mr. Center's Down: 0,0,0
-                    // Mr. Left's Down: 0,0,90
+                    // Mr. Center's Down: 0
+                    // Mr. Left's   Down: 90
+                    // Mr. Up's     Down: 0
+                    // Mr. Right's  Down: -90
+                    // Mr. Down's   Down: 0
+                    // Mr. DDown's  Down: 0
                 }
             }
 

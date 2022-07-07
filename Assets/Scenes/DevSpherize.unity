@@ -993,11 +993,11 @@ MonoBehaviour:
   brushSize: 5
   brushColor: {r: 1, g: 1, b: 1, a: 0}
   NeighborLeft: {fileID: 1012212580}
-  NeighborLeftRotate: {x: 0, y: 0, z: 0}
+  NeighborLeftRotate: {x: 0, y: 0, z: 90}
   NeighborUp: {fileID: 892863991}
   NeighborUpRotate: {x: 0, y: 0, z: 0}
   NeighborRight: {fileID: 858723572}
-  NeighborRightRotate: {x: 0, y: 0, z: 0}
+  NeighborRightRotate: {x: 0, y: 0, z: -90}
   NeighborDown: {fileID: 1629257068}
   NeighborDownRotate: {x: 0, y: 0, z: 0}
   autoSaveTime: 5
@@ -3231,11 +3231,11 @@ MonoBehaviour:
   brushSize: 5
   brushColor: {r: 1, g: 1, b: 1, a: 0}
   NeighborLeft: {fileID: 1012212580}
-  NeighborLeftRotate: {x: 0, y: 0, z: 0}
+  NeighborLeftRotate: {x: 0, y: 0, z: -90}
   NeighborUp: {fileID: 1629257068}
   NeighborUpRotate: {x: 0, y: 0, z: 0}
   NeighborRight: {fileID: 858723572}
-  NeighborRightRotate: {x: 0, y: 0, z: 0}
+  NeighborRightRotate: {x: 0, y: 0, z: 90}
   NeighborDown: {fileID: 892863991}
   NeighborDownRotate: {x: 0, y: 0, z: 0}
   autoSaveTime: 5
@@ -5453,9 +5453,9 @@ MonoBehaviour:
   NeighborLeft: {fileID: 892863991}
   NeighborLeftRotate: {x: 0, y: 0, z: 0}
   NeighborUp: {fileID: 517452700}
-  NeighborUpRotate: {x: 0, y: 0, z: 0}
+  NeighborUpRotate: {x: 0, y: 0, z: -90}
   NeighborRight: {fileID: 1629257068}
-  NeighborRightRotate: {x: 0, y: 0, z: 0}
+  NeighborRightRotate: {x: 0, y: 0, z: -180}
   NeighborDown: {fileID: 148907909}
   NeighborDownRotate: {x: 0, y: 0, z: 90}
   autoSaveTime: 5
@@ -6684,13 +6684,13 @@ MonoBehaviour:
   brushSize: 5
   brushColor: {r: 1, g: 1, b: 1, a: 0}
   NeighborLeft: {fileID: 1629257068}
-  NeighborLeftRotate: {x: 0, y: 0, z: 0}
+  NeighborLeftRotate: {x: 0, y: 0, z: -180}
   NeighborUp: {fileID: 517452700}
-  NeighborUpRotate: {x: 0, y: 0, z: 0}
+  NeighborUpRotate: {x: 0, y: 0, z: 90}
   NeighborRight: {fileID: 892863991}
   NeighborRightRotate: {x: 0, y: 0, z: 0}
   NeighborDown: {fileID: 148907909}
-  NeighborDownRotate: {x: 0, y: 0, z: 0}
+  NeighborDownRotate: {x: 0, y: 0, z: -90}
   autoSaveTime: 5
 --- !u!4 &1012212581
 Transform:
@@ -10521,11 +10521,11 @@ MonoBehaviour:
   brushSize: 5
   brushColor: {r: 1, g: 1, b: 1, a: 0}
   NeighborLeft: {fileID: 1012212580}
-  NeighborLeftRotate: {x: 0, y: 0, z: 0}
+  NeighborLeftRotate: {x: 0, y: 0, z: -180}
   NeighborUp: {fileID: 148907909}
   NeighborUpRotate: {x: 0, y: 0, z: 0}
   NeighborRight: {fileID: 858723572}
-  NeighborRightRotate: {x: 0, y: 0, z: 0}
+  NeighborRightRotate: {x: 0, y: 0, z: -180}
   NeighborDown: {fileID: 517452700}
   NeighborDownRotate: {x: 0, y: 0, z: 0}
   autoSaveTime: 5

@@ -27,10 +27,16 @@ public class PaintFaces : MonoBehaviour
 	bool saving = false; //Flag to check if we are saving the texture
 	bool needsDelete = false;
 
+	[Header("Neighbors, This should all be done in code, god this is painful.")]
+
 	public PaintFaces NeighborLeft;
+	public Vector3 NeighborLeftRotate;
 	public PaintFaces NeighborUp;
+	public Vector3 NeighborUpRotate;
 	public PaintFaces NeighborRight;
+	public Vector3 NeighborRightRotate;
 	public PaintFaces NeighborDown;
+	public Vector3 NeighborDownRotate;
 
 
 	// Start is called before the first frame update

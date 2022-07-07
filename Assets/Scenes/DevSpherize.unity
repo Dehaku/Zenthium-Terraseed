@@ -992,10 +992,14 @@ MonoBehaviour:
   planet: {fileID: 395329959}
   brushSize: 5
   brushColor: {r: 1, g: 1, b: 1, a: 0}
-  NeighborLeft: {fileID: 0}
+  NeighborLeft: {fileID: 1012212580}
+  NeighborLeftRotate: {x: 0, y: 0, z: 0}
   NeighborUp: {fileID: 892863991}
-  NeighborRight: {fileID: 0}
-  NeighborDown: {fileID: 0}
+  NeighborUpRotate: {x: 0, y: 0, z: 0}
+  NeighborRight: {fileID: 858723572}
+  NeighborRightRotate: {x: 0, y: 0, z: 0}
+  NeighborDown: {fileID: 1629257068}
+  NeighborDownRotate: {x: 0, y: 0, z: 0}
   autoSaveTime: 5
 --- !u!4 &148907910
 Transform:
@@ -3174,13 +3178,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 509037801}
-  m_LocalRotation: {x: -0.70706093, y: -0, z: -0, w: 0.7071527}
+  m_LocalRotation: {x: -0.70710677, y: 0, z: 0, w: 0.70710677}
   m_LocalPosition: {x: -6.14, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 148907910}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 90, z: -90}
 --- !u!1 &517452699
 GameObject:
   m_ObjectHideFlags: 0
@@ -3226,10 +3230,14 @@ MonoBehaviour:
   planet: {fileID: 395329959}
   brushSize: 5
   brushColor: {r: 1, g: 1, b: 1, a: 0}
-  NeighborLeft: {fileID: 0}
-  NeighborUp: {fileID: 0}
-  NeighborRight: {fileID: 0}
+  NeighborLeft: {fileID: 1012212580}
+  NeighborLeftRotate: {x: 0, y: 0, z: 0}
+  NeighborUp: {fileID: 1629257068}
+  NeighborUpRotate: {x: 0, y: 0, z: 0}
+  NeighborRight: {fileID: 858723572}
+  NeighborRightRotate: {x: 0, y: 0, z: 0}
   NeighborDown: {fileID: 892863991}
+  NeighborDownRotate: {x: 0, y: 0, z: 0}
   autoSaveTime: 5
 --- !u!4 &517452701
 Transform:
@@ -4116,7 +4124,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 664205817}
   m_LocalRotation: {x: -0.033897307, y: -0.0058642905, z: 0.00045566802, w: -0.99940807}
-  m_LocalPosition: {x: -0.16167068, y: 0.008985759, z: -27.14}
+  m_LocalPosition: {x: -0.16167068, y: -1.52, z: -34.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5443,9 +5451,13 @@ MonoBehaviour:
   brushSize: 5
   brushColor: {r: 1, g: 1, b: 1, a: 0}
   NeighborLeft: {fileID: 892863991}
-  NeighborUp: {fileID: 0}
-  NeighborRight: {fileID: 0}
-  NeighborDown: {fileID: 0}
+  NeighborLeftRotate: {x: 0, y: 0, z: 0}
+  NeighborUp: {fileID: 517452700}
+  NeighborUpRotate: {x: 0, y: 0, z: 0}
+  NeighborRight: {fileID: 1629257068}
+  NeighborRightRotate: {x: 0, y: 0, z: 0}
+  NeighborDown: {fileID: 148907909}
+  NeighborDownRotate: {x: 0, y: 0, z: 90}
   autoSaveTime: 5
 --- !u!4 &858723573
 Transform:
@@ -6052,9 +6064,13 @@ MonoBehaviour:
   brushSize: 5
   brushColor: {r: 1, g: 1, b: 1, a: 0}
   NeighborLeft: {fileID: 1012212580}
+  NeighborLeftRotate: {x: 0, y: 0, z: 0}
   NeighborUp: {fileID: 517452700}
+  NeighborUpRotate: {x: 0, y: 0, z: 0}
   NeighborRight: {fileID: 858723572}
+  NeighborRightRotate: {x: 0, y: 0, z: 0}
   NeighborDown: {fileID: 148907909}
+  NeighborDownRotate: {x: 0, y: 0, z: 0}
   autoSaveTime: 5
 --- !u!1 &900361091
 GameObject:
@@ -6667,10 +6683,14 @@ MonoBehaviour:
   planet: {fileID: 395329959}
   brushSize: 5
   brushColor: {r: 1, g: 1, b: 1, a: 0}
-  NeighborLeft: {fileID: 0}
-  NeighborUp: {fileID: 0}
+  NeighborLeft: {fileID: 1629257068}
+  NeighborLeftRotate: {x: 0, y: 0, z: 0}
+  NeighborUp: {fileID: 517452700}
+  NeighborUpRotate: {x: 0, y: 0, z: 0}
   NeighborRight: {fileID: 892863991}
-  NeighborDown: {fileID: 0}
+  NeighborRightRotate: {x: 0, y: 0, z: 0}
+  NeighborDown: {fileID: 148907909}
+  NeighborDownRotate: {x: 0, y: 0, z: 0}
   autoSaveTime: 5
 --- !u!4 &1012212581
 Transform:
@@ -7035,9 +7055,13 @@ MonoBehaviour:
   brushSize: 1
   brushColor: {r: 1, g: 1, b: 1, a: 0}
   NeighborLeft: {fileID: 0}
+  NeighborLeftRotate: {x: 0, y: 0, z: 0}
   NeighborUp: {fileID: 0}
+  NeighborUpRotate: {x: 0, y: 0, z: 0}
   NeighborRight: {fileID: 0}
+  NeighborRightRotate: {x: 0, y: 0, z: 0}
   NeighborDown: {fileID: 0}
+  NeighborDownRotate: {x: 0, y: 0, z: 0}
   autoSaveTime: 5
 --- !u!4 &1112709682
 Transform:
@@ -10496,10 +10520,14 @@ MonoBehaviour:
   planet: {fileID: 395329959}
   brushSize: 5
   brushColor: {r: 1, g: 1, b: 1, a: 0}
-  NeighborLeft: {fileID: 0}
-  NeighborUp: {fileID: 0}
-  NeighborRight: {fileID: 0}
-  NeighborDown: {fileID: 0}
+  NeighborLeft: {fileID: 1012212580}
+  NeighborLeftRotate: {x: 0, y: 0, z: 0}
+  NeighborUp: {fileID: 148907909}
+  NeighborUpRotate: {x: 0, y: 0, z: 0}
+  NeighborRight: {fileID: 858723572}
+  NeighborRightRotate: {x: 0, y: 0, z: 0}
+  NeighborDown: {fileID: 517452700}
+  NeighborDownRotate: {x: 0, y: 0, z: 0}
   autoSaveTime: 5
 --- !u!4 &1629257069
 Transform:

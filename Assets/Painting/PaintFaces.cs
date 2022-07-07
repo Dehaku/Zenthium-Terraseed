@@ -127,7 +127,10 @@ public class PaintFaces : MonoBehaviour
 	//The main action, instantiates a brush or decal entity at the clicked position on the UV map
 	public bool DoAction(bool white = true) // Returns true if brush container is full, use for saving itself and neighbors without clearing.
 	{
-		if(white)
+		if (needsDelete == false)
+			brushContainer.SetActive(true);
+
+		if (white)
 			brushColor = Color.white;
 		else
 			brushColor = Color.black;
@@ -165,7 +168,8 @@ public class PaintFaces : MonoBehaviour
     {
 		brushCursor.SetActive(false);
 		saving = true;
-		Invoke("SaveTexture", 0.1f);
+		//Invoke("SaveTexture", 0.1f);
+		SaveTexture();
 	}
 
 	//To update at realtime the painting cursor on the mesh
@@ -212,6 +216,7 @@ public class PaintFaces : MonoBehaviour
 	//Sets the base material with a our canvas texture, then removes all our brushes
 	public void SaveTexture()
 	{
+		
 		brushCounter = 0;
 		System.DateTime date = System.DateTime.Now;
 		RenderTexture.active = canvasTexture;

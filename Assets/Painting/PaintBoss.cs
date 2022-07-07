@@ -59,6 +59,13 @@ public class PaintBoss : MonoBehaviour
         bool brushFull = false;
         if (targetHit)
         {
+            var paintWork = targetHit.GetComponentInChildren<PaintWorkTag>();
+            if (paintWork)
+            {
+                Debug.Log("Found paintWork: " + paintWork.name);
+                paintWork.transform.position = targetHit.transform.position;
+            }
+
             // Debug.Log("We hit a paint target!" + hit.collider.name);
             // Debug.Log(targetHit.owner.name);
             if (Input.GetKey(KeyCode.LeftShift))

@@ -64,6 +64,7 @@ public class Spherize : MonoBehaviour
                 ps.side = PlanetSide.Side.right;
             if (p == 5)
                 ps.side = PlanetSide.Side.left;
+            ps.planetParent = this.gameObject;
 
 
 

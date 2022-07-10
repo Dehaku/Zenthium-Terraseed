@@ -9,49 +9,127 @@ public class PaintBoss : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-    }
 
-    RaycastHit hit;
+        Debug.Log("Lock the brush to synced X/Y when it's within the brushes range of corners.");
+    }
 
     bool _triggerSave = false;
     bool _isPainting = false;
     PaintTag targetHit = null;
 
+    public PaintFaces planetPainterBase;
+    public GameObject planetPainterPF;
+
     // Update is called once per frame
     void Update()
+    {
+        PlanetCheckLoop();
+
+        PaintLoop();
+
+    }
+
+    void PlanetCheckLoop()
+    {
+        
+        if (Input.GetMouseButton(2))
+        {
+            PlanetSide newTarget = CheckForPlanetSide();
+            if (newTarget != null)
+            {
+                Debug.Log(newTarget.name + " has PlanetSide");
+                var paintTag = newTarget.GetComponent<PaintTag>();
+                if (paintTag)
+                {
+                    Debug.Log("^has paint tag.");
+                    
+                }
+                    
+                if (!paintTag)
+                {
+                    Debug.Log("^needs a paint tag!");
+                    MakePlanetPaintable(newTarget.planetParent);
+                }
+                    
+                //Debug.Log("Not drawing on same target now!");
+                //SaveLastTarget();
+            }
+
+            //targetHit = newTarget;
+            //_isPainting = true;
+            //brushFull = PaintTarget();
+        }
+    }    
+
+    void MakePlanetPaintable(GameObject planetObject)
+    {
+        PaintFaces painterCenter = new PaintFaces();
+        PaintFaces painterLeft = new PaintFaces();
+        PaintFaces painterUp = new PaintFaces();
+        PaintFaces painterRight = new PaintFaces();
+        PaintFaces painterDown = new PaintFaces();
+        PaintFaces painterDDown = new PaintFaces();
+
+        var planetSides = planetObject.GetComponentsInChildren<PlanetSide>();
+        foreach (var ps in planetSides)
+        {
+            var paintTag = ps.gameObject.AddComponent<PaintTag>();
+            var painterGO = Instantiate(planetPainterPF, planetObject.transform);
+            var painter = painterGO.GetComponent<PaintFaces>();
+            painter.basePaintFaces = planetPainterBase;
+            //painter.sceneCamera
+            paintTag.owner = painter;
+            painter.paintTarget = ps.GetComponent<MeshRenderer>();
+            if (ps.side == PlanetSide.Side.center)
+                painterCenter = painter;
+            if (ps.side == PlanetSide.Side.left)
+                painterLeft = painter;
+            if (ps.side == PlanetSide.Side.up)
+                painterUp = painter;
+            if (ps.side == PlanetSide.Side.right)
+                painterRight = painter;
+            if (ps.side == PlanetSide.Side.down)
+                painterDown = painter;
+            if (ps.side == PlanetSide.Side.ddown)
+                painterDDown = painter;
+            //painter.NeighborDown
+        }
+
+        
+
+
+
+
+    }
+
+    
+
+    void PaintLoop()
     {
         bool brushFull = false;
         if (Input.GetMouseButton(0))
         {
             PaintTag newTarget = CheckForPaintTargets();
-            if(targetHit != null && targetHit != newTarget)
+            if (targetHit != null && targetHit != newTarget)
             {
                 //Debug.Log("Not drawing on same target now!");
                 SaveLastTarget();
             }
-            
+
             targetHit = newTarget;
             _isPainting = true;
             brushFull = PaintTarget();
         }
-        else if(_isPainting)
+        else if (_isPainting)
         {
-            
             _isPainting = false;
             _triggerSave = true;
         }
-            
-        //Debug.Log("Make it save when you let go of the mouse button.");
-        
-
-        
 
         if (brushFull || Input.GetMouseButtonDown(1) || _triggerSave)
         {
-            
             SaveLastTarget();
         }
-
     }
 
     bool PaintTarget()
@@ -161,7 +239,7 @@ public class PaintBoss : MonoBehaviour
 
     PaintTag CheckForPaintTargets()
     {
-        //RaycastHit hit;
+        RaycastHit hit;
         Vector3 cursorPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
         Ray cursorRay = sceneCamera.ScreenPointToRay(cursorPos);
         if (Physics.Raycast(cursorRay, out hit, 200))
@@ -177,6 +255,29 @@ public class PaintBoss : MonoBehaviour
             }
 
             return null;    
+        }
+        return null;
+    }
+
+    PlanetSide CheckForPlanetSide()
+    {
+
+        RaycastHit hit;
+        Vector3 cursorPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
+        Ray cursorRay = sceneCamera.ScreenPointToRay(cursorPos);
+        if (Physics.Raycast(cursorRay, out hit, 200))
+        {
+            var planetTarget = hit.collider.GetComponent<PlanetSide>();
+            if (planetTarget)
+            {
+                MeshCollider meshCollider = hit.collider as MeshCollider;
+                if (meshCollider == null || meshCollider.sharedMesh == null)
+                    return null;
+
+                return planetTarget;
+            }
+
+            return null;
         }
         return null;
     }

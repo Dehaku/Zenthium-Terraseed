@@ -45,6 +45,8 @@ public class PaintFaces : MonoBehaviour
 		if (isBase)
 			return;
 
+		brushCursor = basePaintFaces.brushCursor;
+		sceneCamera = basePaintFaces.sceneCamera;
 		baseMaterial = new Material(basePaintFaces.baseMaterial);
 		canvasRenderer.material = baseMaterial;
 
@@ -64,12 +66,12 @@ public class PaintFaces : MonoBehaviour
 			Debug.Log("ZZZZZZNot synced material!" + paintTarget.name);
 		}
 
-		planet.heightMapRT = canvasTexture;
-
-		StartCoroutine(planetFaces());
-		//planet.Faces
-
-
+		if(planet)
+        {
+			planet.heightMapRT = canvasTexture;
+			StartCoroutine(planetFaces());
+		}
+			
 	}
 
 	IEnumerator planetFaces()
@@ -151,6 +153,7 @@ public class PaintFaces : MonoBehaviour
 		{
 			GameObject brushObj;
 			brushObj = (GameObject)Instantiate(Resources.Load("TexturePainter-Instances/BrushEntity")); //Paint a brush
+			//brushObj = (GameObject)Instantiate(Resources.Load("TexturePainter-Instances/BioBrushEntity")); //Paint a brush
 			brushObj.GetComponent<SpriteRenderer>().color = brushColor; //Set the brush color
 
 			brushColor.a = brushSize * 2.0f; // Brushes have alpha to have a merging effect when painted over.
@@ -206,6 +209,8 @@ public class PaintFaces : MonoBehaviour
 
 
 			Vector2 pixelUV = new Vector2(hit.textureCoord.x, hit.textureCoord.y);
+
+			
 
 			uvWorldPosition.x = pixelUV.x - canvasCam.orthographicSize;//To center the UV on X
 			uvWorldPosition.y = pixelUV.y - canvasCam.orthographicSize;//To center the UV on Y

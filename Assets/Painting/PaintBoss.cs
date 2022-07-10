@@ -37,17 +37,17 @@ public class PaintBoss : MonoBehaviour
             PlanetSide newTarget = CheckForPlanetSide();
             if (newTarget != null)
             {
-                Debug.Log(newTarget.name + " has PlanetSide");
+                //Debug.Log(newTarget.name + " has PlanetSide");
                 var paintTag = newTarget.GetComponent<PaintTag>();
                 if (paintTag)
                 {
-                    Debug.Log("^has paint tag.");
+                    //Debug.Log("^has paint tag.");
                     
                 }
                     
                 if (!paintTag)
                 {
-                    Debug.Log("^needs a paint tag!");
+                    //Debug.Log("^needs a paint tag!");
                     MakePlanetPaintable(newTarget.planetParent);
                 }
                     
@@ -63,12 +63,12 @@ public class PaintBoss : MonoBehaviour
 
     void MakePlanetPaintable(GameObject planetObject)
     {
-        PaintFaces painterCenter = new PaintFaces();
-        PaintFaces painterLeft = new PaintFaces();
-        PaintFaces painterUp = new PaintFaces();
-        PaintFaces painterRight = new PaintFaces();
-        PaintFaces painterDown = new PaintFaces();
-        PaintFaces painterDDown = new PaintFaces();
+        PaintFaces painterCenter = null;
+        PaintFaces painterLeft = null;
+        PaintFaces painterUp = null;
+        PaintFaces painterRight = null;
+        PaintFaces painterDown = null;
+        PaintFaces painterDDown = null;
 
         var planetSides = planetObject.GetComponentsInChildren<PlanetSide>();
         foreach (var ps in planetSides)

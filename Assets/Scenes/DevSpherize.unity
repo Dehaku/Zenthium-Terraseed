@@ -963,7 +963,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &148907909
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1016,7 +1016,7 @@ Transform:
   - {fileID: 1458674829}
   - {fileID: 509037806}
   m_Father: {fileID: 1297944830}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &157936898
 GameObject:
@@ -2997,7 +2997,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &517452700
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4715,7 +4715,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &858723572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4768,7 +4768,7 @@ Transform:
   - {fileID: 326580714}
   - {fileID: 1457341163}
   m_Father: {fileID: 1297944830}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &861927728
 GameObject:
@@ -5306,12 +5306,12 @@ GameObject:
   - component: {fileID: 892863990}
   - component: {fileID: 892863991}
   m_Layer: 25
-  m_Name: _PlanetPainter
+  m_Name: _PlanetPainter Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &892863990
 Transform:
   m_ObjectHideFlags: 0
@@ -5883,7 +5883,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1012212580
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7353,7 +7353,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1297944830
 Transform:
   m_ObjectHideFlags: 0
@@ -7366,8 +7366,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 892863990}
-  - {fileID: 148907910}
   - {fileID: 858723573}
+  - {fileID: 148907910}
   - {fileID: 1012212581}
   - {fileID: 517452701}
   - {fileID: 1629257069}
@@ -9559,7 +9559,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1629257068
 MonoBehaviour:
   m_ObjectHideFlags: 0

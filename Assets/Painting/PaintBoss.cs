@@ -95,7 +95,65 @@ public class PaintBoss : MonoBehaviour
             //painter.NeighborDown
         }
 
-        
+        // Center
+        painterCenter.NeighborLeft = painterRight;
+        painterCenter.NeighborLeftRotate = new Vector3(0, 0, 0);
+        painterCenter.NeighborUp = painterDown;
+        painterCenter.NeighborUpRotate = new Vector3(0, 0, 0);
+        painterCenter.NeighborRight = painterLeft;
+        painterCenter.NeighborRightRotate = new Vector3(0, 0, 0);
+        painterCenter.NeighborDown = painterUp;
+        painterCenter.NeighborDownRotate = new Vector3(0, 0, 0);
+
+        // Left
+        painterLeft.NeighborLeft = painterCenter;
+        painterLeft.NeighborLeftRotate = new Vector3(0, 0, 0);
+        painterLeft.NeighborUp = painterDown;
+        painterLeft.NeighborUpRotate = new Vector3(0, 0, -90);
+        painterLeft.NeighborRight = painterDDown;
+        painterLeft.NeighborRightRotate = new Vector3(0, 0, -180);
+        painterLeft.NeighborDown = painterUp;
+        painterLeft.NeighborDownRotate = new Vector3(0, 0, 90);
+
+        // Up
+        painterUp.NeighborLeft = painterRight;
+        painterUp.NeighborLeftRotate = new Vector3(0, 0, 90);
+        painterUp.NeighborUp = painterCenter;
+        painterUp.NeighborUpRotate = new Vector3(0, 0, 0);
+        painterUp.NeighborRight = painterLeft;
+        painterUp.NeighborRightRotate = new Vector3(0, 0, -90);
+        painterUp.NeighborDown = painterDDown;
+        painterUp.NeighborDownRotate = new Vector3(0, 0, 0);
+
+        // Right
+        painterRight.NeighborLeft = painterDDown;
+        painterRight.NeighborLeftRotate = new Vector3(0, 0, -180);
+        painterRight.NeighborUp = painterDown;
+        painterRight.NeighborUpRotate = new Vector3(0, 0, 90);
+        painterRight.NeighborRight = painterCenter;
+        painterRight.NeighborRightRotate = new Vector3(0, 0, 0);
+        painterRight.NeighborDown = painterUp;
+        painterRight.NeighborDownRotate = new Vector3(0, 0, -90);
+
+        // Down
+        painterDown.NeighborLeft = painterRight;
+        painterDown.NeighborLeftRotate = new Vector3(0, 0, -90);
+        painterDown.NeighborUp = painterDDown;
+        painterDown.NeighborUpRotate = new Vector3(0, 0, 0);
+        painterDown.NeighborRight = painterLeft;
+        painterDown.NeighborRightRotate = new Vector3(0, 0, 90);
+        painterDown.NeighborDown = painterCenter;
+        painterDown.NeighborDownRotate = new Vector3(0, 0, 0);
+
+        // DDown
+        painterDDown.NeighborLeft = painterRight;
+        painterDDown.NeighborLeftRotate = new Vector3(0, 0, -180);
+        painterDDown.NeighborUp = painterUp;
+        painterDDown.NeighborUpRotate = new Vector3(0, 0, 0);
+        painterDDown.NeighborRight = painterLeft;
+        painterDDown.NeighborRightRotate = new Vector3(0, 0, -180);
+        painterDDown.NeighborDown = painterDown;
+        painterDDown.NeighborDownRotate = new Vector3(0, 0, 0);
 
 
 

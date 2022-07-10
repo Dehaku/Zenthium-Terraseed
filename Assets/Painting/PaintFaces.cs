@@ -20,6 +20,7 @@ public class PaintFaces : MonoBehaviour
 	public MeshRenderer paintTarget;
 	public int RTLayer;
 	public Spherize planet;
+	public PlanetSide.Side mySide;
 
 	public float brushSize = 1.0f; //The size of our brush
 	public Color brushColor; //The selected color
@@ -27,7 +28,7 @@ public class PaintFaces : MonoBehaviour
 	bool saving = false; //Flag to check if we are saving the texture
 	bool needsDelete = false;
 
-	[Header("Neighbors, This should all be done in code, god this is painful.")]
+	[Header("Neighbors")]
 
 	public PaintFaces NeighborLeft;
 	public Vector3 NeighborLeftRotate;
@@ -37,6 +38,8 @@ public class PaintFaces : MonoBehaviour
 	public Vector3 NeighborRightRotate;
 	public PaintFaces NeighborDown;
 	public Vector3 NeighborDownRotate;
+
+
 
 
 	// Start is called before the first frame update
@@ -261,6 +264,26 @@ public class PaintFaces : MonoBehaviour
 		}
 		brushContainer.SetActive(true);
 		needsDelete = false;
+
+		var PWT = GetComponentInChildren<PaintWorkTag>();
+		if(PWT)
+        {
+			if (mySide == PlanetSide.Side.center)
+				PWT.transform.localPosition = transform.position + (Vector3.forward * 10);
+			if (mySide == PlanetSide.Side.left)
+				PWT.transform.localPosition = transform.position + (Vector3.left * 10);
+			if (mySide == PlanetSide.Side.up)
+				PWT.transform.localPosition = transform.position+(Vector3.up * 10);
+			if (mySide == PlanetSide.Side.right)
+				PWT.transform.localPosition = transform.position + (Vector3.right * 10);
+			if (mySide == PlanetSide.Side.down)
+				PWT.transform.localPosition = transform.position + (Vector3.down * 10);
+			if (mySide == PlanetSide.Side.ddown)
+				PWT.transform.localPosition = transform.position + (Vector3.back * 10);
+
+
+		}
+
 		Invoke("ShowCursor", 0.1f);
 	}
 

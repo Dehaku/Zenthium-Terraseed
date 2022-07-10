@@ -81,17 +81,41 @@ public class PaintBoss : MonoBehaviour
             paintTag.owner = painter;
             painter.paintTarget = ps.GetComponent<MeshRenderer>();
             if (ps.side == PlanetSide.Side.center)
+            {
                 painterCenter = painter;
+                painter.mySide = ps.side;
+            }
+                
             if (ps.side == PlanetSide.Side.left)
+            {
                 painterLeft = painter;
+                painter.mySide = ps.side;
+            }
+                
             if (ps.side == PlanetSide.Side.up)
+            {
                 painterUp = painter;
+                painter.mySide = ps.side;
+            }
+                
             if (ps.side == PlanetSide.Side.right)
+            {
                 painterRight = painter;
+                painter.mySide = ps.side;
+            }
+                
             if (ps.side == PlanetSide.Side.down)
+            {
                 painterDown = painter;
+                painter.mySide = ps.side;
+            }
+                
             if (ps.side == PlanetSide.Side.ddown)
+            {
                 painterDDown = painter;
+                painter.mySide = ps.side;
+            }
+                
             //painter.NeighborDown
         }
 
@@ -199,13 +223,32 @@ public class PaintBoss : MonoBehaviour
             if (paintWork)
             {
                 Vector3 offset = Vector3.one * 100;
-                paintWork.transform.position = targetHit.transform.position+ offset;
+                Vector3 centerPaintPoint = targetHit.transform.position;
+
+                if (targetHit.owner.mySide == PlanetSide.Side.center)
+                    centerPaintPoint.x += 100;
+                if (targetHit.owner.mySide == PlanetSide.Side.left)
+                    centerPaintPoint.x += 200;
+                if (targetHit.owner.mySide == PlanetSide.Side.up)
+                    centerPaintPoint.x += 300;
+                if (targetHit.owner.mySide == PlanetSide.Side.right)
+                    centerPaintPoint.x += 400;
+                if (targetHit.owner.mySide == PlanetSide.Side.down)
+                    centerPaintPoint.x += 500;
+                if (targetHit.owner.mySide == PlanetSide.Side.ddown)
+                    centerPaintPoint.x += 600;
+
+
+
+                paintWork.transform.position = centerPaintPoint + offset;
                 paintWork.transform.eulerAngles = Vector3.zero;
+
+                
 
                 if(targetHit.owner.NeighborLeft)
                 {
                     var paintWorkNeighbor = targetHit.owner.NeighborLeft.GetComponentInChildren<PaintWorkTag>();
-                    paintWorkNeighbor.transform.position = targetHit.transform.position+(Vector3.left*1f)+ offset;
+                    paintWorkNeighbor.transform.position = centerPaintPoint + (Vector3.left*1f)+ offset;
                     paintWorkNeighbor.transform.eulerAngles = targetHit.owner.NeighborLeftRotate;
                     // Mr. Center's Left: 0
                     // Mr. Left's   Left: 0
@@ -218,7 +261,7 @@ public class PaintBoss : MonoBehaviour
                 if (targetHit.owner.NeighborUp)
                 {
                     var paintWorkNeighbor = targetHit.owner.NeighborUp.GetComponentInChildren<PaintWorkTag>();
-                    paintWorkNeighbor.transform.position = targetHit.transform.position + (Vector3.up * 1f) + offset;
+                    paintWorkNeighbor.transform.position = centerPaintPoint + (Vector3.up * 1f) + offset;
                     paintWorkNeighbor.transform.eulerAngles = targetHit.owner.NeighborUpRotate;
                     // Mr. Center's Up: 0
                     // Mr. Left's   Up: -90
@@ -231,7 +274,7 @@ public class PaintBoss : MonoBehaviour
                 if (targetHit.owner.NeighborRight)
                 {
                     var paintWorkNeighbor = targetHit.owner.NeighborRight.GetComponentInChildren<PaintWorkTag>();
-                    paintWorkNeighbor.transform.position = targetHit.transform.position + (Vector3.right * 1f) + offset;
+                    paintWorkNeighbor.transform.position = centerPaintPoint + (Vector3.right * 1f) + offset;
                     paintWorkNeighbor.transform.eulerAngles = targetHit.owner.NeighborRightRotate;
                     // Mr. Center's Right: 0
                     // Mr. Left's   Right: -180
@@ -243,7 +286,7 @@ public class PaintBoss : MonoBehaviour
                 if (targetHit.owner.NeighborDown)
                 {
                     var paintWorkNeighbor = targetHit.owner.NeighborDown.GetComponentInChildren<PaintWorkTag>();
-                    paintWorkNeighbor.transform.position = targetHit.transform.position + (Vector3.down * 1f) + offset;
+                    paintWorkNeighbor.transform.position = centerPaintPoint + (Vector3.down * 1f) + offset;
                     paintWorkNeighbor.transform.eulerAngles = targetHit.owner.NeighborDownRotate;
                     // Mr. Center's Down: 0
                     // Mr. Left's   Down: 90

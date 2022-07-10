@@ -214,11 +214,30 @@ public class PaintBoss : MonoBehaviour
         }
     }
 
+
+    void TogglePaintWorks(PaintTag target, bool on)
+    {
+        if (!target) // Nullcheck.
+        {
+            Debug.Log(on + "Target was Null in TogglePaintWorks somehow.");
+            return;
+        }
+        
+        target.owner.gameObject.SetActive(on);
+        target.owner.NeighborLeft.gameObject.SetActive(on);
+        target.owner.NeighborUp.gameObject.SetActive(on);
+        target.owner.NeighborRight.gameObject.SetActive(on);
+        target.owner.NeighborDown.gameObject.SetActive(on);
+    }
+
+
     bool PaintTarget()
     {
         bool brushFull = false;
         if (targetHit)
         {
+            TogglePaintWorks(targetHit,true);
+
             var paintWork = targetHit.owner.GetComponentInChildren<PaintWorkTag>();
             if (paintWork)
             {
@@ -335,6 +354,8 @@ public class PaintBoss : MonoBehaviour
                 StartCoroutine(targetHit.owner.NeighborDown.EmptyBrushContainer());
 
             _triggerSave = false;
+
+            TogglePaintWorks(targetHit, false);
         }
     }
 

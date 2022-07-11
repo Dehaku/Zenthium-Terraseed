@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PaintBoss : MonoBehaviour
 {
+    public float brushSize = 1;
+    public GameObject cursor;
+
+    
+    
+    
     public Camera sceneCamera;
 
     // Start is called before the first frame update
@@ -27,6 +33,29 @@ public class PaintBoss : MonoBehaviour
 
         PaintLoop();
 
+        UpdateCursor();
+    }
+
+    Vector3 _lastHitPos;
+    void UpdateCursor()
+    {
+        if (!cursor)
+            return;
+
+        RaycastHit hit;
+        Vector3 cursorPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
+        Ray cursorRay = sceneCamera.ScreenPointToRay(cursorPos);
+        if (Physics.Raycast(cursorRay, out hit, 200))
+        {
+            cursor.SetActive(true);
+            cursor.transform.position = hit.point;
+            cursor.transform.eulerAngles = hit.normal;
+            cursor.transform.localScale = Vector3.one * brushSize;
+        }
+        else
+        {
+            cursor.SetActive(false);
+        }
     }
 
     void PlanetCheckLoop()
@@ -247,6 +276,8 @@ public class PaintBoss : MonoBehaviour
         bool brushFull = false;
         if (targetHit)
         {
+            targetHit.owner.brushSize = brushSize;
+
             TogglePaintWorks(targetHit,true);
 
             var paintWork = targetHit.owner.GetComponentInChildren<PaintWorkTag>();
@@ -329,6 +360,9 @@ public class PaintBoss : MonoBehaviour
 
             // Debug.Log("We hit a paint target!" + hit.collider.name);
             // Debug.Log(targetHit.owner.name);
+
+            
+
             if (Input.GetKey(KeyCode.LeftShift))
                 brushFull = targetHit.owner.DoAction(false);
             else

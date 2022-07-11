@@ -5,6 +5,7 @@ using UnityEngine;
 public class PaintBoss : MonoBehaviour
 {
     public float brushSize = 1;
+    public GameObject brushSpritePF;
     public GameObject cursor;
 
     
@@ -104,6 +105,7 @@ public class PaintBoss : MonoBehaviour
         {
             var paintTag = ps.gameObject.AddComponent<PaintTag>();
             var painterGO = Instantiate(planetPainterPF, planetObject.transform);
+            
             var painter = painterGO.GetComponent<PaintFaces>();
             painter.basePaintFaces = planetPainterBase;
             paintTag.owner = painter;
@@ -274,6 +276,7 @@ public class PaintBoss : MonoBehaviour
         if (targetHit)
         {
             targetHit.owner.brushSize = brushSize;
+            targetHit.owner.brushSpritePF = brushSpritePF;
 
             TogglePaintWorks(targetHit,true);
             TriggerTerrainMorph(targetHit.GetComponentInParent<Spherize>());

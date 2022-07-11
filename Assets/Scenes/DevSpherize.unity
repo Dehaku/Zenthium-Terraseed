@@ -980,6 +980,7 @@ MonoBehaviour:
   basePaintFaces: {fileID: 1112709681}
   brushCursor: {fileID: 2104470319}
   brushContainer: {fileID: 1910522776}
+  brushSpritePF: {fileID: 0}
   sceneCamera: {fileID: 664205819}
   canvasCam: {fileID: 1399451688}
   cursorPaint: {fileID: 21300000, guid: 2ad8e55b008da9a4f9203826e67bc99c, type: 3}
@@ -1184,7 +1185,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 517452700}
-  timeAlive: 0
 --- !u!64 &189138819
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2300,7 +2300,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 1012212580}
-  timeAlive: 0
 --- !u!64 &432296822
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2948,7 +2947,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 148907909}
-  timeAlive: 0
 --- !u!64 &509037804
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -3018,6 +3016,7 @@ MonoBehaviour:
   basePaintFaces: {fileID: 1112709681}
   brushCursor: {fileID: 2104470319}
   brushContainer: {fileID: 1310926934}
+  brushSpritePF: {fileID: 0}
   sceneCamera: {fileID: 664205819}
   canvasCam: {fileID: 475155403}
   cursorPaint: {fileID: 21300000, guid: 2ad8e55b008da9a4f9203826e67bc99c, type: 3}
@@ -3640,7 +3639,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 892863991}
-  timeAlive: 0
 --- !u!1 &611530477
 GameObject:
   m_ObjectHideFlags: 0
@@ -4484,6 +4482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brushSize: 1
+  brushSpritePF: {fileID: 113140, guid: a83983ea0f7ea18439f8f8530dc1c8cc, type: 3}
   cursor: {fileID: 1338551518}
   sceneCamera: {fileID: 664205819}
   planetPainterBase: {fileID: 1112709681}
@@ -4741,6 +4740,7 @@ MonoBehaviour:
   basePaintFaces: {fileID: 1112709681}
   brushCursor: {fileID: 2104470319}
   brushContainer: {fileID: 140340138}
+  brushSpritePF: {fileID: 0}
   sceneCamera: {fileID: 664205819}
   canvasCam: {fileID: 1376526727}
   cursorPaint: {fileID: 21300000, guid: 2ad8e55b008da9a4f9203826e67bc99c, type: 3}
@@ -5354,6 +5354,7 @@ MonoBehaviour:
   basePaintFaces: {fileID: 1112709681}
   brushCursor: {fileID: 2104470319}
   brushContainer: {fileID: 1903806250}
+  brushSpritePF: {fileID: 0}
   sceneCamera: {fileID: 664205819}
   canvasCam: {fileID: 1512889760}
   cursorPaint: {fileID: 21300000, guid: 2ad8e55b008da9a4f9203826e67bc99c, type: 3}
@@ -5911,6 +5912,7 @@ MonoBehaviour:
   basePaintFaces: {fileID: 1112709681}
   brushCursor: {fileID: 2104470319}
   brushContainer: {fileID: 260446564}
+  brushSpritePF: {fileID: 0}
   sceneCamera: {fileID: 664205819}
   canvasCam: {fileID: 1582807978}
   cursorPaint: {fileID: 21300000, guid: 2ad8e55b008da9a4f9203826e67bc99c, type: 3}
@@ -6283,6 +6285,7 @@ MonoBehaviour:
   basePaintFaces: {fileID: 0}
   brushCursor: {fileID: 2104470319}
   brushContainer: {fileID: 26609845}
+  brushSpritePF: {fileID: 0}
   sceneCamera: {fileID: 664205819}
   canvasCam: {fileID: 876495727}
   cursorPaint: {fileID: 21300000, guid: 2ad8e55b008da9a4f9203826e67bc99c, type: 3}
@@ -7792,12 +7795,12 @@ PrefabInstance:
     - target: {fileID: 4471613742062117654, guid: c23ad9620938fbd4c96db37f95c51289,
         type: 3}
       propertyPath: shapeFaces
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4471613742062117654, guid: c23ad9620938fbd4c96db37f95c51289,
         type: 3}
       propertyPath: autoUpdateFaces
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4471613742062117655, guid: c23ad9620938fbd4c96db37f95c51289,
         type: 3}
@@ -8359,7 +8362,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 1629257068}
-  timeAlive: 0
 --- !u!64 &1389466355
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -8828,7 +8830,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 858723572}
-  timeAlive: 0
 --- !u!64 &1457341161
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -9758,6 +9759,7 @@ MonoBehaviour:
   basePaintFaces: {fileID: 1112709681}
   brushCursor: {fileID: 2104470319}
   brushContainer: {fileID: 1215774142}
+  brushSpritePF: {fileID: 0}
   sceneCamera: {fileID: 664205819}
   canvasCam: {fileID: 2018528460}
   cursorPaint: {fileID: 21300000, guid: 2ad8e55b008da9a4f9203826e67bc99c, type: 3}
@@ -12917,6 +12919,16 @@ PrefabInstance:
     - target: {fileID: 563631808082152200, guid: 5b174c98ffedb81429bb9a57e9fa2ba1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 563631808082152201, guid: 5b174c98ffedb81429bb9a57e9fa2ba1,
+        type: 3}
+      propertyPath: shapeFaces
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 563631808082152201, guid: 5b174c98ffedb81429bb9a57e9fa2ba1,
+        type: 3}
+      propertyPath: autoUpdateFaces
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 563631808082152203, guid: 5b174c98ffedb81429bb9a57e9fa2ba1,

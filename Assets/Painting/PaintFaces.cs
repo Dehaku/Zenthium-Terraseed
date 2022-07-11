@@ -9,7 +9,7 @@ public class PaintFaces : MonoBehaviour
 	public bool isBase = false;
 	public PaintFaces basePaintFaces;
 	[Header("Settings")]
-	public GameObject brushCursor, brushContainer; //The cursor that overlaps the model and our container for the brushes painted
+	public GameObject brushCursor, brushContainer, brushSpritePF; //The cursor that overlaps the model and our container for the brushes painted
 	public Camera sceneCamera, canvasCam;  //The camera that looks at the model, and the camera that looks at the canvas.
 	public Sprite cursorPaint; // Cursor for the differen functions 
 	public RenderTexture canvasTexture; // Render Texture that looks at our Base Texture and the painted brushes
@@ -65,12 +65,17 @@ public class PaintFaces : MonoBehaviour
 		canvasMaterial.SetTexture("_MainTex", canvasTexture);
 
 		if (paintTarget)
+        {
 			paintTarget.sharedMaterial = canvasMaterial;
 
-		if (paintTarget.sharedMaterial != canvasMaterial)
-		{
-			Debug.Log("ZZZZZZNot synced material!" + paintTarget.name);
+			if (paintTarget.sharedMaterial != canvasMaterial)
+			{
+				Debug.Log("ZZZZZZNot synced material!" + paintTarget.name);
+			}
 		}
+			
+
+		
 
 		if (planet)
 		{
@@ -145,22 +150,7 @@ public class PaintFaces : MonoBehaviour
 		
 		
 		UpdateBrushColor();
-		/*
-		if (Input.GetMouseButton(0))
-		{
-			brushColor = Color.white;
-			if (Input.GetKey(KeyCode.LeftShift))
-				brushColor = Color.black;
-			DoAction();
-		}
-		if (Input.GetMouseButtonDown(1))
-		{
-			hasAutoSaved = true;
-			brushCursor.SetActive(false);
-			saving = true;
-			Invoke("SaveTexture", 0.1f);
-		}
-		*/
+		
 		UpdateBrushCursor();
 		
 	}
@@ -191,7 +181,8 @@ public class PaintFaces : MonoBehaviour
 		if (HitTestUVPosition(ref uvWorldPosition))
 		{
 			GameObject brushObj;
-			brushObj = (GameObject)Instantiate(Resources.Load("TexturePainter-Instances/BrushEntity")); //Paint a brush
+			brushObj = Instantiate(brushSpritePF); //Paint a brush
+			//brushObj = (GameObject)Instantiate(Resources.Load("TexturePainter-Instances/BrushEntity")); //Paint a brush
 			//brushObj = (GameObject)Instantiate(Resources.Load("TexturePainter-Instances/BioBrushEntity")); //Paint a brush
 			brushObj.GetComponent<SpriteRenderer>().color = brushColor; //Set the brush color
 
@@ -205,9 +196,6 @@ public class PaintFaces : MonoBehaviour
 		if (brushCounter >= MAX_BRUSH_COUNT)
 		{ //If we reach the max brushes available, flatten the texture and clear the brushes
 			return true;
-
-			
-
 		}
 		return false;
 	}

@@ -112,44 +112,15 @@ public class Spherize : MonoBehaviour
 
     Color32 SampleHeightMap(Vector2 pointInBounds, Vector4 bounds, Color32[] heightPixels, int heightPixelsWidth)
     {
-
-        Texture heightTexture;
-        if(!useRT)
-            heightTexture = heightMap;
-        else
-            heightTexture = heightMapRT;
-
-        //Debug.Log("Width: " + heightTexture.width);
         var pointX = 1 - GetPercentOfRange(pointInBounds.x, bounds.w, bounds.x);
         var pointY = 1 - GetPercentOfRange(pointInBounds.y, bounds.y, bounds.z);
 
-        int hTx = (int)Mathf.Clamp(heightTexture.width * pointX,0,heightPixelsWidth-1);
-        int hTy = (int)Mathf.Clamp(heightTexture.height * pointY, 0, heightPixelsWidth - 1);
+        int hTx = (int)Mathf.Clamp(heightPixelsWidth * pointX,0,heightPixelsWidth-1);
+        int hTy = (int)Mathf.Clamp(heightPixelsWidth * pointY, 0, heightPixelsWidth - 1);
         
-
-
-
-        if (Random.Range(0, 500) == 250)
-        {
-            //Debug.Log(pointInBounds.x + "," + bounds.w + "," + bounds.x);
-            //Debug.Log(pointInBounds.y + "," + bounds.y + "," + bounds.z);
-            //Debug.Log("PointX: " + pointX + ", pointY:" + pointY + ", hTx:" + hTx + ", hTy:" + hTy);
-        }
-        float timer = Time.realtimeSinceStartup;
-        //var pixel = heightMap.GetPixel(hTx, hTy);
-        //if (hTy < 3 || hTx < 3)
-        //    Debug.Log("Coords: " + (Time.realtimeSinceStartup - timer) * 1000f + "ms" + ", " + hTx + ":" + hTy);
-        //if (hTy > 510 || hTx > 510)
-        //    Debug.Log("Coords: " + (Time.realtimeSinceStartup - timer) * 1000f + "ms" + ", " + hTx + ":" + hTy);
         var pixel = heightPixels[hTy + heightPixelsWidth * hTx];
-        //if (hTy < 3 || hTx < 3)
-        //    Debug.Log("Get Pixel Time: " + (Time.realtimeSinceStartup - timer) * 1000f + "ms" + ", " + hTx + ":" + hTy);
-        //if (hTy > 510 || hTx > 510)
-        //    Debug.Log("Get Pixel Time: " + (Time.realtimeSinceStartup - timer) * 1000f + "ms" + ", " + hTx + ":" + hTy);
-        //bounds.w bounds.x
-
+        
         return pixel;
-
     }
 
     public bool once = false;
@@ -173,22 +144,6 @@ public class Spherize : MonoBehaviour
 
 
             Vector3[] vertices = virginFaces[iteration].GetComponent<MeshFilter>().mesh.vertices;
-            List<Vector2> uvs = new List<Vector2>();
-            virginFaces[iteration].GetComponent<MeshFilter>().mesh.GetUVs(0,uvs);
-
-            for(int i = 0; i < uvs.Count; i++)
-            {
-                //Debug.Log("UVS:" + i + ", " + uvs[i]);
-            }
-            for(int x = 0; x < 33; x++)
-            {
-                for (int y = 0; y < 33; y++)
-                {
-                    //Debug.Log("UVSxy:" +x+":"+y+", ult:"+ uvs[x + 32 * y]);
-                }
-            }
-
-
 
             if (bend)
             {
@@ -205,12 +160,12 @@ public class Spherize : MonoBehaviour
                         bounds.z = vertices[i].z;
                 }
                 //Debug.Log("Bounds: " + bounds.w + ": " + bounds.x + ": " + bounds.y + ": " + bounds.z + ": ");
-                var mbounds = newPlane.GetComponent<MeshFilter>().mesh.bounds;
-                //Debug.Log("MeshBounds: " + mbounds);
 
-                Color32[] heightPixels;
+                Color32[] heightPixels = null;
                 int heightWidth = 0;
-                
+                bool heightMapFound = false;
+
+
                 if (!useRT)
                 {
                     heightPixels = heightMap.GetPixels32();
@@ -219,43 +174,72 @@ public class Spherize : MonoBehaviour
                     
                 else
                 {
-                    Texture2D tex = new Texture2D(heightMapRT.width, heightMapRT.height, TextureFormat.RGBA32, false);
+                    var paintTag = newPlane.GetComponent<PaintTag>();
+                    if(paintTag)
+                    {
+                        var canvasRT = paintTag.owner.canvasTexture;
+                        if(canvasRT)
+                            heightMapFound = true;
+
+                    }
+
+                        
+                    if(heightMapFound)
+                    {
+                        Texture2D tex = new Texture2D(heightMapRT.width, heightMapRT.height, TextureFormat.RGBA32, false);
 
 
-                    var old_rt = RenderTexture.active;
-                    
-                    RenderTexture.active = heightMapRT;
-                    // ReadPixels looks at the active RenderTexture.
-                    tex.ReadPixels(new Rect(0, 0, heightMapRT.width, heightMapRT.height), 0, 0);
-                    tex.Apply();
-                    
-                    RenderTexture.active = old_rt;
-                    heightPixels = tex.GetPixels32();
-                    heightWidth = tex.width;
 
-                    Destroy(tex);
 
+                        var old_rt = RenderTexture.active;
+
+                        RenderTexture.active = newPlane.GetComponent<PaintTag>().owner.canvasTexture;
+                        //RenderTexture.active = heightMapRT;
+                        // ReadPixels looks at the active RenderTexture.
+                        tex.ReadPixels(new Rect(0, 0, heightMapRT.width, heightMapRT.height), 0, 0);
+                        tex.Apply();
+
+                        RenderTexture.active = old_rt;
+
+                        heightPixels = tex.GetPixels32();
+                        heightWidth = tex.width;
+                        /*
+                        Texture2D textu = (newPlane.GetComponent<MeshRenderer>().material.GetTexture("_HeightMap") as Texture2D);
+
+                        if(textu)
+                        {
+
+                            heightMapFound = true;
+                        }
+
+                        */
+
+                        Destroy(tex);
+                    }
                 }
-                
-
 
                 for (var i = 0; i < vertices.Length; i++)
                 {
-
-                    Vector2 samplePoint = new Vector2(vertices[i].z, vertices[i].x);
-                    //if(i == 3 || i == 9 || i == 27 || i == 81 || i == 243 || i == 511)
-                    //{
-                    //    Debug.Log("i:" + i + ", xy: " + vertices[i].x + ":" + vertices[i].y);
-                    //}
-                    //Debug.Log("Pre-Vert " + i + ": " + vertices[i].x + "," + vertices[i].y + "," + vertices[i].z);
-                    vertices[i] = virginFaces[iteration].transform.InverseTransformPoint(
-                        (
-                        virginFaces[iteration].transform.TransformPoint(vertices[i]).normalized 
-                        * (this.radius + (SampleHeightMap(samplePoint, bounds, heightPixels, heightWidth).b * heightDamp))
-                       // + transform.position
-                        ) );
-                    //Debug.Log("Aft-Vert " + i + ": " + vertices[i].x + "," + vertices[i].y + "," + vertices[i].z);
-                    
+                    if(heightMapFound)
+                    {
+                        Vector2 samplePoint = new Vector2(vertices[i].z, vertices[i].x);
+                        vertices[i] = virginFaces[iteration].transform.InverseTransformPoint(
+                            (
+                            virginFaces[iteration].transform.TransformPoint(vertices[i]).normalized
+                            * (this.radius + (SampleHeightMap(samplePoint, bounds, heightPixels, heightWidth).b * heightDamp))
+                            // + transform.position
+                            ));
+                    }
+                    if (!heightMapFound)
+                    {
+                        Vector2 samplePoint = new Vector2(vertices[i].z, vertices[i].x);
+                        vertices[i] = virginFaces[iteration].transform.InverseTransformPoint(
+                            (
+                            virginFaces[iteration].transform.TransformPoint(vertices[i]).normalized
+                            * (this.radius + (255 * heightDamp))
+                            // + transform.position
+                            ));
+                    }
                 }
             }
 

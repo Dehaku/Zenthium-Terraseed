@@ -115,6 +115,8 @@ public class Spherize : MonoBehaviour
         var pointX = 1 - GetPercentOfRange(pointInBounds.x, bounds.w, bounds.x);
         var pointY = 1 - GetPercentOfRange(pointInBounds.y, bounds.y, bounds.z);
 
+        //Debug.Log("pointY:" + pointY + ", " + heightPixelsWidth * pointY + ", " + (int)Mathf.Clamp(heightPixelsWidth * pointY, 0, heightPixelsWidth - 1));
+
         int hTx = (int)Mathf.Clamp(heightPixelsWidth * pointX,0,heightPixelsWidth-1);
         int hTy = (int)Mathf.Clamp(heightPixelsWidth * pointY, 0, heightPixelsWidth - 1);
         

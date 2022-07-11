@@ -5,6 +5,8 @@ using UnityEngine;
 public class PaintBoss : MonoBehaviour
 {
     public float brushSize = 1;
+    public int brushSizeCode = 10;
+
     public GameObject brushSpritePF;
     public GameObject cursor;
 
@@ -33,6 +35,8 @@ public class PaintBoss : MonoBehaviour
 
     [HideInInspector]
     public Vector3 cursorOverride; // For Corner Collapsing the brushes position in PaintFaces(To avoid seam snailshelling)
+
+    public bool allowDisableRenderers = true;
 
     // Update is called once per frame
     void Update()
@@ -73,7 +77,7 @@ public class PaintBoss : MonoBehaviour
 
     bool PlanetCheckLoop()
     {
-        if (Input.GetMouseButton(0))
+        //if (Input.GetMouseButton(0))
         {
             PlanetSide newTarget = CheckForPlanetSide();
             if (newTarget != null)
@@ -254,10 +258,48 @@ public class PaintBoss : MonoBehaviour
             _triggerSave = true;
         }
 
+        if (Input.GetMouseButton(2) && safe)
+        {
+            Debug.Log("MMB!");
+            CodePaintTarget();
+            
+
+        }
+
         if (brushFull || Input.GetMouseButtonDown(1) || _triggerSave)
         {
             SaveLastTarget();
         }
+    }
+
+    PaintTag CodePaintTarget()
+    {
+        RaycastHit hit;
+        Vector3 cursorPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
+        Ray cursorRay = sceneCamera.ScreenPointToRay(cursorPos);
+        if (Physics.Raycast(cursorRay, out hit, 200))
+        {
+            var paintTarget = hit.collider.GetComponent<PaintTag>();
+            if (paintTarget)
+            {
+                MeshCollider meshCollider = hit.collider as MeshCollider;
+                if (meshCollider == null || meshCollider.sharedMesh == null)
+                    return null;
+
+
+                Color32 brushColor = Color.white;
+                if(Input.GetKey(KeyCode.LeftShift))
+                    brushColor = Color.black;
+                paintTarget.owner.CodePaint(hit.textureCoord, brushSizeCode, brushColor);
+
+                TriggerTerrainMorph(paintTarget.GetComponentInParent<Spherize>());
+
+                return paintTarget;
+            }
+
+            return null;
+        }
+        return null;
     }
 
 
@@ -268,7 +310,9 @@ public class PaintBoss : MonoBehaviour
             Debug.Log(on + "Target was Null in TogglePaintWorks somehow.");
             return;
         }
-        
+        if (!allowDisableRenderers && on == false)
+            return;
+
         target.owner.gameObject.SetActive(on);
         target.owner.NeighborLeft.gameObject.SetActive(on);
         target.owner.NeighborUp.gameObject.SetActive(on);

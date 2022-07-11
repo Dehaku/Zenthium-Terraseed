@@ -61,6 +61,13 @@ public class PaintBoss : MonoBehaviour
         }
     }    
 
+    IEnumerator SetPlanetsideTextureToRenderTexture(PlanetSide ps, PaintFaces painter)
+    {
+        yield return new WaitForSeconds(1f);
+        var meshRend = ps.GetComponent<MeshRenderer>();
+        meshRend.material = new Material(meshRend.material);
+        meshRend.material.SetTexture("_HeightMap", painter.canvasTexture);
+    }
     void MakePlanetPaintable(GameObject planetObject)
     {
         PaintFaces painterCenter = null;
@@ -77,9 +84,13 @@ public class PaintBoss : MonoBehaviour
             var painterGO = Instantiate(planetPainterPF, planetObject.transform);
             var painter = painterGO.GetComponent<PaintFaces>();
             painter.basePaintFaces = planetPainterBase;
-            //painter.sceneCamera
             paintTag.owner = painter;
-            painter.paintTarget = ps.GetComponent<MeshRenderer>();
+
+            
+            StartCoroutine(SetPlanetsideTextureToRenderTexture(ps, painter)); // Delay the texture so it has time to setup.
+
+            // painter.paintTarget = ps.GetComponent<MeshRenderer>();
+
             if (ps.side == PlanetSide.Side.center)
             {
                 painterCenter = painter;

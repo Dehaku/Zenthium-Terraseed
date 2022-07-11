@@ -11269,6 +11269,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlanetGen (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4471613742062117654, guid: c23ad9620938fbd4c96db37f95c51289,
+        type: 3}
+      propertyPath: autoUpdateFaces
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4471613742062117655, guid: c23ad9620938fbd4c96db37f95c51289,
         type: 3}
       propertyPath: m_RootOrder
@@ -12587,6 +12592,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlanetGen
       objectReference: {fileID: 0}
+    - target: {fileID: 4471613742062117654, guid: c23ad9620938fbd4c96db37f95c51289,
+        type: 3}
+      propertyPath: autoUpdateFaces
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4471613742062117655, guid: c23ad9620938fbd4c96db37f95c51289,
         type: 3}
       propertyPath: m_RootOrder
@@ -12646,11 +12656,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 9678d9b750e784549903cb52f78b4f28, type: 2}
+      objectReference: {fileID: 2100000, guid: f0828e81a50c5674c9775fb46661bf36, type: 2}
+    - target: {fileID: 4471613742062117658, guid: c23ad9620938fbd4c96db37f95c51289,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4471613742062117658, guid: c23ad9620938fbd4c96db37f95c51289,
         type: 3}
       propertyPath: rotateDir.x
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4471613742062117658, guid: c23ad9620938fbd4c96db37f95c51289,
         type: 3}

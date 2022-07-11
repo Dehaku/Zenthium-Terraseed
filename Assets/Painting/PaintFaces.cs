@@ -41,9 +41,12 @@ public class PaintFaces : MonoBehaviour
 
 
 
+    private void Awake()
+    {
+	}
 
-	// Start is called before the first frame update
-	void Start()
+    // Start is called before the first frame update
+    void Start()
 	{
 		if (isBase)
 			return;
@@ -54,7 +57,7 @@ public class PaintFaces : MonoBehaviour
 		canvasRenderer.material = baseMaterial;
 
 		canvasMaterial = new Material(basePaintFaces.canvasMaterial);
-		
+
 
 		canvasTexture = new RenderTexture(basePaintFaces.canvasTexture.width, basePaintFaces.canvasTexture.height, basePaintFaces.canvasTexture.depth, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB);
 		canvasTexture.antiAliasing = basePaintFaces.canvasTexture.antiAliasing;
@@ -69,15 +72,48 @@ public class PaintFaces : MonoBehaviour
 			Debug.Log("ZZZZZZNot synced material!" + paintTarget.name);
 		}
 
-		if(planet)
-        {
+		if (planet)
+		{
 			planet.heightMapRT = canvasTexture;
 			StartCoroutine(planetFaces());
 		}
-			
+
+
 	}
 
-	IEnumerator planetFaces()
+
+	public void Init()
+    {
+		brushCursor = basePaintFaces.brushCursor;
+		sceneCamera = basePaintFaces.sceneCamera;
+		baseMaterial = new Material(basePaintFaces.baseMaterial);
+		canvasRenderer.material = baseMaterial;
+
+		canvasMaterial = new Material(basePaintFaces.canvasMaterial);
+
+
+		canvasTexture = new RenderTexture(basePaintFaces.canvasTexture.width, basePaintFaces.canvasTexture.height, basePaintFaces.canvasTexture.depth, RenderTextureFormat.ARGB32, RenderTextureReadWrite.sRGB);
+		canvasTexture.antiAliasing = basePaintFaces.canvasTexture.antiAliasing;
+		canvasCam.targetTexture = canvasTexture;
+		canvasMaterial.SetTexture("_MainTex", canvasTexture);
+
+		if (paintTarget)
+			paintTarget.sharedMaterial = canvasMaterial;
+
+		if (paintTarget.sharedMaterial != canvasMaterial)
+		{
+			Debug.Log("ZZZZZZNot synced material!" + paintTarget.name);
+		}
+
+		if (planet)
+		{
+			planet.heightMapRT = canvasTexture;
+			StartCoroutine(planetFaces());
+		}
+
+	}
+
+    IEnumerator planetFaces()
 	{
 		yield return 1f;
 		foreach (var face in planet.faces)

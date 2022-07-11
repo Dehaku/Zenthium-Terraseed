@@ -17,5 +17,4 @@ public class PlanetSide : MonoBehaviour
     public Side side;
 
     public GameObject planetParent;
-    
 }

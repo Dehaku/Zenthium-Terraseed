@@ -8,6 +8,10 @@ public class PaintBoss : MonoBehaviour
     public GameObject brushSpritePF;
     public GameObject cursor;
 
+    public bool collapseCorners;
+    [Range(0f,1f)]
+    public float collapseCornersRange;
+
     
     
     
@@ -26,6 +30,9 @@ public class PaintBoss : MonoBehaviour
 
     public PaintFaces planetPainterBase;
     public GameObject planetPainterPF;
+
+    [HideInInspector]
+    public Vector3 cursorOverride;
 
     // Update is called once per frame
     void Update()
@@ -277,6 +284,8 @@ public class PaintBoss : MonoBehaviour
         {
             targetHit.owner.brushSize = brushSize;
             targetHit.owner.brushSpritePF = brushSpritePF;
+            targetHit.owner.collapseCorners = collapseCorners;
+            targetHit.owner.collapseCornerRange = collapseCornersRange;
 
             TogglePaintWorks(targetHit,true);
             TriggerTerrainMorph(targetHit.GetComponentInParent<Spherize>());

@@ -1002,6 +1002,8 @@ MonoBehaviour:
   NeighborRightRotate: {x: 0, y: 0, z: -90}
   NeighborDown: {fileID: 1629257068}
   NeighborDownRotate: {x: 0, y: 0, z: 0}
+  collapseCorners: 1
+  collapseCornerRange: 1
   autoSaveTime: 5
 --- !u!4 &148907910
 Transform:
@@ -3038,6 +3040,8 @@ MonoBehaviour:
   NeighborRightRotate: {x: 0, y: 0, z: 90}
   NeighborDown: {fileID: 892863991}
   NeighborDownRotate: {x: 0, y: 0, z: 0}
+  collapseCorners: 1
+  collapseCornerRange: 1
   autoSaveTime: 5
 --- !u!4 &517452701
 Transform:
@@ -4484,6 +4488,8 @@ MonoBehaviour:
   brushSize: 1
   brushSpritePF: {fileID: 113140, guid: a83983ea0f7ea18439f8f8530dc1c8cc, type: 3}
   cursor: {fileID: 1338551518}
+  collapseCorners: 1
+  collapseCornersRange: 0.25
   sceneCamera: {fileID: 664205819}
   planetPainterBase: {fileID: 1112709681}
   planetPainterPF: {fileID: 3052544756792672904, guid: 1d3b9957f6bb06f4580eff4588f1bf97,
@@ -4762,6 +4768,8 @@ MonoBehaviour:
   NeighborRightRotate: {x: 0, y: 0, z: -180}
   NeighborDown: {fileID: 148907909}
   NeighborDownRotate: {x: 0, y: 0, z: 90}
+  collapseCorners: 1
+  collapseCornerRange: 1
   autoSaveTime: 5
 --- !u!4 &858723573
 Transform:
@@ -5376,6 +5384,8 @@ MonoBehaviour:
   NeighborRightRotate: {x: 0, y: 0, z: 0}
   NeighborDown: {fileID: 148907909}
   NeighborDownRotate: {x: 0, y: 0, z: 0}
+  collapseCorners: 1
+  collapseCornerRange: 1
   autoSaveTime: 5
 --- !u!1 &900361091
 GameObject:
@@ -5934,6 +5944,8 @@ MonoBehaviour:
   NeighborRightRotate: {x: 0, y: 0, z: 0}
   NeighborDown: {fileID: 148907909}
   NeighborDownRotate: {x: 0, y: 0, z: -90}
+  collapseCorners: 1
+  collapseCornerRange: 1
   autoSaveTime: 5
 --- !u!4 &1012212581
 Transform:
@@ -6307,6 +6319,8 @@ MonoBehaviour:
   NeighborRightRotate: {x: 0, y: 0, z: 0}
   NeighborDown: {fileID: 0}
   NeighborDownRotate: {x: 0, y: 0, z: 0}
+  collapseCorners: 1
+  collapseCornerRange: 1
   autoSaveTime: 5
 --- !u!4 &1112709682
 Transform:
@@ -9781,6 +9795,8 @@ MonoBehaviour:
   NeighborRightRotate: {x: 0, y: 0, z: -180}
   NeighborDown: {fileID: 517452700}
   NeighborDownRotate: {x: 0, y: 0, z: 0}
+  collapseCorners: 1
+  collapseCornerRange: 1
   autoSaveTime: 5
 --- !u!4 &1629257069
 Transform:

@@ -39,6 +39,10 @@ public class PaintFaces : MonoBehaviour
 	public PaintFaces NeighborDown;
 	public Vector3 NeighborDownRotate;
 
+	[Header("Collapse Corners")]
+	public bool collapseCorners = true;
+	public float collapseCornerRange = 1;
+
 
 
     private void Awake()
@@ -237,10 +241,22 @@ public class PaintFaces : MonoBehaviour
 
 			Vector2 pixelUV = new Vector2(hit.textureCoord.x, hit.textureCoord.y);
 
-			
+			if(collapseCorners)
+            {
+				if (pixelUV.x < collapseCornerRange || pixelUV.x > (1f - collapseCornerRange))
+					pixelUV.y = pixelUV.x;
+				if (pixelUV.y < collapseCornerRange || pixelUV.y > (1f - collapseCornerRange))
+					pixelUV.x = pixelUV.y;
+
+				
+				Debug.Log("uvWP: " + uvWorldPosition + ", pUV: " + pixelUV);
+			}
 
 			uvWorldPosition.x = pixelUV.x - canvasCam.orthographicSize;//To center the UV on X
 			uvWorldPosition.y = pixelUV.y - canvasCam.orthographicSize;//To center the UV on Y
+
+			//uvWorldPosition.x = pixelUV.x - canvasCam.orthographicSize;//To center the UV on X
+			//uvWorldPosition.y = pixelUV.y - canvasCam.orthographicSize;//To center the UV on Y
 			uvWorldPosition.z = 0.0f;
 			//Debug.Log("Hit: " + hit.collider.name + ", at " + hit.point + ", translated to : " + pixelUV + ", Ult: " + uvWorldPosition);
 			return true;

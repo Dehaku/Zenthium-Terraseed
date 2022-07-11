@@ -188,12 +188,9 @@ public class Spherize : MonoBehaviour
                     {
                         Texture2D tex = new Texture2D(heightMapRT.width, heightMapRT.height, TextureFormat.RGBA32, false);
 
-
-
-
                         var old_rt = RenderTexture.active;
-
                         RenderTexture.active = newPlane.GetComponent<PaintTag>().owner.canvasTexture;
+                        
                         //RenderTexture.active = heightMapRT;
                         // ReadPixels looks at the active RenderTexture.
                         tex.ReadPixels(new Rect(0, 0, heightMapRT.width, heightMapRT.height), 0, 0);

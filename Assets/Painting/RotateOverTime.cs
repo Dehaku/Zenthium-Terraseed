@@ -13,7 +13,7 @@ public class RotateOverTime : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void FixedUpdate()
     {
         target.eulerAngles += (rotateDir * Time.deltaTime);
     }

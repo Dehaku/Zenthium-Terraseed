@@ -29,9 +29,10 @@ public class PaintBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlanetCheckLoop();
+        bool paintable = PlanetCheckLoop();
 
-        PaintLoop();
+        
+        PaintLoop(paintable);
 
         UpdateCursor();
     }
@@ -58,36 +59,28 @@ public class PaintBoss : MonoBehaviour
         }
     }
 
-    void PlanetCheckLoop()
+    bool PlanetCheckLoop()
     {
-        
-        if (Input.GetMouseButton(2))
+        if (Input.GetMouseButton(0))
         {
             PlanetSide newTarget = CheckForPlanetSide();
             if (newTarget != null)
             {
-                //Debug.Log(newTarget.name + " has PlanetSide");
                 var paintTag = newTarget.GetComponent<PaintTag>();
                 if (paintTag)
                 {
-                    //Debug.Log("^has paint tag.");
-                    
+                    //if (paintTag.timeAlive > 1f)
+                    return true;
                 }
-                    
-                if (!paintTag)
+                else
                 {
-                    //Debug.Log("^needs a paint tag!");
                     MakePlanetPaintable(newTarget.planetParent);
+                    return false;
                 }
-                    
-                //Debug.Log("Not drawing on same target now!");
-                //SaveLastTarget();
             }
-
-            //targetHit = newTarget;
-            //_isPainting = true;
-            //brushFull = PaintTarget();
         }
+        
+        return false;
     }    
 
     IEnumerator SetPlanetsideTextureToRenderTexture(PlanetSide ps, PaintFaces painter)
@@ -226,10 +219,10 @@ public class PaintBoss : MonoBehaviour
 
     
 
-    void PaintLoop()
+    void PaintLoop(bool safe = false)
     {
         bool brushFull = false;
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && safe)
         {
             PaintTag newTarget = CheckForPaintTargets();
             if (targetHit != null && targetHit != newTarget)
@@ -270,6 +263,10 @@ public class PaintBoss : MonoBehaviour
         target.owner.NeighborDown.gameObject.SetActive(on);
     }
 
+    void TriggerTerrainMorph(Spherize target)
+    {
+        target.shapeFaces = true;
+    }
 
     bool PaintTarget()
     {
@@ -279,6 +276,7 @@ public class PaintBoss : MonoBehaviour
             targetHit.owner.brushSize = brushSize;
 
             TogglePaintWorks(targetHit,true);
+            TriggerTerrainMorph(targetHit.GetComponentInParent<Spherize>());
 
             var paintWork = targetHit.owner.GetComponentInChildren<PaintWorkTag>();
             if (paintWork)

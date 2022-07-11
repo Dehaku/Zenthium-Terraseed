@@ -142,6 +142,8 @@ public class PaintFaces : MonoBehaviour
 		if (isBase)
 			return;
 
+
+
 		//timeSinceLastInput += Time.deltaTime;
 		if (timeSinceLastInput > autoSaveTime && hasAutoSaved == false)
 		{
@@ -156,7 +158,13 @@ public class PaintFaces : MonoBehaviour
 		UpdateBrushColor();
 		
 		UpdateBrushCursor();
-		
+
+
+		if (Input.GetKey(KeyCode.LeftCommand) && Input.GetMouseButton(0))//if (Input.GetKeyDown(KeyCode.F))
+			MatchEdges();
+		if (Input.GetKeyDown(KeyCode.F))
+			MatchEdges();
+
 	}
 
 	private void UpdateBrushColor()
@@ -258,7 +266,7 @@ public class PaintFaces : MonoBehaviour
 
 			if(collapseCorners)
             {
-				Debug.Log("uvWP: " + uvWorldPosition + ", pUV: " + pixelUV);
+				//Debug.Log("uvWP: " + uvWorldPosition + ", pUV: " + pixelUV);
 				GameObject.FindGameObjectWithTag("PaintTool").GetComponent<PaintBoss>().cursorOverride = uvWorldPosition;
 			}
 
@@ -287,7 +295,9 @@ public class PaintFaces : MonoBehaviour
 		tex.ReadPixels(new Rect(0, 0, canvasTexture.width, canvasTexture.height), 0, 0);
 		tex.Apply();
 		RenderTexture.active = null;
+		var oldTex = baseMaterial.mainTexture;
 		baseMaterial.mainTexture = tex; //Put the painted texture as the base
+		Destroy(oldTex); // Free up old memory, prevents memory leaks.
 
 		//StartCoroutine ("SaveTextureToFile"); //Do you want to save the texture? This is your method!
 		needsDelete = true;
@@ -295,8 +305,93 @@ public class PaintFaces : MonoBehaviour
 
 		brushContainer.SetActive(false); // We disable the brushes so the terrain doesn't flick in the delay it takes to clear it.
 
+		//MatchEdges();
 		
 	}
+
+	
+
+	void MatchEdges()
+    {
+		if (mySide != PlanetSide.Side.down)
+			return;
+
+		float timer = Time.realtimeSinceStartup;
+
+		Texture2D tex = baseMaterial.mainTexture as Texture2D;
+
+		var pixelsMain = tex.GetPixels32();
+
+		Texture2D texLeft = NeighborLeft.baseMaterial.mainTexture as Texture2D;
+		Texture2D texUp = NeighborUp.baseMaterial.mainTexture as Texture2D;
+		Texture2D texRight = NeighborRight.baseMaterial.mainTexture as Texture2D;
+		Texture2D texDown = NeighborDown.baseMaterial.mainTexture as Texture2D;
+		var pixelsLeft = texLeft.GetPixels32();
+		var pixelsUp = texUp.GetPixels32();
+		var pixelsRight = texRight.GetPixels32();
+		var pixelsDown = texDown.GetPixels32();
+
+
+		Color32 softColor = new Color32();
+		Color32 colorNeighbor = new Color32();
+		Color32 colorMain = new Color32();
+
+		//Neighbor Up
+		for (int x = 0; x < 2; x++)
+		{
+			for (int y = 0; y < tex.width; y++)
+			{
+				colorMain = pixelsMain[y + tex.width * ((tex.width - 1) - x)];
+				colorNeighbor = pixelsUp[y + tex.width * x];
+
+				softColor.r = (byte)((colorMain.r + colorNeighbor.r) / 2f);
+				softColor.g = (byte)((colorMain.g + colorNeighbor.g) / 2f);
+				softColor.b = (byte)((colorMain.b + colorNeighbor.b) / 2f);
+				softColor.a = (byte)((colorMain.a + colorNeighbor.a) / 2f);
+
+				pixelsMain[y + tex.width * ((tex.width - 1) - x)] = softColor;
+				pixelsUp[y + tex.width * x] = softColor;
+			}
+		}
+
+		//Neighbor Down
+		for (int x = 0; x < 2; x++)
+		{
+			for(int y = 0; y < tex.width; y++)
+            {
+				colorMain = pixelsMain[y + tex.width * x];
+				colorNeighbor = pixelsDown[y + tex.width * ((tex.width - 1) - x)];
+
+				softColor.r = (byte) ((colorMain.r + colorNeighbor.r) / 2f);
+				softColor.g = (byte) ((colorMain.g + colorNeighbor.g) / 2f);
+				softColor.b = (byte) ((colorMain.b + colorNeighbor.b) / 2f);
+				softColor.a = (byte)((colorMain.a + colorNeighbor.a) / 2f);
+
+				pixelsMain[y + tex.width * x] = softColor;
+				pixelsDown[y + tex.width * ((tex.width - 1) - x)] = softColor;
+			}
+		}
+		
+
+		Debug.Log("Width" + tex.width + ", " + pixelsDown.Length);
+
+
+		tex.SetPixels32(pixelsMain);
+		tex.Apply();
+		texLeft.SetPixels32(pixelsLeft);
+		texLeft.Apply();
+		texUp.SetPixels32(pixelsUp);
+		texUp.Apply();
+		texRight.SetPixels32(pixelsRight);
+		texRight.Apply();
+		texDown.SetPixels32(pixelsDown);
+		texDown.Apply();
+		
+
+
+		Debug.Log("Seam Fix Time: " + (Time.realtimeSinceStartup - timer) * 1000f + "ms");
+	}
+
 
 	public IEnumerator EmptyBrushContainer()
     {

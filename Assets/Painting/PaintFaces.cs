@@ -243,17 +243,26 @@ public class PaintFaces : MonoBehaviour
 
 			if(collapseCorners)
             {
-				if (pixelUV.x < collapseCornerRange || pixelUV.x > (1f - collapseCornerRange))
+				if (pixelUV.x < collapseCornerRange && pixelUV.y<collapseCornerRange)
 					pixelUV.y = pixelUV.x;
-				if (pixelUV.y < collapseCornerRange || pixelUV.y > (1f - collapseCornerRange))
+				if (pixelUV.x > (1f - collapseCornerRange) && pixelUV.y > (1f - collapseCornerRange))
 					pixelUV.x = pixelUV.y;
 
 				
-				Debug.Log("uvWP: " + uvWorldPosition + ", pUV: " + pixelUV);
+
+
 			}
 
 			uvWorldPosition.x = pixelUV.x - canvasCam.orthographicSize;//To center the UV on X
 			uvWorldPosition.y = pixelUV.y - canvasCam.orthographicSize;//To center the UV on Y
+
+			if(collapseCorners)
+            {
+				Debug.Log("uvWP: " + uvWorldPosition + ", pUV: " + pixelUV);
+				GameObject.FindGameObjectWithTag("PaintTool").GetComponent<PaintBoss>().cursorOverride = uvWorldPosition;
+			}
+
+			
 
 			//uvWorldPosition.x = pixelUV.x - canvasCam.orthographicSize;//To center the UV on X
 			//uvWorldPosition.y = pixelUV.y - canvasCam.orthographicSize;//To center the UV on Y

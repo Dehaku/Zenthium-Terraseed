@@ -8,6 +8,7 @@ TagManager:
   - SightTarget
   - GameEntity
   - AsteroidManager
+  - PaintTool
   layers:
   - Default
   - TransparentFX

@@ -8,7 +8,7 @@ public class PaintBoss : MonoBehaviour
     public GameObject brushSpritePF;
     public GameObject cursor;
 
-    public bool collapseCorners;
+    public bool collapseCorners; // For Corner Collapsing the brushes position in PaintFaces(To avoid seam snailshelling)
     [Range(0f,1f)]
     public float collapseCornersRange;
 
@@ -32,11 +32,13 @@ public class PaintBoss : MonoBehaviour
     public GameObject planetPainterPF;
 
     [HideInInspector]
-    public Vector3 cursorOverride;
+    public Vector3 cursorOverride; // For Corner Collapsing the brushes position in PaintFaces(To avoid seam snailshelling)
 
     // Update is called once per frame
     void Update()
     {
+        cursorOverride = Vector3.zero;
+
         bool paintable = PlanetCheckLoop();
 
         
@@ -58,6 +60,8 @@ public class PaintBoss : MonoBehaviour
         {
             cursor.SetActive(true);
             cursor.transform.position = hit.point;
+            if (cursorOverride != Vector3.zero)
+                cursor.transform.position = cursorOverride;
             cursor.transform.eulerAngles = hit.normal;
             cursor.transform.localScale = Vector3.one * brushSize;
         }

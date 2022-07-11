@@ -4468,7 +4468,7 @@ GameObject:
   - component: {fileID: 839027290}
   m_Layer: 0
   m_Name: PaintTool
-  m_TagString: Untagged
+  m_TagString: PaintTool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4485,8 +4485,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfcae2d01202d484e94dae8422c52aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brushSize: 1
-  brushSpritePF: {fileID: 113140, guid: a83983ea0f7ea18439f8f8530dc1c8cc, type: 3}
+  brushSize: 0.01
+  brushSpritePF: {fileID: 113140, guid: c89793802e15d1343b4bb7047740b7a4, type: 3}
   cursor: {fileID: 1338551518}
   collapseCorners: 1
   collapseCornersRange: 0.25
@@ -4494,6 +4494,7 @@ MonoBehaviour:
   planetPainterBase: {fileID: 1112709681}
   planetPainterPF: {fileID: 3052544756792672904, guid: 1d3b9957f6bb06f4580eff4588f1bf97,
     type: 3}
+  cursorOverride: {x: 0, y: 0, z: 0}
 --- !u!4 &839027291
 Transform:
   m_ObjectHideFlags: 0

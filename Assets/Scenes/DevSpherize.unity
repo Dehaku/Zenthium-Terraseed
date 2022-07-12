@@ -3821,8 +3821,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 664205817}
-  m_LocalRotation: {x: -0.033897307, y: -0.0058642905, z: 0.00045566802, w: -0.99940807}
-  m_LocalPosition: {x: -0.16167068, y: -1.52, z: -34.76}
+  m_LocalRotation: {x: -0.07882093, y: -0.40510574, z: 0.033697646, w: -0.9102423}
+  m_LocalPosition: {x: -36.117104, y: 6.7897162, z: -4.3771343}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4504,6 +4504,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   brushSize: 0.03
+  brushSizeCode: 30
+  brushColorCode:
+    serializedVersion: 2
+    rgba: 0
+  brushSpeed: 10
   brushSpritePF: {fileID: 113140, guid: 2be22212c51c60341a6d66e2b09f663e, type: 3}
   cursor: {fileID: 1338551518}
   collapseCorners: 0
@@ -4513,6 +4518,7 @@ MonoBehaviour:
   planetPainterPF: {fileID: 3052544756792672904, guid: 1d3b9957f6bb06f4580eff4588f1bf97,
     type: 3}
   cursorOverride: {x: 0, y: 0, z: 0}
+  allowDisableRenderers: 0
 --- !u!4 &839027291
 Transform:
   m_ObjectHideFlags: 0
@@ -12906,6 +12912,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 563631808082152197, guid: 5b174c98ffedb81429bb9a57e9fa2ba1,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 563631808082152200, guid: 5b174c98ffedb81429bb9a57e9fa2ba1,
         type: 3}
       propertyPath: m_RootOrder

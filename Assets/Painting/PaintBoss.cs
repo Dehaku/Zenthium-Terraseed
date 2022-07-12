@@ -262,7 +262,7 @@ public class PaintBoss : MonoBehaviour
 
         if (Input.GetMouseButton(2) && safe)
         {
-            CodePaintTarget();
+            //CodePaintTarget(); Needs work.
             
 
         }

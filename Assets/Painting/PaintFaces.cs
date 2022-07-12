@@ -160,10 +160,12 @@ public class PaintFaces : MonoBehaviour
 		UpdateBrushCursor();
 
 
+		/* Needs work.
 		if (Input.GetKey(KeyCode.LeftCommand) && Input.GetMouseButton(0))//if (Input.GetKeyDown(KeyCode.F))
 			MatchEdges();
 		if (Input.GetKeyDown(KeyCode.F))
 			MatchEdges();
+		*/
 
 	}
 
@@ -305,7 +307,7 @@ public class PaintFaces : MonoBehaviour
 
 		brushContainer.SetActive(false); // We disable the brushes so the terrain doesn't flick in the delay it takes to clear it.
 
-		//MatchEdges();
+		// MatchEdges(); Needs work.
 		
 	}
 
@@ -330,8 +332,9 @@ public class PaintFaces : MonoBehaviour
 			return;
 		}
 
-		if (mySide != PlanetSide.Side.down)
-			return;
+		
+
+		
 
 		float timer = Time.realtimeSinceStartup;
 
@@ -389,7 +392,13 @@ public class PaintFaces : MonoBehaviour
             }
 		}
 
-		
+
+		tex.SetPixels32(pixelsMain);
+		tex.Apply();
+
+		if (mySide != PlanetSide.Side.down)
+			return;
+
 
 		//Neighbor Up
 		for (int x = 0; x < 5; x++)
@@ -404,8 +413,9 @@ public class PaintFaces : MonoBehaviour
 				softColor.b = (byte)((colorMain.b + colorNeighbor.b) / 2f);
 				softColor.a = (byte)((colorMain.a + colorNeighbor.a) / 2f);
 
-				pixelsMain[y + tex.width * ((tex.width - 1) - x)] = softColor;
-				pixelsUp[y + tex.width * x] = softColor;
+				//pixelsMain[y + tex.width * ((tex.width - 1) - x)] = softColor;
+				//pixelsUp[y + tex.width * x] = softColor;
+				pixelsUp[y + tex.width * x] = pixelsMain[y + tex.width * ((tex.width - 1) - x)];
 			}
 		}
 
@@ -425,14 +435,15 @@ public class PaintFaces : MonoBehaviour
 
 				//Debug.Log("Offset y by one?");
 
-				pixelsMain[y + tex.width * ((tex.width - 1) - x)] = softColor;
-				pixelsLeft[x + tex.width * ((tex.width - 1) - y)] = softColor;
+				//pixelsMain[y + tex.width * ((tex.width - 1) - x)] = softColor;
+				//pixelsLeft[x + tex.width * ((tex.width - 1) - y)] = softColor;
 				//if(!(Input.GetKey(KeyCode.G)))
 				//	pixelsLeft[x + tex.width * ((tex.width - 1) - (int)(Mathf.Clamp(y, 0, 10)))] = pixelsMain[y + tex.width * ((tex.width - 1) - x)];
 				//else
 				//{
 				//	pixelsLeft[x + tex.width * ((tex.width - 1) - (int)(Mathf.Clamp(y, 0, 10)))] = Color.white;
 				//}
+				pixelsLeft[x + tex.width * ((tex.width - 1) - y)] = pixelsMain[y + tex.width * ((tex.width - 1) - x)];
 			}
 		}
 
@@ -440,10 +451,10 @@ public class PaintFaces : MonoBehaviour
 		//Neighbor Right
 		for (int x = 0; x < tex.width; x++)
 		{
-			for (int y = 0; y < 5; y++)
+			for (int y = 0; y < tex.width; y++)
 			{
 				colorMain = pixelsMain[y + tex.width * ((tex.width - 1) - x)];
-				colorNeighbor = pixelsRight[x + tex.width * y];
+				colorNeighbor = pixelsRight[x + tex.width * ((tex.width - 1) - y)];
 
 				softColor.r = (byte)((colorMain.r + colorNeighbor.r) / 2f);
 				softColor.g = (byte)((colorMain.g + colorNeighbor.g) / 2f);
@@ -452,9 +463,9 @@ public class PaintFaces : MonoBehaviour
 
 				//Debug.Log("Offset y by one?");
 
-				//pixelsMain[y + tex.width * ((tex.width - 1) - x)] = softColor;
-				//pixelsLeft[x + tex.width * ((tex.width - 1) - (int)(Mathf.Clamp(y + 1, 0, 2)))] = softColor;
-				pixelsRight[x + tex.width * y] = pixelsMain[y + tex.width * ((tex.width - 1) - x)];
+				//pixelsMain[y + tex.width * x] = softColor;
+				//pixelsRight[x + tex.width * ((tex.width - 1) - y)] = softColor;
+				pixelsRight[x + tex.width * ((tex.width - 1) - y)] = pixelsMain[x + tex.width * y];
 			}
 		}
 
@@ -472,12 +483,15 @@ public class PaintFaces : MonoBehaviour
 				softColor.b = (byte)((colorMain.b + colorNeighbor.b) / 2f);
 				softColor.a = (byte)((colorMain.a + colorNeighbor.a) / 2f);
 
-				pixelsMain[y + tex.width * x] = softColor;
-				pixelsDown[y + tex.width * ((tex.width - 1) - x)] = softColor;
+				//pixelsMain[y + tex.width * x] = softColor;
+				//pixelsDown[y + tex.width * ((tex.width - 1) - x)] = softColor;
+				pixelsDown[y + tex.width * ((tex.width - 1) - x)] = pixelsMain[y + tex.width * x];
 			}
 		}
 
-		
+
+
+
 
 
 
@@ -510,6 +524,9 @@ public class PaintFaces : MonoBehaviour
 		if (mySide != PlanetSide.Side.down)
 			return;
 
+		return;
+
+
 		float timer = Time.realtimeSinceStartup;
 
 		Texture2D tex = baseMaterial.mainTexture as Texture2D;
@@ -530,9 +547,9 @@ public class PaintFaces : MonoBehaviour
 		Color32 colorNeighbor = new Color32();
 		Color32 colorMain = new Color32();
 
-		
 
-		
+
+
 		//Neighbor Up
 		for (int x = 0; x < 5; x++)
 		{
@@ -546,46 +563,20 @@ public class PaintFaces : MonoBehaviour
 				softColor.b = (byte)((colorMain.b + colorNeighbor.b) / 2f);
 				softColor.a = (byte)((colorMain.a + colorNeighbor.a) / 2f);
 
-				pixelsMain[y + tex.width * ((tex.width - 1) - x)] = softColor;
-				pixelsUp[y + tex.width * x] = softColor;
+				//pixelsMain[y + tex.width * ((tex.width - 1) - x)] = softColor;
+				//pixelsUp[y + tex.width * x] = softColor;
+				pixelsUp[y + tex.width * x] = pixelsMain[y + tex.width * ((tex.width - 1) - x)];
 			}
 		}
-		
+
 
 		//Neighbor Left
 		for (int x = 0; x < tex.width; x++)
 		{
 			for (int y = 0; y < 10; y++)
 			{
-				colorMain =		pixelsMain[y + tex.width * ((tex.width - 1) - x)];
-				colorNeighbor = pixelsLeft[x + tex.width * ((tex.width - 1) - (int)(Mathf.Clamp(y-1,0,5)))];
-
-				softColor.r = (byte)((colorMain.r + colorNeighbor.r) / 2f);
-				softColor.g = (byte)((colorMain.g + colorNeighbor.g) / 2f);
-				softColor.b = (byte)((colorMain.b + colorNeighbor.b) / 2f);
-				softColor.a = (byte)((colorMain.a + colorNeighbor.a) / 2f);
-
-				//Debug.Log("Offset y by one?");
-
-				pixelsMain[y + tex.width * ((tex.width - 1) - x)] = softColor;
-				pixelsLeft[x + tex.width * ((tex.width - 1) - (int)(Mathf.Clamp(y, 0, 2)))] = softColor;
-				//if(!(Input.GetKey(KeyCode.G)))
-				//	pixelsLeft[x + tex.width * ((tex.width - 1) - (int)(Mathf.Clamp(y, 0, 10)))] = pixelsMain[y + tex.width * ((tex.width - 1) - x)];
-				//else
-                //{
-				//	pixelsLeft[x + tex.width * ((tex.width - 1) - (int)(Mathf.Clamp(y, 0, 10)))] = Color.white;
-				//}
-			}
-		}
-
-
-		//Neighbor Right
-		for (int x = 0; x < tex.width; x++)
-		{
-			for (int y = 0; y < 5; y++)
-			{
 				colorMain = pixelsMain[y + tex.width * ((tex.width - 1) - x)];
-				colorNeighbor = pixelsRight[x + tex.width * y];
+				colorNeighbor = pixelsLeft[x + tex.width * ((tex.width - 1) - y)];
 
 				softColor.r = (byte)((colorMain.r + colorNeighbor.r) / 2f);
 				softColor.g = (byte)((colorMain.g + colorNeighbor.g) / 2f);
@@ -595,30 +586,59 @@ public class PaintFaces : MonoBehaviour
 				//Debug.Log("Offset y by one?");
 
 				//pixelsMain[y + tex.width * ((tex.width - 1) - x)] = softColor;
-				//pixelsLeft[x + tex.width * ((tex.width - 1) - (int)(Mathf.Clamp(y + 1, 0, 2)))] = softColor;
-				pixelsRight[x + tex.width * y] = pixelsMain[y + tex.width * ((tex.width - 1) - x)];
+				//pixelsLeft[x + tex.width * ((tex.width - 1) - y)] = softColor;
+				//if(!(Input.GetKey(KeyCode.G)))
+				//	pixelsLeft[x + tex.width * ((tex.width - 1) - (int)(Mathf.Clamp(y, 0, 10)))] = pixelsMain[y + tex.width * ((tex.width - 1) - x)];
+				//else
+				//{
+				//	pixelsLeft[x + tex.width * ((tex.width - 1) - (int)(Mathf.Clamp(y, 0, 10)))] = Color.white;
+				//}
+				pixelsLeft[x + tex.width * ((tex.width - 1) - y)] = pixelsMain[y + tex.width * ((tex.width - 1) - x)];
 			}
 		}
 
-		
+
+		//Neighbor Right
+		for (int x = 0; x < tex.width; x++)
+		{
+			for (int y = 0; y < tex.width; y++)
+			{
+				colorMain = pixelsMain[y + tex.width * ((tex.width - 1) - x)];
+				colorNeighbor = pixelsRight[x + tex.width * ((tex.width - 1) - y)];
+
+				softColor.r = (byte)((colorMain.r + colorNeighbor.r) / 2f);
+				softColor.g = (byte)((colorMain.g + colorNeighbor.g) / 2f);
+				softColor.b = (byte)((colorMain.b + colorNeighbor.b) / 2f);
+				softColor.a = (byte)((colorMain.a + colorNeighbor.a) / 2f);
+
+				//Debug.Log("Offset y by one?");
+
+				//pixelsMain[y + tex.width * x] = softColor;
+				//pixelsRight[x + tex.width * ((tex.width - 1) - y)] = softColor;
+				pixelsRight[x + tex.width * ((tex.width - 1) - y)] = pixelsMain[x + tex.width * y];
+			}
+		}
+
+
 		//Neighbor Down
 		for (int x = 0; x < 5; x++)
 		{
-			for(int y = 0; y < tex.width; y++)
-            {
+			for (int y = 0; y < tex.width; y++)
+			{
 				colorMain = pixelsMain[y + tex.width * x];
 				colorNeighbor = pixelsDown[y + tex.width * ((tex.width - 1) - x)];
 
-				softColor.r = (byte) ((colorMain.r + colorNeighbor.r) / 2f);
-				softColor.g = (byte) ((colorMain.g + colorNeighbor.g) / 2f);
-				softColor.b = (byte) ((colorMain.b + colorNeighbor.b) / 2f);
+				softColor.r = (byte)((colorMain.r + colorNeighbor.r) / 2f);
+				softColor.g = (byte)((colorMain.g + colorNeighbor.g) / 2f);
+				softColor.b = (byte)((colorMain.b + colorNeighbor.b) / 2f);
 				softColor.a = (byte)((colorMain.a + colorNeighbor.a) / 2f);
 
-				pixelsMain[y + tex.width * x] = softColor;
-				pixelsDown[y + tex.width * ((tex.width - 1) - x)] = softColor;
+				//pixelsMain[y + tex.width * x] = softColor;
+				//pixelsDown[y + tex.width * ((tex.width - 1) - x)] = softColor;
+				pixelsDown[y + tex.width * ((tex.width - 1) - x)] = pixelsMain[y + tex.width * x];
 			}
 		}
-		
+
 
 
 
@@ -634,8 +654,7 @@ public class PaintFaces : MonoBehaviour
 		texDown.Apply();
 		
 
-
-		Debug.Log("Seam Fix Time: " + (Time.realtimeSinceStartup - timer) * 1000f + "ms");
+		Debug.Log(mySide +", Seam Fix Time: " + (Time.realtimeSinceStartup - timer) * 1000f + "ms");
 	}
 
 

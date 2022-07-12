@@ -16,6 +16,7 @@ public class Spherize : MonoBehaviour
     public RenderTexture heightMapRT;
     public bool useRT = false;
     public float heightDamp;
+    public bool otherMethod = false;
     
 
     void Start()
@@ -115,13 +116,60 @@ public class Spherize : MonoBehaviour
         var pointX = 1 - GetPercentOfRange(pointInBounds.x, bounds.w, bounds.x);
         var pointY = 1 - GetPercentOfRange(pointInBounds.y, bounds.y, bounds.z);
 
-        //Debug.Log("pointY:" + pointY + ", " + heightPixelsWidth * pointY + ", " + (int)Mathf.Clamp(heightPixelsWidth * pointY, 0, heightPixelsWidth - 1));
+        //Debug.Log("pointY:" + pointY + ", " + heightPixelsWidth * pointY + ", " + (int)Mathf.Clamp(heightPixelsWidth * pointY, 0, heightPixelsWidth - 1) + ", " + (int)(heightPixelsWidth * pointY));
 
-        int hTx = (int)Mathf.Clamp(heightPixelsWidth * pointX,0,heightPixelsWidth-1);
-        int hTy = (int)Mathf.Clamp(heightPixelsWidth * pointY, 0, heightPixelsWidth - 1);
-        
+        //int hTx = (int)Mathf.Clamp(heightPixelsWidth * pointX,0,heightPixelsWidth-1);
+        //int hTy = (int)Mathf.Clamp(heightPixelsWidth * pointY, 0, heightPixelsWidth - 1);
+
+        int hTx = (int)(heightPixelsWidth * pointX);
+        int hTy = (int)(heightPixelsWidth * pointY);
+        if (hTx >= heightPixelsWidth)
+            hTx = heightPixelsWidth - 1;
+        if (hTy >= heightPixelsWidth)
+            hTy = heightPixelsWidth - 1;
+
         var pixel = heightPixels[hTy + heightPixelsWidth * hTx];
         
+        return pixel;
+    }
+
+    Color32 SampleHeightMap(Vector2 pointInBounds, Texture2D texture)
+    {
+        /*
+        var pointX = 1 - GetPercentOfRange(pointInBounds.x, bounds.w, bounds.x);
+        var pointY = 1 - GetPercentOfRange(pointInBounds.y, bounds.y, bounds.z);
+
+        Debug.Log("pointY:" + pointY + ", " + heightPixelsWidth * pointY + ", " + (int)Mathf.Clamp(heightPixelsWidth * pointY, 0, heightPixelsWidth - 1) + ", " + (int)(heightPixelsWidth * pointY));
+
+        //int hTx = (int)Mathf.Clamp(heightPixelsWidth * pointX,0,heightPixelsWidth-1);
+        //int hTy = (int)Mathf.Clamp(heightPixelsWidth * pointY, 0, heightPixelsWidth - 1);
+
+        int hTx = (int)(heightPixelsWidth * pointX);
+        int hTy = (int)(heightPixelsWidth * pointY);
+        if (hTx >= heightPixelsWidth)
+            hTx = heightPixelsWidth - 1;
+        if (hTy >= heightPixelsWidth)
+            hTy = heightPixelsWidth - 1;
+
+        var pixel = heightPixels[hTy + heightPixelsWidth * hTx];
+        */
+
+        var xPos = (int)(texture.width * pointInBounds.x);
+        var yPos = (int)(texture.height * pointInBounds.y);
+        if (xPos >= texture.width)
+            xPos = texture.width - 1;
+        if (yPos >= texture.width)
+            yPos = texture.height - 1;
+
+        if (xPos < 2 || xPos > texture.width-2)
+        {
+            //Debug.Log("xPos:" + xPos + ":" + yPos);
+        }
+        
+
+        //Debug.Log("pIB:" + (int)(texture.width * pointInBounds.x) + " : " + (int)(texture.height * pointInBounds.y) + ", vs " + pointInBounds.x * texture.width + ":" + pointInBounds.y * texture.height);
+        var pixel = texture.GetPixel(xPos, yPos);
+
         return pixel;
     }
 
@@ -216,29 +264,85 @@ public class Spherize : MonoBehaviour
                         Destroy(tex);
                     }
                 }
+                //bool otherMethod = true;
+
+                Texture wee = null;
+
+                Texture2D texForUVS = null;
+                Texture2D texForUVS2 = null;
+                Vector2[] uvs = null;
+
+                if (otherMethod)
+                {
+                    bool hasMainTex  = newPlane.GetComponent<PaintTag>().owner.baseMaterial.HasTexture("MainTex");
+                    //Debug.Log("Has MainTex:" + hasMainTex);
+                    hasMainTex = newPlane.GetComponent<PaintTag>().owner.baseMaterial.HasTexture("_MainTex");
+                    //Debug.Log("Has _MainTex:" + hasMainTex);
+                    if(hasMainTex)
+                    {
+                        //Debug.Log(newPlane.GetComponent<PaintTag>().owner.baseMaterial.mainTexture);
+                        //Debug.Log(newPlane.GetComponent<PaintTag>().owner.baseMaterial.mainTexture.GetType());
+
+                        texForUVS = newPlane.GetComponent<PaintTag>().owner.baseMaterial.mainTexture as Texture2D;
+                        //Debug.Log("_MainTex:" + texForUVS.width);
+                    }
+                        
+
+                    hasMainTex = newPlane.GetComponent<PaintTag>().owner.baseMaterial.HasTexture("_HeightMap");
+                    //Debug.Log("Has _HeightMap:" + hasMainTex);
+
+                    
+                    //texForUVS2 = newPlane.GetComponent<MeshRenderer>().material.GetTexture("MainTex") as Texture2D;
+                    uvs = newPlane.GetComponent<MeshFilter>().mesh.uv;
+                }
+
+                //Debug.Log(newPlane.name + texForUVS + ":" + texForUVS2 + ":" + wee);
+
+                
+
 
                 for (var i = 0; i < vertices.Length; i++)
                 {
-                    if(heightMapFound)
+
+                    if(otherMethod)
                     {
                         Vector2 samplePoint = new Vector2(vertices[i].z, vertices[i].x);
+
+                        //Debug.Log("V:" + vertices[i] + ":" + uvs[i]);
+
                         vertices[i] = virginFaces[iteration].transform.InverseTransformPoint(
                             (
                             virginFaces[iteration].transform.TransformPoint(vertices[i]).normalized
-                            * (this.radius + (SampleHeightMap(samplePoint, bounds, heightPixels, heightWidth).b * heightDamp))
+                            * (this.radius + (SampleHeightMap(uvs[i], texForUVS).b * heightDamp))
                             // + transform.position
                             ));
                     }
-                    if (!heightMapFound)
+                    else
                     {
-                        Vector2 samplePoint = new Vector2(vertices[i].z, vertices[i].x);
-                        vertices[i] = virginFaces[iteration].transform.InverseTransformPoint(
-                            (
-                            virginFaces[iteration].transform.TransformPoint(vertices[i]).normalized
-                            * (this.radius + (255 * heightDamp))
-                            // + transform.position
-                            ));
+                        if (heightMapFound)
+                        {
+                            Vector2 samplePoint = new Vector2(vertices[i].z, vertices[i].x);
+
+
+                            vertices[i] = virginFaces[iteration].transform.InverseTransformPoint(
+                                (
+                                virginFaces[iteration].transform.TransformPoint(vertices[i]).normalized
+                                * (this.radius + (SampleHeightMap(samplePoint, bounds, heightPixels, heightWidth).b * heightDamp))
+                                // + transform.position
+                                ));
+                        }
+                        if (!heightMapFound)
+                        {
+                            Vector2 samplePoint = new Vector2(vertices[i].z, vertices[i].x);
+                            vertices[i] = virginFaces[iteration].transform.InverseTransformPoint(
+                                (
+                                virginFaces[iteration].transform.TransformPoint(vertices[i]).normalized
+                                * (this.radius + (255 * heightDamp))
+                                // + transform.position
+                                ));
+                        }
                     }
+                    
                 }
             }
 

@@ -237,7 +237,6 @@ MonoBehaviour:
     icon: {fileID: 0}
   scaleOffset: 0.6
   _physicsMassOffset: 100
-  mainObject: {fileID: 4857272412844325179}
 --- !u!114 &4857272413072896484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -250,7 +249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca0fb14842bf2948bce9fc6feb61b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myMass: {fileID: 6595645704415133736, guid: e298c1e8f001ad94dbc39b8394c1fdd4, type: 3}
+  myMass: {fileID: 4857272413072896487}
 --- !u!114 &4857272413072896486
 MonoBehaviour:
   m_ObjectHideFlags: 0

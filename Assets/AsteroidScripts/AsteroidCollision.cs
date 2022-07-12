@@ -34,13 +34,13 @@ public class AsteroidCollision : MonoBehaviour
         // Smaller mass gets eaten.
         if (myMass.GetMass() >= theirMass.GetMass())
         {
-            AbsorbBody(ref myMass,ref theirMass,gameObject,collision.gameObject);
+            AbsorbBody(myMass,theirMass,gameObject,collision.gameObject);
         }
         else
-            AbsorbBody(ref theirMass, ref myMass, collision.gameObject, gameObject);
+            AbsorbBody(theirMass,myMass, collision.gameObject, gameObject);
     }
 
-    void AbsorbBody(ref Mass eaterMass, ref Mass victimMass, GameObject eaterGO, GameObject victimGO)
+    void AbsorbBody(Mass eaterMass,Mass victimMass, GameObject eaterGO, GameObject victimGO)
     { // Replace destroy with a pool later. >>>Maybe give half material each hit instead of removing, removing after below 1 substance unit
 
         eaterMass.bodies += victimMass.bodies;

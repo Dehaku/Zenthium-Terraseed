@@ -825,7 +825,8 @@ PrefabInstance:
       propertyPath: planetPainterBase
       value: 
       objectReference: {fileID: 801582214}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9189794532674706738, guid: 227e3e88fc33fbf43ac014a57d74c4e6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 227e3e88fc33fbf43ac014a57d74c4e6, type: 3}
 --- !u!1001 &801582213
 PrefabInstance:

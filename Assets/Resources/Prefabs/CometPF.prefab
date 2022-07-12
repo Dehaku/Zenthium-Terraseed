@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 1302071028591843002}
   - component: {fileID: 4936565356547618906}
   m_Layer: 0
-  m_Name: Comet
+  m_Name: CometPF
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,19 +259,7 @@ MonoBehaviour:
   rb: {fileID: 6595645704415133748}
   trans: {fileID: 2463695405139496127}
   _mass: 0
-  substances:
-  - SO: {fileID: 11400000, guid: 001a3e6670f138446959f0cd8024b75c, type: 2}
-    amount: 15
-    id: 
-    weightPerUnit: 0
-    color: {r: 0, g: 0, b: 0, a: 0}
-    icon: {fileID: 0}
-  - SO: {fileID: 11400000, guid: b12b795da1198644888784009b2f20c3, type: 2}
-    amount: 5
-    id: 
-    weightPerUnit: 0
-    color: {r: 0, g: 0, b: 0, a: 0}
-    icon: {fileID: 0}
+  substances: []
   scaleOffset: 0.6
   _physicsMassOffset: 100
 --- !u!114 &1302071028591843002
@@ -335,7 +323,6 @@ GameObject:
   - component: {fileID: 6423262502688208774}
   - component: {fileID: 1137951279249281541}
   - component: {fileID: 3647429625457486137}
-  - component: {fileID: 4123038954748435916}
   m_Layer: 0
   m_Name: Ocean
   m_TagString: Untagged
@@ -407,16 +394,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &4123038954748435916
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5769264947018620819}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}

@@ -38,7 +38,11 @@ public class Mass : MonoBehaviour
 
         rb.mass = GetMass()/_physicsMassOffset;
         var newScale = (Vector3.one * scaleOffset) * Mathf.Pow(rb.mass * _physicsMassOffset, 1f / 3f);
-        transform.localScale = newScale;
+        //if (transform.parent)
+        //    transform.parent.localScale = newScale;
+        //else
+            
+            transform.localScale = newScale;
     }
 
     public void AddSubstance(Substance sub, float amount)

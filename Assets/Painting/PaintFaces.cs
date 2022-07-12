@@ -154,10 +154,7 @@ public class PaintFaces : MonoBehaviour
 		}
 
 		
-		
-		UpdateBrushColor();
-		
-		UpdateBrushCursor();
+		//UpdateBrushCursor();
 
 
 		/* Needs work.
@@ -169,10 +166,7 @@ public class PaintFaces : MonoBehaviour
 
 	}
 
-	private void UpdateBrushColor()
-	{
-		//throw new NotImplementedException();
-	}
+	
 
 
 	//The main action, instantiates a brush or decal entity at the clicked position on the UV map
@@ -216,7 +210,7 @@ public class PaintFaces : MonoBehaviour
 
 	public void TriggerSaveMethod()
     {
-		brushCursor.SetActive(false);
+		//brushCursor.SetActive(false);
 		saving = true;
 		//Invoke("SaveTexture", 0.1f);
 		SaveTexture();

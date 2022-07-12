@@ -44,11 +44,11 @@ public class AsteroidLogic : MonoBehaviour
     {
         for(int i = 0; i != spawnPerTick; i++)
         {
-            if (_amountSpawned <= spawnAmount)
+            if (_amountSpawned < spawnAmount)
             {
                 Vector3 spawnPos = transform.position + (UnityEngine.Random.insideUnitSphere * spawnRadius);
                 var obj = Instantiate(spawnPrefabs[UnityEngine.Random.Range(0, spawnPrefabs.Count)], spawnPos, transform.rotation);
-                objectsRB.Add(obj.GetComponent<Rigidbody>());
+                objectsRB.Add(obj.GetComponentInChildren<Rigidbody>());
                 refreshArrays = true;
 
                 _amountSpawned++;

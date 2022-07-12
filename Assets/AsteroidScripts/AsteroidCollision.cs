@@ -58,7 +58,10 @@ public class AsteroidCollision : MonoBehaviour
         Debug.Log("Velocities: " + eaterRB.velocity + " : " + victimRB.velocity + ", Impact: " + relativeVelocity + " : " + impactMagnitude);
 
         eaterRB.AddForce(victimRB.velocity * victimRB.mass, ForceMode.Impulse);
-        victimGO.SetActive(false);
+        if (victimMass.mainObject)
+            victimMass.mainObject.SetActive(false);
+        else
+            victimGO.SetActive(false);
         //Destroy(victimGO); // Replace this with a pool later.
     }
 

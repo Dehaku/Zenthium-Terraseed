@@ -6,6 +6,8 @@ public class PaintBoss : MonoBehaviour
 {
     public float brushSize = 1;
     public int brushSizeCode = 10;
+    public Color32 brushColorCode;
+    public float brushSpeed = 0.05f;
 
     public GameObject brushSpritePF;
     public GameObject cursor;
@@ -260,7 +262,6 @@ public class PaintBoss : MonoBehaviour
 
         if (Input.GetMouseButton(2) && safe)
         {
-            Debug.Log("MMB!");
             CodePaintTarget();
             
 
@@ -290,7 +291,7 @@ public class PaintBoss : MonoBehaviour
                 Color32 brushColor = Color.white;
                 if(Input.GetKey(KeyCode.LeftShift))
                     brushColor = Color.black;
-                paintTarget.owner.CodePaint(hit.textureCoord, brushSizeCode, brushColor);
+                paintTarget.owner.CodePaint(hit.textureCoord, brushSizeCode, brushColorCode, brushSpeed);
 
                 TriggerTerrainMorph(paintTarget.GetComponentInParent<Spherize>());
 

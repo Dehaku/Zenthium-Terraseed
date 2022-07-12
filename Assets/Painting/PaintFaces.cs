@@ -312,7 +312,17 @@ public class PaintFaces : MonoBehaviour
 	bool firstCall = true;
 
 
-	public void CodePaint(Vector2 texPos, int brushSize, Color32 brushColor)
+	Color32 ColorStep(Color32 target, Color32 dest, float stepAmount)
+    {
+		target.r = (byte)Mathf.Clamp(((target.r + dest.r) / 2f),target.r - stepAmount, target.r + stepAmount);
+		target.g = (byte)Mathf.Clamp(((target.g + dest.g) / 2f),target.g - stepAmount, target.g + stepAmount);
+		target.b = (byte)Mathf.Clamp(((target.b + dest.b) / 2f),target.b - stepAmount, target.b + stepAmount);
+		target.a = (byte)Mathf.Clamp(((target.a + dest.a) / 2f),target.a - stepAmount, target.a + stepAmount);
+
+		return target;
+	}
+
+	public void CodePaint(Vector2 texPos, int brushSize, Color32 brushColor, float brushSpeed)
 	{
 		if (firstCall)
 		{
@@ -350,11 +360,27 @@ public class PaintFaces : MonoBehaviour
         {
 			for (int y = 0; y < tex.width; y++)
             {
+
+				
 				//pixelsMain[y + tex.width * ((tex.width - 1) - x)] = brushColor;
 				if (Vector2.Distance(new Vector2(texPos.y*tex.width,texPos.x*tex.width),new Vector2(x,y)) < brushSize)
                 {
-					//colorMain = pixelsMain[y + tex.width * ((tex.width - 1) - x)];
-					pixelsMain[y + tex.width * x] = brushColor;
+					colorMain = pixelsMain[y + tex.width * x];
+					pixelsMain[y + tex.width * x] = ColorStep(colorMain, brushColor, brushSpeed);
+
+					//softColor = Color32.Lerp(colorMain, brushColor, brushSpeed);
+
+					//softColor = brushColor;
+
+					//softColor = ColorStep(colorMain, brushColor, brushSpeed);
+
+					//softColor.r = (byte)((colorMain.r + brushColor.r) / 2f);
+					//softColor.g = (byte)((colorMain.g + brushColor.g) / 2f);
+					//softColor.b = (byte)((colorMain.b + brushColor.b) / 2f);
+					//softColor.a = (byte)((colorMain.a + brushColor.a) / 2f);
+
+
+					//pixelsMain[y + tex.width * x] = softColor;
 
 				}
 
@@ -390,7 +416,7 @@ public class PaintFaces : MonoBehaviour
 			for (int y = 0; y < 10; y++)
 			{
 				colorMain = pixelsMain[y + tex.width * ((tex.width - 1) - x)];
-				colorNeighbor = pixelsLeft[x + tex.width * ((tex.width - 1) - (int)(Mathf.Clamp(y - 1, 0, 5)))];
+				colorNeighbor = pixelsLeft[x + tex.width * ((tex.width - 1) - y)];
 
 				softColor.r = (byte)((colorMain.r + colorNeighbor.r) / 2f);
 				softColor.g = (byte)((colorMain.g + colorNeighbor.g) / 2f);
@@ -400,7 +426,7 @@ public class PaintFaces : MonoBehaviour
 				//Debug.Log("Offset y by one?");
 
 				pixelsMain[y + tex.width * ((tex.width - 1) - x)] = softColor;
-				pixelsLeft[x + tex.width * ((tex.width - 1) - (int)(Mathf.Clamp(y, 0, 2)))] = softColor;
+				pixelsLeft[x + tex.width * ((tex.width - 1) - y)] = softColor;
 				//if(!(Input.GetKey(KeyCode.G)))
 				//	pixelsLeft[x + tex.width * ((tex.width - 1) - (int)(Mathf.Clamp(y, 0, 10)))] = pixelsMain[y + tex.width * ((tex.width - 1) - x)];
 				//else

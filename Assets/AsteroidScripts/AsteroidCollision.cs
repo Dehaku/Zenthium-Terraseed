@@ -22,14 +22,17 @@ public class AsteroidCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Collision! " + gameObject.name + ":" + collision.gameObject.name);
+        Debug.Log("myMass:" + name + ", " + myMass.bodies + ", vs " + collision.collider.name);
+        if (myMass.bodies < 0.5f) // We've already been consumed, don't run any logic. 1 didn't seem to work. Floating issues?
+            return;
 
         var theirMass = collision.gameObject.GetComponent<Mass>();
         if (!theirMass)
             return;
-        
+        Debug.Log("Collision! " + gameObject.name + ":" + collision.gameObject.name);
+
         // Smaller mass gets eaten.
-        if(myMass.GetMass() >= theirMass.GetMass())
+        if (myMass.GetMass() >= theirMass.GetMass())
         {
             AbsorbBody(myMass,theirMass,gameObject,collision.gameObject);
         }
@@ -58,10 +61,14 @@ public class AsteroidCollision : MonoBehaviour
         Debug.Log("Velocities: " + eaterRB.velocity + " : " + victimRB.velocity + ", Impact: " + relativeVelocity + " : " + impactMagnitude);
 
         eaterRB.AddForce(victimRB.velocity * victimRB.mass, ForceMode.Impulse);
-        if (victimMass.mainObject)
-            victimMass.mainObject.SetActive(false);
+        Debug.Log("vmMain:" + victimGO.transform.parent + victimGO);
+        if (victimGO.transform.parent)
+            victimGO.transform.parent.gameObject.SetActive(false);
         else
             victimGO.SetActive(false);
+            //victimMass.mainObject.SetActive(false);
+        //else
+            //victimGO.SetActive(false);
         //Destroy(victimGO); // Replace this with a pool later.
     }
 

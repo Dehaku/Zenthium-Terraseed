@@ -16,8 +16,6 @@ public class Mass : MonoBehaviour
     public float scaleOffset = 1;
     [SerializeField] float _physicsMassOffset = 100f;
 
-    public GameObject mainObject;
-
     public float GetMass()
     {
         float massCalc = 0;

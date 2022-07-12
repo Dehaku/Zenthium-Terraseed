@@ -946,7 +946,7 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 4857272412844325176, guid: 551fd82be4fd18b4794b456712b6a622, type: 3}
   spawnRadius: 1000
-  spawnAmount: 50
+  spawnAmount: 1000
   spawnPerTick: 50
   _amountSpawned: 0
   OtherObjectsToGrav:

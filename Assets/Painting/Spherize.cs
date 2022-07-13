@@ -21,6 +21,8 @@ public class Spherize : MonoBehaviour
 
 
 
+    static GameObject _virginPlaneContainer; // For clean hierarchy
+
     void Start()
     {
         Vector3[] positionArr = {
@@ -77,8 +79,13 @@ public class Spherize : MonoBehaviour
 
 
 
-            GameObject virginPlane = Instantiate(planePF, transform);
-            virginPlane.transform.parent = null;
+            if(!_virginPlaneContainer)
+            {
+                _virginPlaneContainer = new GameObject();
+                _virginPlaneContainer.name = "Virgin Plane Container";
+            }
+
+            GameObject virginPlane = Instantiate(planePF, _virginPlaneContainer.transform);
             virginPlane.transform.localScale = newPlane.transform.localScale;
             virginPlane.transform.position = newPlane.transform.position;
             virginPlane.transform.eulerAngles = newPlane.transform.eulerAngles;

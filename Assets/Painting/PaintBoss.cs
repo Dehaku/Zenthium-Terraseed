@@ -42,6 +42,8 @@ public class PaintBoss : MonoBehaviour
 
     public LayerMask paintRayLayer;
 
+    static GameObject _painterContainer; // For clean hierarchy.
+
     // Update is called once per frame
     void Update()
     {
@@ -64,7 +66,7 @@ public class PaintBoss : MonoBehaviour
         RaycastHit hit;
         Vector3 cursorPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
         Ray cursorRay = sceneCamera.ScreenPointToRay(cursorPos);
-        if (Physics.Raycast(cursorRay, out hit, 200))
+        if (Physics.Raycast(cursorRay, out hit, 20000))
         {
             cursor.SetActive(true);
             cursor.transform.position = hit.point;
@@ -156,6 +158,16 @@ public class PaintBoss : MonoBehaviour
             var paintTag = ps.gameObject.AddComponent<PaintTag>();
             var painterGO = Instantiate(planetPainterPF,_painterOffsets, Quaternion.identity);
             _painterOffsets += Vector3.one * 5;
+
+            if(!_painterContainer)
+            {
+                _painterContainer = new GameObject();
+                _painterContainer.name = "Painter Container";
+            }
+
+            painterGO.transform.parent = _painterContainer.transform;
+            
+
             
             var painter = painterGO.GetComponent<PaintFaces>();
             painter.basePaintFaces = planetPainterBase;
@@ -505,7 +517,7 @@ public class PaintBoss : MonoBehaviour
         RaycastHit hit;
         Vector3 cursorPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
         Ray cursorRay = sceneCamera.ScreenPointToRay(cursorPos);
-        if (Physics.Raycast(cursorRay, out hit, 200, paintRayLayer))
+        if (Physics.Raycast(cursorRay, out hit, 20000, paintRayLayer))
         {
             var paintTarget = hit.collider.GetComponent<PaintTag>();
             if (paintTarget)
@@ -523,12 +535,12 @@ public class PaintBoss : MonoBehaviour
     }
 
     PlanetSide CheckForPlanetSide()
-    {
+    { 
 
         RaycastHit hit;
         Vector3 cursorPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
         Ray cursorRay = sceneCamera.ScreenPointToRay(cursorPos);
-        if (Physics.Raycast(cursorRay, out hit, 200, paintRayLayer))
+        if (Physics.Raycast(cursorRay, out hit, 20000, paintRayLayer))
         {
             var planetTarget = hit.collider.GetComponent<PlanetSide>();
             if (planetTarget)

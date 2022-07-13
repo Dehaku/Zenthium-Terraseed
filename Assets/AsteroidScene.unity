@@ -830,6 +830,11 @@ PrefabInstance:
       propertyPath: paintRayLayer.m_Bits
       value: 67108864
       objectReference: {fileID: 0}
+    - target: {fileID: 9189794533398533399, guid: 227e3e88fc33fbf43ac014a57d74c4e6,
+        type: 3}
+      propertyPath: allowDisableRenderers
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9189794532674706738, guid: 227e3e88fc33fbf43ac014a57d74c4e6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 227e3e88fc33fbf43ac014a57d74c4e6, type: 3}
@@ -952,7 +957,7 @@ MonoBehaviour:
   - {fileID: 4857272412844325176, guid: 551fd82be4fd18b4794b456712b6a622, type: 3}
   spawnRadius: 1000
   velocityDeleteRadius: 5000
-  spawnAmount: 5
+  spawnAmount: 1000
   spawnPerTick: 50
   _amountSpawned: 0
   OtherObjectsToGrav:

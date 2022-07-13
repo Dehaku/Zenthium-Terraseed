@@ -50,6 +50,7 @@ public class AsteroidLogic : MonoBehaviour
                 Vector3 spawnPos = transform.position + (UnityEngine.Random.insideUnitSphere * spawnRadius);
                 var obj = Instantiate(spawnPrefabs[UnityEngine.Random.Range(0, spawnPrefabs.Count)], spawnPos, transform.rotation);
                 objectsRB.Add(obj.GetComponentInChildren<Rigidbody>());
+                obj.name = obj.name + _amountSpawned;
                 refreshArrays = true;
 
                 _amountSpawned++;
@@ -153,13 +154,21 @@ public class AsteroidLogic : MonoBehaviour
     }
     private void LateUpdate()
     {
+        KeepBodiesClose();
+    }
+
+    void KeepBodiesClose()
+    {
         foreach (var item in objectsRB)
         {
-            if(Vector3.Distance(item.position, transform.position) > velocityDeleteRadius)
+            if (Vector3.Distance(item.position, transform.position) > velocityDeleteRadius)
             {
-                item.velocity = -item.velocity;
-                item.position += item.velocity * 0.5f;
-                Debug.Log(item.gameObject.name + " has left the area! Reversing.");
+                item.velocity = -(item.velocity*0.9f);
+                //item.position += item.velocity * 0.5f;
+
+                var dir = transform.position - item.position;
+                item.position = item.position + (dir.normalized * 10);
+                //Debug.Log(item.gameObject.name + " has left the area! Reversing.");
             }
         }
     }

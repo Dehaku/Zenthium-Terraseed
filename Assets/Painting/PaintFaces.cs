@@ -188,7 +188,6 @@ public class PaintFaces : MonoBehaviour
 		Vector3 uvWorldPosition = Vector3.zero;
 		if (HitTestUVPosition(ref uvWorldPosition, paintRayLayer))
 		{
-			Debug.Log("Painting!");
 			GameObject brushObj;
 			brushObj = Instantiate(brushSpritePF); //Paint a brush
 			//brushObj = (GameObject)Instantiate(Resources.Load("TexturePainter-Instances/BrushEntity")); //Paint a brush
@@ -226,12 +225,10 @@ public class PaintFaces : MonoBehaviour
 		Ray cursorRay = sceneCamera.ScreenPointToRay(cursorPos);
 		if (Physics.Raycast(cursorRay, out hit, 20000, paintRayLayer))
 		{
-			Debug.Log("Hitting!");
 			MeshCollider meshCollider = hit.collider as MeshCollider;
 			if (meshCollider == null || meshCollider.sharedMesh == null)
 				return false;
 
-			Debug.Log("Hit hit!");
 
 			Vector2 pixelUV = new Vector2(hit.textureCoord.x, hit.textureCoord.y);
 

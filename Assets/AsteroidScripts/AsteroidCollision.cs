@@ -29,7 +29,6 @@ public class AsteroidCollision : MonoBehaviour
         var theirMass = collision.gameObject.GetComponent<Mass>();
         if (!theirMass)
             return;
-        Debug.Log("Collision! " + gameObject.name + ":" + collision.gameObject.name);
 
         // Smaller mass gets eaten.
         if (myMass.GetMass() >= theirMass.GetMass())

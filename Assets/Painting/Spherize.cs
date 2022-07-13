@@ -53,6 +53,10 @@ public class Spherize : MonoBehaviour
             newPlane.AddComponent<MeshCollider>();
             newPlane.GetComponent<MeshCollider>().enabled = collisionOnByDefault; // Disabled for asteroid collisions, Needs to be enabled in code.
             newPlane.GetComponent<MeshRenderer>().material = GetComponent<MeshRenderer>().material;
+
+            int LayerPlanetPaintFace = LayerMask.NameToLayer("PlanetPaintFace");
+            newPlane.layer = LayerPlanetPaintFace;
+
             faces.Add(newPlane);
             newPlane.name = "Face" + p;
             var ps = newPlane.AddComponent<PlanetSide>();

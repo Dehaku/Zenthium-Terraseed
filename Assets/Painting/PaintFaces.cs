@@ -170,7 +170,7 @@ public class PaintFaces : MonoBehaviour
 
 
 	//The main action, instantiates a brush or decal entity at the clicked position on the UV map
-	public bool DoAction(bool white = true) // Returns true if brush container is full, use for saving itself and neighbors without clearing.
+	public bool DoAction(LayerMask paintRayLayer, bool white = true) // Returns true if brush container is full, use for saving itself and neighbors without clearing.
 	{
 		if (needsDelete == false)
 			brushContainer.SetActive(true);
@@ -186,7 +186,7 @@ public class PaintFaces : MonoBehaviour
 		if (saving || needsDelete)
 			return false;
 		Vector3 uvWorldPosition = Vector3.zero;
-		if (HitTestUVPosition(ref uvWorldPosition))
+		if (HitTestUVPosition(ref uvWorldPosition, paintRayLayer))
 		{
 			Debug.Log("Painting!");
 			GameObject brushObj;
@@ -217,27 +217,14 @@ public class PaintFaces : MonoBehaviour
 		SaveTexture();
 	}
 
-	//To update at realtime the painting cursor on the mesh
-	void UpdateBrushCursor()
-	{
-		Vector3 uvWorldPosition = Vector3.zero;
-		if (HitTestUVPosition(ref uvWorldPosition) && !saving && !needsDelete)
-		{
-			brushCursor.SetActive(true);
-			brushCursor.transform.position = uvWorldPosition + brushContainer.transform.position;
-		}
-		else
-		{
-			brushCursor.SetActive(false);
-		}
-	}
+	
 	//Returns the position on the texuremap according to a hit in the mesh collider
-	bool HitTestUVPosition(ref Vector3 uvWorldPosition)
+	bool HitTestUVPosition(ref Vector3 uvWorldPosition, LayerMask paintRayLayer)
 	{
 		RaycastHit hit;
 		Vector3 cursorPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
 		Ray cursorRay = sceneCamera.ScreenPointToRay(cursorPos);
-		if (Physics.Raycast(cursorRay, out hit, 20000))
+		if (Physics.Raycast(cursorRay, out hit, 20000, paintRayLayer))
 		{
 			Debug.Log("Hitting!");
 			MeshCollider meshCollider = hit.collider as MeshCollider;

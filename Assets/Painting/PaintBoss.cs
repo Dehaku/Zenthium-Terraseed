@@ -40,6 +40,8 @@ public class PaintBoss : MonoBehaviour
 
     public bool allowDisableRenderers = true;
 
+    public LayerMask paintRayLayer;
+
     // Update is called once per frame
     void Update()
     {
@@ -136,6 +138,9 @@ public class PaintBoss : MonoBehaviour
         meshRend.material = new Material(meshRend.material);
         meshRend.material.SetTexture("_HeightMap", painter.canvasTexture);
     }
+
+    Vector3 _painterOffsets = Vector3.zero; // We spawn them spaced out so they don't overlap and influence eachother.
+
     void MakePlanetPaintable(GameObject planetObject)
     {
         PaintFaces painterCenter = null;
@@ -149,7 +154,8 @@ public class PaintBoss : MonoBehaviour
         foreach (var ps in planetSides)
         {
             var paintTag = ps.gameObject.AddComponent<PaintTag>();
-            var painterGO = Instantiate(planetPainterPF, planetObject.transform);
+            var painterGO = Instantiate(planetPainterPF,_painterOffsets, Quaternion.identity);
+            _painterOffsets += Vector3.one * 5;
             
             var painter = painterGO.GetComponent<PaintFaces>();
             painter.basePaintFaces = planetPainterBase;
@@ -306,7 +312,10 @@ public class PaintBoss : MonoBehaviour
         RaycastHit hit;
         Vector3 cursorPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
         Ray cursorRay = sceneCamera.ScreenPointToRay(cursorPos);
-        if (Physics.Raycast(cursorRay, out hit, 200))
+
+        
+
+        if (Physics.Raycast(cursorRay, out hit, 20000, paintRayLayer))
         {
             var paintTarget = hit.collider.GetComponent<PaintTag>();
             if (paintTarget)
@@ -451,9 +460,9 @@ public class PaintBoss : MonoBehaviour
             
 
             if (Input.GetKey(KeyCode.LeftShift))
-                brushFull = targetHit.owner.DoAction(false);
+                brushFull = targetHit.owner.DoAction(paintRayLayer, false);
             else
-                brushFull = targetHit.owner.DoAction(true);
+                brushFull = targetHit.owner.DoAction(paintRayLayer, true);
         }
         return brushFull;
     }
@@ -496,7 +505,7 @@ public class PaintBoss : MonoBehaviour
         RaycastHit hit;
         Vector3 cursorPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
         Ray cursorRay = sceneCamera.ScreenPointToRay(cursorPos);
-        if (Physics.Raycast(cursorRay, out hit, 200))
+        if (Physics.Raycast(cursorRay, out hit, 200, paintRayLayer))
         {
             var paintTarget = hit.collider.GetComponent<PaintTag>();
             if (paintTarget)
@@ -519,7 +528,7 @@ public class PaintBoss : MonoBehaviour
         RaycastHit hit;
         Vector3 cursorPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0.0f);
         Ray cursorRay = sceneCamera.ScreenPointToRay(cursorPos);
-        if (Physics.Raycast(cursorRay, out hit, 200))
+        if (Physics.Raycast(cursorRay, out hit, 200, paintRayLayer))
         {
             var planetTarget = hit.collider.GetComponent<PlanetSide>();
             if (planetTarget)

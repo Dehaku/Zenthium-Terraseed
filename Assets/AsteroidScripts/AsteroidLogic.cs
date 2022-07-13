@@ -22,6 +22,8 @@ public class AsteroidLogic : MonoBehaviour
 
     List<Rigidbody> objectsRB = new List<Rigidbody>();
 
+    static GameObject _planetContainer;
+
     public void RemoveObjectRB(Rigidbody obj)
     {
         objectsRB.Remove(obj);
@@ -52,6 +54,13 @@ public class AsteroidLogic : MonoBehaviour
                 objectsRB.Add(obj.GetComponentInChildren<Rigidbody>());
                 obj.name = obj.name + _amountSpawned;
                 refreshArrays = true;
+
+                if(!_planetContainer)
+                {
+                    _planetContainer = new GameObject();
+                    _planetContainer.name = "Planet Container";
+                }
+                obj.transform.parent = _planetContainer.transform;
 
                 _amountSpawned++;
             }

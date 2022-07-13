@@ -14,6 +14,7 @@ public class AsteroidLogic : MonoBehaviour
     [Header("===Initial Spawn===")]
     public List<GameObject> spawnPrefabs;
     public float spawnRadius = 10;
+    public float velocityDeleteRadius = 10000; // If a rigidbody is further than this distance, it's velocity is deleted so it can return.
     public int spawnAmount = 1;
     public int spawnPerTick = 1;
 
@@ -152,7 +153,15 @@ public class AsteroidLogic : MonoBehaviour
     }
     private void LateUpdate()
     {
-        
+        foreach (var item in objectsRB)
+        {
+            if(Vector3.Distance(item.position, transform.position) > velocityDeleteRadius)
+            {
+                item.velocity = -item.velocity;
+                item.position += item.velocity * 0.5f;
+                Debug.Log(item.gameObject.name + " has left the area! Reversing.");
+            }
+        }
     }
 
     void Attract()

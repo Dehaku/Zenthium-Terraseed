@@ -17,7 +17,9 @@ public class Spherize : MonoBehaviour
     public bool useRT = false;
     public float heightDamp;
     public bool otherMethod = false;
-    
+    public bool collisionOnByDefault = true;
+
+
 
     void Start()
     {
@@ -49,7 +51,7 @@ public class Spherize : MonoBehaviour
             newPlane.transform.position = positionArr[p];
             newPlane.transform.eulerAngles = rotationArr[p];
             newPlane.AddComponent<MeshCollider>();
-            newPlane.GetComponent<MeshCollider>().enabled = false; // Disabled for asteroid collisions, Needs to be enabled in code.
+            newPlane.GetComponent<MeshCollider>().enabled = collisionOnByDefault; // Disabled for asteroid collisions, Needs to be enabled in code.
             newPlane.GetComponent<MeshRenderer>().material = GetComponent<MeshRenderer>().material;
             faces.Add(newPlane);
             newPlane.name = "Face" + p;

@@ -489,7 +489,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 423785046}
   m_LocalRotation: {x: 0.016253019, y: 0.44074944, z: -0.010494898, w: 0.89742166}
-  m_LocalPosition: {x: -269.32727, y: 0, z: -195.09799}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 745615381}
@@ -946,6 +946,7 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 4857272412844325176, guid: 551fd82be4fd18b4794b456712b6a622, type: 3}
   spawnRadius: 1000
+  velocityDeleteRadius: 5000
   spawnAmount: 1000
   spawnPerTick: 50
   _amountSpawned: 0
@@ -967,7 +968,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 874864271}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.43613672, y: 10.375456, z: -89.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

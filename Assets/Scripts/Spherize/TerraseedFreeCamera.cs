@@ -76,9 +76,14 @@ using UnityEngine;
             {
                 //movement.y++;
             }
-            else if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift))
             {
-                //movement.y--;
+            //movement.y--;
+            movementSpeed = 300;
+            }
+            else
+            { 
+                movementSpeed = 30; 
             }
 
             movement.z += Input.GetAxisRaw("Vertical");

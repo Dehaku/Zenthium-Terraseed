@@ -96,7 +96,13 @@ public class Spherize : MonoBehaviour
     public bool autoUpdateFaces = false;
     public bool shapeFaces = false;
 
-    
+    public void EnableFaceColliders(bool enabled)
+    {
+        foreach (var item in faces)
+        {
+            item.GetComponent<MeshCollider>().enabled = enabled;
+        }
+    }
 
     private void Update()
     {
@@ -269,10 +275,10 @@ public class Spherize : MonoBehaviour
                 }
                 //bool otherMethod = true;
 
-                Texture wee = null;
+                //Texture wee = null;
 
                 Texture2D texForUVS = null;
-                Texture2D texForUVS2 = null;
+                //Texture2D texForUVS2 = null;
                 Vector2[] uvs = null;
 
                 if (otherMethod)

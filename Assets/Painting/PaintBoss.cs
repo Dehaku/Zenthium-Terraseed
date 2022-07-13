@@ -70,6 +70,34 @@ public class PaintBoss : MonoBehaviour
                 cursor.transform.position = cursorOverride;
             cursor.transform.eulerAngles = hit.normal;
             cursor.transform.localScale = Vector3.one * brushSize;
+
+            if (Input.GetKey(KeyCode.I))
+            {
+                Debug.Log("Cursor is hitting: " + hit.collider.name + ", at " + hit.point + ", norm: " + hit.normal);
+            }
+            if (Input.GetKeyDown(KeyCode.U))
+            {
+                Debug.Log("Enabling Face Colliders: " + hit.collider.name + ", at " + hit.point + ", norm: " + hit.normal);
+
+                var hitParent = hit.collider.transform.parent;
+                if (hitParent)
+                {
+                    var spherize = hit.collider.transform.parent.GetComponentInChildren<Spherize>();
+                    if (spherize)
+                    {
+                        Debug.Log("Found Spherize in child of the parent: " + hit.collider.transform.parent.name);
+                        spherize.EnableFaceColliders(true);
+                    }
+                    else
+                    {
+                        Debug.Log("No Spherize Detected in: " + hit.collider.transform.parent.name);
+                    }
+                }
+                else
+                    Debug.LogWarning("No parent found, odd.");
+                
+            }
+
         }
         else
         {

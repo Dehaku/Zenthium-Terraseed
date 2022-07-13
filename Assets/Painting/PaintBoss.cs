@@ -39,6 +39,7 @@ public class PaintBoss : MonoBehaviour
     public Vector3 cursorOverride; // For Corner Collapsing the brushes position in PaintFaces(To avoid seam snailshelling)
 
     public bool allowDisableRenderers = true;
+    public bool disableRendersShortlyAfterSpawn = true;
 
     public LayerMask paintRayLayer;
 
@@ -143,6 +144,12 @@ public class PaintBoss : MonoBehaviour
 
     Vector3 _painterOffsets = Vector3.zero; // We spawn them spaced out so they don't overlap and influence eachother.
 
+    IEnumerator DisableRendersAfterTime(GameObject painterGO, float timeBeforeDisable)
+    {
+        yield return new WaitForSeconds(timeBeforeDisable);
+        painterGO.SetActive(false);
+    }
+
     void MakePlanetPaintable(GameObject planetObject)
     {
         PaintFaces painterCenter = null;
@@ -175,6 +182,9 @@ public class PaintBoss : MonoBehaviour
 
             
             StartCoroutine(SetPlanetsideTextureToRenderTexture(ps, painter)); // Delay the texture so it has time to setup.
+            if (disableRendersShortlyAfterSpawn)
+                StartCoroutine(DisableRendersAfterTime(painterGO, 3f));
+
 
             // painter.paintTarget = ps.GetComponent<MeshRenderer>();
 
@@ -281,6 +291,7 @@ public class PaintBoss : MonoBehaviour
 
 
     }
+
 
     
 

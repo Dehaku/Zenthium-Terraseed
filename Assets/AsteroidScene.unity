@@ -232,7 +232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &158340817
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,6 +354,88 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &170318923
+GameObject:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 170318924}
+  - component: {fileID: 170318927}
+  - component: {fileID: 170318926}
+  - component: {fileID: 170318925}
+  m_Layer: 0
+  m_Name: cm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &170318924
+Transform:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170318923}
+  m_LocalRotation: {x: 0.2096734, y: 0.005643133, z: -0.0028340903, w: -0.97775114}
+  m_LocalPosition: {x: -1476.6097, y: 105.926704, z: 525.58496}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1912183727}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &170318925
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170318923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd6043bde05a7fc4cba197d06915c1e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Damping: {x: 0.1, y: 0.1, z: 0.4}
+  ShoulderOffset: {x: 0, y: 0.4, z: 0}
+  VerticalArmLength: 0.4
+  CameraSide: 1
+  CameraDistance: 2
+  CameraCollisionFilter:
+    serializedVersion: 2
+    m_Bits: 0
+  IgnoreTag: 
+  CameraRadius: 0.2
+  DampingIntoCollision: 0
+  DampingFromCollision: 2
+--- !u!114 &170318926
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170318923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4c41ac9245b87c4192012080077d830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Damping: 0
+--- !u!114 &170318927
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170318923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &258519170
 GameObject:
   m_ObjectHideFlags: 3
@@ -441,6 +523,7 @@ GameObject:
   m_Component:
   - component: {fileID: 306507255}
   - component: {fileID: 306507257}
+  - component: {fileID: 306507258}
   - component: {fileID: 306507256}
   m_Layer: 0
   m_Name: Ship
@@ -456,15 +539,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 306507254}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1471.9562, y: 111.63788, z: -534.78}
+  m_LocalRotation: {x: -0, y: -0.46313056, z: -0, w: 0.8862901}
+  m_LocalPosition: {x: 1471.6508, y: -1.07, z: -536.7695}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1881876075}
   - {fileID: 1516223215}
   m_Father: {fileID: 0}
   m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -55.179, z: 0}
 --- !u!114 &306507256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,14 +557,140 @@ MonoBehaviour:
   m_GameObject: {fileID: 306507254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 009ebe4f39cc0a54dae7489d67832afd, type: 3}
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 306507257}
-  shipSpeed: 100
-  shipTorque: 100
-  dampenRotation: 1
-  dampenRotationAmount: 1
+  m_Actions: {fileID: -944628639613478452, guid: 6e86a5933dbf59643aab8d43a89b9161,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 306507258}
+        m_TargetAssemblyTypeName: ShipMovementRB, Assembly-CSharp
+        m_MethodName: OnThrust
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c6f04176-7f19-415e-a05a-3a8dd719a133
+    m_ActionName: Ship Controls/Thrust[/Keyboard/s,/Keyboard/w,/XInputControllerWindows/leftStick/down,/LogitechDualAction/leftStick/down,/XInputControllerWindows/leftStick/up,/LogitechDualAction/leftStick/up]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 306507258}
+        m_TargetAssemblyTypeName: ShipMovementRB, Assembly-CSharp
+        m_MethodName: OnStrafe
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: d873244d-89be-47a4-8959-bd45b130d687
+    m_ActionName: Ship Controls/Strafe[/Keyboard/a,/Keyboard/d,/XInputControllerWindows/leftStick/left,/LogitechDualAction/leftStick/left,/XInputControllerWindows/leftStick/right,/LogitechDualAction/leftStick/right]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 306507258}
+        m_TargetAssemblyTypeName: ShipMovementRB, Assembly-CSharp
+        m_MethodName: OnUpDown
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f29d3140-efde-4b78-8453-b891b7a65be2
+    m_ActionName: Ship Controls/UpDown[/Keyboard/leftCtrl,/Keyboard/space,/XInputControllerWindows/leftShoulder,/LogitechDualAction/leftShoulder,/XInputControllerWindows/rightShoulder,/LogitechDualAction/rightShoulder]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 306507258}
+        m_TargetAssemblyTypeName: ShipMovementRB, Assembly-CSharp
+        m_MethodName: OnRoll
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1a2154c6-2d6d-4c65-b29c-ace1283499fe
+    m_ActionName: Ship Controls/Roll[/Keyboard/q,/Keyboard/e,/XInputControllerWindows/leftTrigger,/LogitechDualAction/leftTrigger,/XInputControllerWindows/rightTrigger,/LogitechDualAction/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 306507258}
+        m_TargetAssemblyTypeName: ShipMovementRB, Assembly-CSharp
+        m_MethodName: OnPitchYaw
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fc85102b-0f18-4063-8f2c-213ea62748de
+    m_ActionName: Ship Controls/PitchYaw[/XInputControllerWindows/rightStick,/LogitechDualAction/rightStick,/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 306507258}
+        m_TargetAssemblyTypeName: ShipMovementRB, Assembly-CSharp
+        m_MethodName: OnBoost
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 463d2943-9d18-4735-bffa-15e37604c641
+    m_ActionName: Ship Controls/Boost[/Keyboard/shift,/XInputControllerWindows/buttonEast,/LogitechDualAction/buttonEast]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 306507258}
+        m_TargetAssemblyTypeName: ShipMovementRB, Assembly-CSharp
+        m_MethodName: OnInertialDampener
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f5cd609f-20ca-448a-9fd7-3bf99dd147c2
+    m_ActionName: Ship Controls/InertialDampener[/Keyboard/r,/XInputControllerWindows/leftStickPress,/LogitechDualAction/leftStickPress]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Ship Controls
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!54 &306507257
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -492,12 +701,44 @@ Rigidbody:
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0.5
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &306507258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 306507254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc3bfdabad487f94c8347a6917998213, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  yawTorque: 100
+  invertPitch: 0
+  pitchTorque: 100
+  rollTorque: 100
+  thrust: 1000
+  upThrust: 500
+  strafeThrust: 500
+  thrustDeadZone: 0.1
+  inertialDampener: 0
+  inertialDampenerAmount: 0.5
+  maxBoostAmount: 20
+  boostDepreciationRate: 0.1
+  boostRechargeRate: 0.15
+  boostMultiplier: 10
+  currentBoostAmount: 0
+  boosting: 0
+  gainBoostWhileBoosting: 0
+  thrustGlideReduction: 0.111
+  upDownGlideReduction: 0.111
+  leftRightGlideReduction: 0.111
 --- !u!1001 &355984800
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -969,8 +1210,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 445753504}
-  m_LocalRotation: {x: -0.018189494, y: -0.000000002628218, z: 4.7814627e-11, w: 0.9998346}
-  m_LocalPosition: {x: 1471.9562, y: 111.63788, z: -544.78}
+  m_LocalRotation: {x: 0.06958519, y: -0.46170095, z: 0.036361717, w: 0.8835542}
+  m_LocalPosition: {x: 1477.5999, y: 0.7281506, z: -540.90753}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1464,7 +1705,7 @@ MonoBehaviour:
   - {fileID: 4857272412844325176, guid: 551fd82be4fd18b4794b456712b6a622, type: 3}
   spawnRadius: 1000
   velocityDeleteRadius: 5000
-  spawnAmount: 1000
+  spawnAmount: 100
   spawnPerTick: 50
   _amountSpawned: 0
   OtherObjectsToGrav:
@@ -2562,7 +2803,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1516223215}
   m_Layer: 0
-  m_Name: LookAt
+  m_Name: LookTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2575,13 +2816,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516223214}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.49}
+  m_LocalRotation: {x: 0.078512885, y: -0, z: -0, w: 0.99691314}
+  m_LocalPosition: {x: 0, y: 0.69, z: -5.3339844}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 306507255}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 9.006, y: 0, z: 0}
 --- !u!1 &1592460480
 GameObject:
   m_ObjectHideFlags: 0
@@ -3118,6 +3359,76 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!1 &1912183725
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1912183727}
+  - component: {fileID: 1912183726}
+  m_Layer: 0
+  m_Name: ShipCameraVirtual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1912183726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912183725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ExcludedPropertiesInInspector:
+  - m_Script
+  m_LockStageInInspector: 
+  m_StreamingVersion: 20170927
+  m_Priority: 10
+  m_StandbyUpdate: 2
+  m_LookAt: {fileID: 1516223215}
+  m_Follow: {fileID: 1516223215}
+  m_Lens:
+    FieldOfView: 40
+    OrthographicSize: 10
+    NearClipPlane: 0.1
+    FarClipPlane: 5000
+    Dutch: 0
+    ModeOverride: 0
+    LensShift: {x: 0, y: 0}
+    GateFit: 2
+    m_SensorSize: {x: 2.490085, y: 1}
+  m_Transitions:
+    m_BlendHint: 0
+    m_InheritPosition: 0
+    m_OnCameraLive:
+      m_PersistentCalls:
+        m_Calls: []
+  m_LegacyBlendHint: 0
+  m_ComponentOwner: {fileID: 170318924}
+--- !u!4 &1912183727
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1912183725}
+  m_LocalRotation: {x: 0.06958519, y: -0.46170095, z: 0.036361717, w: 0.8835542}
+  m_LocalPosition: {x: 1477.5999, y: 0.7281506, z: -540.90753}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 170318924}
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2067185413
 GameObject:
   m_ObjectHideFlags: 0

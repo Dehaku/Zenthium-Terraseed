@@ -5,8 +5,8 @@ using UnityEngine;
 public class ShipMovement : MonoBehaviour
 {
     public Rigidbody rb;
-    public float shipSpeed;
-    public float shipTorque;
+    public float shipSpeed = 100;
+    public float shipTorque = 2.5f;
 
     public bool dampenRotation = true;
     public float dampenRotationAmount = 1f;

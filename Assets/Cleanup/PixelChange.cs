@@ -5,14 +5,14 @@ using UnityEngine;
 public class PixelChange : MonoBehaviour
 {
     public RenderTexture renderTexture; // renderTextuer that you will be rendering stuff on
-    public Renderer renderer; // renderer in which you will apply changed texture
+    public Renderer tarRenderer; // renderer in which you will apply changed texture
     Texture2D texture;
 
     void Start() 
     {
 
         texture = new Texture2D(renderTexture.width, renderTexture.height);
-        renderer.material.mainTexture = texture;
+        tarRenderer.material.mainTexture = texture;
         //make texture2D because you want to "edit" it. 
         //however this is not a way to apply any post rendering effects because
         //this way, you are reading it through CPU(slow).

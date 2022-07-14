@@ -309,6 +309,21 @@ public class PaintBoss : MonoBehaviour
             _triggerSave = true;
         }
 
+        if (Input.GetMouseButtonDown(2) && safe)
+        {
+            PaintTag newTarget = CheckForPaintTargets();
+            if (targetHit != null && targetHit != newTarget)
+            {
+                //Debug.Log("Not drawing on same target now!");
+                SaveLastTarget();
+            }
+
+            targetHit = newTarget;
+            _isPainting = true;
+            brushFull = PaintTarget();
+        }
+        
+
         if (Input.GetMouseButton(2) && safe)
         {
             //CodePaintTarget(); Needs work.

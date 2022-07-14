@@ -1567,7 +1567,7 @@ PrefabInstance:
         type: 3}
       propertyPath: brushSpritePF
       value: 
-      objectReference: {fileID: 113140, guid: c89793802e15d1343b4bb7047740b7a4, type: 3}
+      objectReference: {fileID: 113140, guid: 02feb1a7013e54b4d8116570f7cce3e8, type: 3}
     - target: {fileID: 9189794533398533399, guid: 227e3e88fc33fbf43ac014a57d74c4e6,
         type: 3}
       propertyPath: planetPainterBase
@@ -1705,7 +1705,7 @@ MonoBehaviour:
   - {fileID: 4857272412844325176, guid: 551fd82be4fd18b4794b456712b6a622, type: 3}
   spawnRadius: 1000
   velocityDeleteRadius: 5000
-  spawnAmount: 100
+  spawnAmount: 50
   spawnPerTick: 50
   _amountSpawned: 0
   OtherObjectsToGrav:

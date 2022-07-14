@@ -12,6 +12,8 @@ public class PaintBoss : MonoBehaviour
     public GameObject brushSpritePF;
     public GameObject cursor;
 
+    public Color32 seaLevel;
+
     public bool collapseCorners; // For Corner Collapsing the brushes position in PaintFaces(To avoid seam snailshelling)
     [Range(0f,1f)]
     public float collapseCornersRange;
@@ -126,12 +128,15 @@ public class PaintBoss : MonoBehaviour
         return false;
     }    
 
-    IEnumerator SetPlanetsideTextureToRenderTexture(PlanetSide ps, PaintFaces painter)
+    IEnumerator SetPlanetsideTextureToRenderTexture(PlanetSide ps, PaintFaces painter, float waitTime)
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(waitTime);
         var meshRend = ps.GetComponent<MeshRenderer>();
         meshRend.material = new Material(meshRend.material);
         meshRend.material.SetTexture("_HeightMap", painter.canvasTexture);
+
+        Debug.Log("Saving!");
+        painter.TriggerSaveMethod();
     }
 
     Vector3 _painterOffsets = Vector3.zero; // We spawn them spaced out so they don't overlap and influence eachother.
@@ -173,7 +178,13 @@ public class PaintBoss : MonoBehaviour
             paintTag.owner = painter;
 
             
-            StartCoroutine(SetPlanetsideTextureToRenderTexture(ps, painter)); // Delay the texture so it has time to setup.
+            StartCoroutine(SetPlanetsideTextureToRenderTexture(ps, painter, 1f)); // Delay the texture so it has time to setup.
+            
+            // Starting to feel like these delays may be dangerous.
+            StartCoroutine(ChangeCanvasesBlankColor(paintTag, seaLevel, 1.5f));
+            StartCoroutine(ApplyNoiseToCanvas(paintTag, 2f));
+            Debug.Log("Chirp");
+
             if (disableRendersShortlyAfterSpawn)
                 StartCoroutine(DisableRendersAfterTime(painterGO, 3f));
 
@@ -284,7 +295,41 @@ public class PaintBoss : MonoBehaviour
 
     }
 
+    IEnumerator DelayTriggerTerrainMorph(PaintTag painter, float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
 
+        var paintSphere = painter.GetComponentInParent<Spherize>();
+
+        if(paintSphere)
+            TriggerTerrainMorph(paintSphere);
+        
+    }
+
+    void ChangeCanvasesBlankColor(PaintTag painter, Color32 blankColor)
+    {
+        painter.owner.SetCanvasColor(blankColor);
+        StartCoroutine(DelayTriggerTerrainMorph(painter, 0.1f));
+    }
+
+    IEnumerator ChangeCanvasesBlankColor(PaintTag painter, Color32 blankColor, float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        ChangeCanvasesBlankColor(painter, blankColor);
+    }
+
+    void ApplyNoiseToCanvas(PaintTag painter)
+    {
+        painter.owner.ApplyNoiseToCanvas(Color.red);
+
+        StartCoroutine(DelayTriggerTerrainMorph(painter, 0.1f));
+    }
+
+    IEnumerator ApplyNoiseToCanvas(PaintTag painter, float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        ApplyNoiseToCanvas(painter);
+    }
     
 
     void PaintLoop(bool safe = false)

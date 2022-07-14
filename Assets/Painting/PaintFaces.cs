@@ -84,7 +84,7 @@ public class PaintFaces : MonoBehaviour
 		if (planet)
 		{
 			planet.heightMapRT = canvasTexture;
-			StartCoroutine(planetFaces());
+			StartCoroutine(planetFaces(0.5f));
 		}
 
 
@@ -117,14 +117,14 @@ public class PaintFaces : MonoBehaviour
 		if (planet)
 		{
 			planet.heightMapRT = canvasTexture;
-			StartCoroutine(planetFaces());
+			StartCoroutine(planetFaces(0.5f));
 		}
 
 	}
 
-    IEnumerator planetFaces()
+    IEnumerator planetFaces(float waitTime)
 	{
-		yield return 1f;
+		yield return new WaitForSeconds(waitTime);
 		foreach (var face in planet.faces)
 		{
 			face.GetComponent<MeshRenderer>().material.SetTexture("_NoiseTexture", canvasTexture);
@@ -492,6 +492,64 @@ public class PaintFaces : MonoBehaviour
 
 		Debug.Log("Code Paint Time: " + (Time.realtimeSinceStartup - timer) * 1000f + "ms");
 	}
+
+
+
+	public void SetCanvasColor(Color32 brushColor)
+	{
+		Debug.Log("SetCanvasColor PreFirstCall");
+		
+
+		Debug.Log("Setting Canvas Color " + gameObject.name);
+
+		Texture2D tex = baseMaterial.mainTexture as Texture2D;
+
+		var pixelsMain = tex.GetPixels32();
+
+		Color32 colorMain = new Color32();
+
+		for (int x = 0; x < tex.width; x++)
+		{
+			for (int y = 0; y < tex.width; y++)
+			{
+				colorMain = pixelsMain[y + tex.width * x];
+				pixelsMain[y + tex.width * x] = brushColor;
+			}
+		}
+		tex.SetPixels32(pixelsMain);
+		tex.Apply();
+	}
+
+	public void ApplyNoiseToCanvas(Color32 brushColor)
+	{
+		if (firstCall)
+		{
+			firstCall = false;
+			return;
+		}
+		return;
+
+		Debug.Log("Applying Noise " + gameObject.name);
+
+		Texture2D tex = baseMaterial.mainTexture as Texture2D;
+
+		var pixelsMain = tex.GetPixels32();
+
+		Color32 colorMain = new Color32();
+
+		for (int x = 0; x < tex.width; x++)
+		{
+			for (int y = 0; y < tex.width; y++)
+			{
+				colorMain = pixelsMain[y + tex.width * x];
+				pixelsMain[y + tex.width * x] = brushColor;
+			}
+		}
+		tex.SetPixels32(pixelsMain);
+		tex.Apply();
+	}
+
+
 
 
 	void MatchEdges()

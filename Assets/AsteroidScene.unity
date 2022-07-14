@@ -1570,6 +1570,11 @@ PrefabInstance:
       objectReference: {fileID: 113140, guid: 02feb1a7013e54b4d8116570f7cce3e8, type: 3}
     - target: {fileID: 9189794533398533399, guid: 227e3e88fc33fbf43ac014a57d74c4e6,
         type: 3}
+      propertyPath: seaLevel.rgba
+      value: 4283256141
+      objectReference: {fileID: 0}
+    - target: {fileID: 9189794533398533399, guid: 227e3e88fc33fbf43ac014a57d74c4e6,
+        type: 3}
       propertyPath: planetPainterBase
       value: 
       objectReference: {fileID: 801582214}

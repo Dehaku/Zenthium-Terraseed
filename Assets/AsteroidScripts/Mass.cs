@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Mass : MonoBehaviour
 {
+    public Asteroid asteroid;
     public int bodies = 1; // For tracking how many collisions there've been, mostly for fun.
     [SerializeField] Rigidbody rb;
     [SerializeField] Transform trans;
@@ -24,7 +25,19 @@ public class Mass : MonoBehaviour
             massCalc += item.amount * item.weightPerUnit;
         }
         _mass = massCalc;
+
         return massCalc;
+    }
+
+    public void Reset() // Reset ourselves after being pooled.
+    {
+        bodies = 1;
+
+        var rMass = GetComponent<RandomMass>();
+        if (rMass)
+            rMass.AddRandomSubstances();
+        
+        AffectTransforms();
     }
 
     public void AffectTransforms()

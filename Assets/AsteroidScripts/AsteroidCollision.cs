@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Mass))]
 public class AsteroidCollision : MonoBehaviour
 {
-    
     public Mass myMass;
 
     AsteroidLogic aLogic;
@@ -30,8 +29,14 @@ public class AsteroidCollision : MonoBehaviour
         if (!theirMass)
             return;
 
+        var myMassAmount = myMass.GetMass();
+        var theirMassAmount = theirMass.GetMass();
+
+        if (myMassAmount == 0 || theirMassAmount == 0)
+            return;
+
         // Smaller mass gets eaten.
-        if (myMass.GetMass() >= theirMass.GetMass())
+        if (myMassAmount >= theirMass.GetMass())
         {
             AbsorbBody(myMass,theirMass,gameObject,collision.gameObject);
         }
@@ -61,15 +66,13 @@ public class AsteroidCollision : MonoBehaviour
         //Debug.Log("Velocities: " + eaterRB.velocity + " : " + victimRB.velocity + ", Impact: " + relativeVelocity + " : " + impactMagnitude);
 
         eaterRB.AddForce(victimRB.velocity * victimRB.mass, ForceMode.Impulse);
-        //Debug.Log("vmMain:" + victimGO.transform.parent + victimGO);
-        if (victimGO.transform.parent)
+
+        if (victimMass.asteroid) // release from pool.
+            victimMass.asteroid.Release();
+        else if (victimGO.transform.parent) // Legacy code, JIC
             victimGO.transform.parent.gameObject.SetActive(false);
         else
             victimGO.SetActive(false);
-            //victimMass.mainObject.SetActive(false);
-        //else
-            //victimGO.SetActive(false);
-        //Destroy(victimGO); // Replace this with a pool later.
     }
 
     private void OnDisable()

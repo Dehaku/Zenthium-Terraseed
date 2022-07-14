@@ -7,16 +7,23 @@ public class RandomMass : MonoBehaviour
 {
     Mass mass;
 
+    private void Awake()
+    {
+        mass = GetComponent<Mass>();
+        if (!mass)
+            Debug.LogError("No Mass in randomMass somehow");
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        mass = GetComponent<Mass>();
+        
         AddRandomSubstances();
     }
     //[EButton]
 
     public List<RandomEntry> rEntries = new List<RandomEntry>();
-    void AddRandomSubstances()
+    public void AddRandomSubstances()
     {
         foreach (var item in rEntries)
         {

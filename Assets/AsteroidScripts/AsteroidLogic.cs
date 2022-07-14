@@ -5,10 +5,12 @@ using Unity.Jobs;
 using Unity.Collections;
 using Unity.Burst;
 using Unity.Mathematics;
+using UnityEngine.Pool;
 
 public class AsteroidLogic : MonoBehaviour
 {
-    
+    [SerializeField] int activeAsteroids, inactiveAsteroids, minimumAsteroids;
+
     
     
     [Header("===Initial Spawn===")]
@@ -20,9 +22,51 @@ public class AsteroidLogic : MonoBehaviour
 
     [SerializeField] int _amountSpawned = 0;
 
+    List<GameObject> objectsGO = new List<GameObject>();
     List<Rigidbody> objectsRB = new List<Rigidbody>();
 
     static GameObject _planetContainer;
+
+    ObjectPool<Asteroid> _asteroidPool;
+
+    private void Awake()
+    {
+        if (!_planetContainer)
+        {
+            _planetContainer = new GameObject();
+            _planetContainer.name = "Planet Container";
+        }
+
+        _asteroidPool = new ObjectPool<Asteroid>(CreateAsteroid, OnTakeAsteroidFromPool, OnReturnBallToPool);
+    }
+    Asteroid CreateAsteroid()
+    {
+        var obj = Instantiate(spawnPrefabs[UnityEngine.Random.Range(0, spawnPrefabs.Count)]);
+        var ast = obj.GetComponent<Asteroid>();
+        ast.SetPool(_asteroidPool);
+        return ast;
+    }
+
+    void OnTakeAsteroidFromPool(Asteroid asteroid)
+    {
+        Debug.Log(asteroid.name + " has been taken out.");
+        asteroid.gameObject.SetActive(true);
+        refreshArrays = true; // Refresh Gravity Job Cache
+
+        // Remove momentum.
+        asteroid.mass.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        // Reset substances and the like.
+        asteroid.mass.Reset();
+    }
+
+    void OnReturnBallToPool(Asteroid asteroid)
+    {
+        Debug.Log(asteroid.name + " is going in.");
+        asteroid.gameObject.SetActive(false);
+        refreshArrays = true;  // Refresh Gravity Job Cache
+    }
+
+
 
     public void RemoveObjectRB(Rigidbody obj)
     {
@@ -42,25 +86,67 @@ public class AsteroidLogic : MonoBehaviour
         
     }
 
+
+    void UpdateActiveAsteroidCount()
+    {
+        activeAsteroids = 0;
+        inactiveAsteroids = 0;
+
+        for(int i = 0; i < objectsGO.Count; i++)
+        {
+            if (objectsGO[i].activeInHierarchy)
+                activeAsteroids++;
+            else
+                inactiveAsteroids++;
+        }
+    }
+
+    void RespawnAsteroidLogic()
+    {
+        if (activeAsteroids >= minimumAsteroids)
+            return;
+
+        if ((activeAsteroids + inactiveAsteroids) < minimumAsteroids)
+            return;
+
+        Debug.Log("Respawning!");
+
+        Vector3 spawnPos = transform.position + (UnityEngine.Random.insideUnitSphere * spawnRadius);
+        var obj = _asteroidPool.Get();
+        var objRB = obj.GetComponentInChildren<Rigidbody>();
+        objectsRB.Add(objRB);
+        obj.transform.position = spawnPos;
+        obj.transform.rotation = transform.rotation;
+        refreshArrays = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        UpdateActiveAsteroidCount();
+        RespawnAsteroidLogic();
+
         for(int i = 0; i != spawnPerTick; i++)
         {
             if (_amountSpawned < spawnAmount)
             {
                 Vector3 spawnPos = transform.position + (UnityEngine.Random.insideUnitSphere * spawnRadius);
-                var obj = Instantiate(spawnPrefabs[UnityEngine.Random.Range(0, spawnPrefabs.Count)], spawnPos, transform.rotation);
-                objectsRB.Add(obj.GetComponentInChildren<Rigidbody>());
+                //var obj = Instantiate(spawnPrefabs[UnityEngine.Random.Range(0, spawnPrefabs.Count)], spawnPos, transform.rotation);
+                var obj = _asteroidPool.Get();
+                //var obj = CreateAsteroid();
+                objectsGO.Add(obj.gameObject);
+                obj.transform.parent = _planetContainer.transform;
+
+                var objRB = obj.GetComponentInChildren<Rigidbody>();
+                obj.transform.position = spawnPos;
+                obj.transform.rotation = transform.rotation;
+                objectsRB.Add(objRB);
+
                 obj.name = obj.name + _amountSpawned;
                 refreshArrays = true;
 
-                if(!_planetContainer)
-                {
-                    _planetContainer = new GameObject();
-                    _planetContainer.name = "Planet Container";
-                }
-                obj.transform.parent = _planetContainer.transform;
+                
+                
 
                 _amountSpawned++;
             }
@@ -99,8 +185,17 @@ public class AsteroidLogic : MonoBehaviour
     {
         for (int i = 0; i < objectsRB.Count; i++)
         {
-            positionArray[i] = objectsRB[i].position;
-            massArray[i] = objectsRB[i].mass;
+            if(objectsRB[i].gameObject.activeInHierarchy)
+            {
+                positionArray[i] = objectsRB[i].position;
+                massArray[i] = objectsRB[i].mass;
+            }
+            else
+            {
+                positionArray[i] = objectsRB[i].position;
+                massArray[i] = 0;
+            }
+            
         }
     }
 

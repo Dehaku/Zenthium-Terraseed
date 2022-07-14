@@ -1706,11 +1706,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24a3bfb8831ca9846925ab93ab816bee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  activeAsteroids: 0
+  inactiveAsteroids: 0
+  minimumAsteroids: 500
   spawnPrefabs:
   - {fileID: 4857272412844325176, guid: 551fd82be4fd18b4794b456712b6a622, type: 3}
   spawnRadius: 1000
   velocityDeleteRadius: 5000
-  spawnAmount: 50
+  spawnAmount: 750
   spawnPerTick: 50
   _amountSpawned: 0
   OtherObjectsToGrav:
@@ -3410,7 +3413,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.490085, y: 1}
+    m_SensorSize: {x: 2.4872522, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

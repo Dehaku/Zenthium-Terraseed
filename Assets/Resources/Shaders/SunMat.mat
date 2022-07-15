@@ -40,13 +40,13 @@ Material:
     m_Floats:
     - ColorAmount: 20
     - Fill: 0.01
-    - FresnelPower: 0
+    - FresnelPower: 0.05
     - NoiseScale: 5
-    - ScrollSpeed: 0.05
+    - ScrollSpeed: 0.01
     - TilingSize: 1.23
     - _Offset: 8.88
     m_Colors:
     - NoiseSpeed: {r: -0.5, g: 0, b: 0, a: 0}
     - NoiseSpeed02: {r: 0.5, g: 0, b: 0, a: 0}
-    - _Emission: {r: 9.082411, g: 2.7104576, b: 0, a: 0}
+    - _Emission: {r: 72.65929, g: 21.68366, b: 0, a: 0}
   m_BuildTextureStacks: []

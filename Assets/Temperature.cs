@@ -2,35 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TemperatureConvert : MonoBehaviour
+public class Temperature : MonoBehaviour
 {
 
-    float CelsiusToFahrenheit(float celsius)
+    public static float CelsiusToFahrenheit(float celsius) 
     {
         return (celsius * 18f / 10f + 32f);
     }
 
-    float CelsiusToKelvin(float celsius)
+    public static float CelsiusToKelvin(float celsius)
     {
         return (celsius + 273f);
     }
 
-    float FahrenheitToCelsius(float fahrenheit)
+    public static float FahrenheitToCelsius(float fahrenheit)
     {
         return (fahrenheit - 32f) * 5f / 9f;
     }
 
-    float FahrenheitToKelvin(float fahrenheit)
+    public static float FahrenheitToKelvin(float fahrenheit)
     {
         return ((fahrenheit - 32f) * 5f / 9f)+273f;
     }
 
-    float KelvinToCelsius(float kelvin)
+    public static float KelvinToCelsius(float kelvin)
     {
         return (kelvin - 273f);
     }
 
-    float KelvinToFahrenheit(float kelvin)
+    public static float KelvinToFahrenheit(float kelvin)
     {
         return 1.8f*(kelvin - 273f) + 32f;
     }

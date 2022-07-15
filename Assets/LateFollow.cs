@@ -29,11 +29,13 @@ public class LateFollow : MonoBehaviour
         }
         _localPosShift = FollowTarget.InverseTransformPoint(transform.position);
         _localRotShift = Quaternion.Inverse(FollowTarget.rotation) * transform.rotation;
+        
     }
 
     void LateUpdate()
     {
         transform.rotation = FollowTarget.rotation * _localRotShift;
         transform.position = FollowTarget.TransformPoint(_localPosShift);
-    }
+    } 
+    
 }

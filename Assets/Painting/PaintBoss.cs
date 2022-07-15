@@ -135,7 +135,6 @@ public class PaintBoss : MonoBehaviour
         meshRend.material = new Material(meshRend.material);
         meshRend.material.SetTexture("_HeightMap", painter.canvasTexture);
 
-        Debug.Log("Saving!");
         painter.TriggerSaveMethod();
     }
 
@@ -183,7 +182,6 @@ public class PaintBoss : MonoBehaviour
             // Starting to feel like these delays may be dangerous.
             StartCoroutine(ChangeCanvasesBlankColor(paintTag, seaLevel, 1.5f));
             StartCoroutine(ApplyNoiseToCanvas(paintTag, 2f));
-            Debug.Log("Chirp");
 
             if (disableRendersShortlyAfterSpawn)
                 StartCoroutine(DisableRendersAfterTime(painterGO, 3f));

@@ -49,7 +49,6 @@ public class AsteroidLogic : MonoBehaviour
 
     void OnTakeAsteroidFromPool(Asteroid asteroid)
     {
-        Debug.Log(asteroid.name + " has been taken out.");
         asteroid.gameObject.SetActive(true);
         refreshArrays = true; // Refresh Gravity Job Cache
 
@@ -61,7 +60,6 @@ public class AsteroidLogic : MonoBehaviour
 
     void OnReturnBallToPool(Asteroid asteroid)
     {
-        Debug.Log(asteroid.name + " is going in.");
         asteroid.gameObject.SetActive(false);
         refreshArrays = true;  // Refresh Gravity Job Cache
     }
@@ -109,7 +107,6 @@ public class AsteroidLogic : MonoBehaviour
         if ((activeAsteroids + inactiveAsteroids) < minimumAsteroids)
             return;
 
-        Debug.Log("Respawning!");
 
         Vector3 spawnPos = transform.position + (UnityEngine.Random.insideUnitSphere * spawnRadius);
         var obj = _asteroidPool.Get();
@@ -132,8 +129,8 @@ public class AsteroidLogic : MonoBehaviour
             {
                 Vector3 spawnPos = transform.position + (UnityEngine.Random.insideUnitSphere * spawnRadius);
                 //var obj = Instantiate(spawnPrefabs[UnityEngine.Random.Range(0, spawnPrefabs.Count)], spawnPos, transform.rotation);
-                var obj = _asteroidPool.Get();
-                //var obj = CreateAsteroid();
+                //var obj = _asteroidPool.Get();
+                var obj = CreateAsteroid(); // This needs to stay as Create instead of .Get() due to race conditions. Sometimes I make myself sad.
                 objectsGO.Add(obj.gameObject);
                 obj.transform.parent = _planetContainer.transform;
 

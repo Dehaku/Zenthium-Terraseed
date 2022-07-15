@@ -490,17 +490,15 @@ public class PaintFaces : MonoBehaviour
 
 
 
-		Debug.Log("Code Paint Time: " + (Time.realtimeSinceStartup - timer) * 1000f + "ms");
+		//Debug.Log("Code Paint Time: " + (Time.realtimeSinceStartup - timer) * 1000f + "ms");
 	}
 
 
 
 	public void SetCanvasColor(Color32 brushColor)
 	{
-		Debug.Log("SetCanvasColor PreFirstCall");
 		
 
-		Debug.Log("Setting Canvas Color " + gameObject.name);
 
 		Texture2D tex = baseMaterial.mainTexture as Texture2D;
 

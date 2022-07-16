@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 0
   id: Iron
+  description: Useful Metal.
   weightPerUnit: 7.8
-  color: {r: 0.44775718, g: 0.6883591, b: 0.735849, a: 0}
+  color: {r: 0.44775718, g: 0.6883591, b: 0.735849, a: 1}
   icon: {fileID: -8454244940975299443, guid: 55f15c1c6b465c7409d475a7425c817a, type: 3}
+  _meltingPoint: 1538
+  _boilingPoint: 2861
+  _globalWarmingPotential: 25000

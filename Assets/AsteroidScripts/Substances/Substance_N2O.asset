@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 569f7d25ef165f74f9b2da1d295b5798, type: 3}
-  m_Name: Substance_Gold
+  m_Name: Substance_N2O
   m_EditorClassIdentifier: 
   amount: 0
-  id: Gold
-  description: Shiny Metal.
-  weightPerUnit: 19.3
-  color: {r: 1, g: 0.6666667, b: 0, a: 1}
+  id: N2O
+  description: Gotta go fast
+  weightPerUnit: 0.0019781
+  color: {r: 0.52156866, g: 0.6, b: 0.9490197, a: 0.49803922}
   icon: {fileID: -8454244940975299443, guid: 55f15c1c6b465c7409d475a7425c817a, type: 3}
-  _meltingPoint: 1064
-  _boilingPoint: 3080
-  _globalWarmingPotential: 25000
+  _meltingPoint: -90.86
+  _boilingPoint: -88.48
+  _globalWarmingPotential: 273

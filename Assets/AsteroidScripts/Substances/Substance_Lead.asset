@@ -14,5 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 0
   id: Lead
+  description: Soft Metal.
   weightPerUnit: 11.3
+  color: {r: 0, g: 0, b: 0, a: 1}
   icon: {fileID: -8454244940975299443, guid: 55f15c1c6b465c7409d475a7425c817a, type: 3}
+  _meltingPoint: 327.5
+  _boilingPoint: 1750
+  _globalWarmingPotential: 25000

@@ -8,9 +8,58 @@ public class Substance : ScriptableObject
 {
     public float amount;
     public string id;
-    public float weightPerUnit;
+    public string description;
+    public float weightPerUnit; // kg/m3 // https://www.engineeringtoolbox.com/gas-density-d_158.html
     public Color color;
     public Sprite icon;
+
+    // https://www.engineeringtoolbox.com/material-properties-t_24.html
+
+    [SerializeField] float _meltingPoint; // 
+    [SerializeField] float _boilingPoint; // https://www.engineeringtoolbox.com/boiling-temperature-metals-d_1267.html 
+    [SerializeField] float _globalWarmingPotential; // GWP
+                                                    // https://en.wikipedia.org/wiki/Global_warming_potential
+                                                    // A lot of numbers had to be dug up in other locations, there may be inconsistencies.
+
+
+    public float CalculateGlobalWarmingPotential(float celsius) // GWP
+    {
+        // Only return above 0 if this element is a gas.
+        if(isGas(celsius))
+            return _globalWarmingPotential * amount;
+
+        return 0;
+    }
+
+    public float GetGlobalWarmingPotential() // GWP
+    {
+        return _globalWarmingPotential;
+    }
+
+    private void OnValidate()
+    {
+        if (_meltingPoint == 0 || _boilingPoint == 0)
+            Debug.LogWarning(name + " doesn't have set melting/boiling points");
+    }
+
+    public bool isSolid(float celsius)
+    {
+        if (celsius < _meltingPoint)
+            return true;
+        return false;
+    }
+    public bool isLiquid(float celsius)
+    {
+        if (celsius > _meltingPoint && celsius < _boilingPoint)
+            return true;
+        return false;
+    }
+    public bool isGas(float celsius)
+    {
+        if (celsius > _boilingPoint)
+            return true;
+        return false;
+    }
 
     public sub Subify()
     {

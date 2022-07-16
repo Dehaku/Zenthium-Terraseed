@@ -15,8 +15,8 @@ public class Substance : ScriptableObject
 
     // https://www.engineeringtoolbox.com/material-properties-t_24.html
 
-    [SerializeField] float _meltingPoint; // 
-    [SerializeField] float _boilingPoint; // https://www.engineeringtoolbox.com/boiling-temperature-metals-d_1267.html 
+    [SerializeField] float _meltingPoint = float.MaxValue; // 
+    [SerializeField] float _boilingPoint = float.MaxValue; // https://www.engineeringtoolbox.com/boiling-temperature-metals-d_1267.html 
     [SerializeField] float _globalWarmingPotential; // GWP
                                                     // https://en.wikipedia.org/wiki/Global_warming_potential
                                                     // A lot of numbers had to be dug up in other locations, there may be inconsistencies.
@@ -38,8 +38,8 @@ public class Substance : ScriptableObject
 
     private void OnValidate()
     {
-        if (_meltingPoint == 0 || _boilingPoint == 0)
-            Debug.LogWarning(name + " doesn't have set melting/boiling points");
+        if (_meltingPoint == float.MaxValue)
+                Debug.LogWarning(name + " doesn't have set melting/boiling points");
     }
 
     public bool isSolid(float celsius)

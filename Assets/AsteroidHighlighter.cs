@@ -212,6 +212,12 @@ public class AsteroidHighlighter : MonoBehaviour
     void ToggleTracker()
     {
         displayTrackers = !displayTrackers;
+        if(displayTrackers)
+            foreach (var item in markers)
+                item.gameObject.SetActive(true);
+        else
+            foreach (var item in markers)
+                item.gameObject.SetActive(false);
     }
 
     // Update is called once per frame

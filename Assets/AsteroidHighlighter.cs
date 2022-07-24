@@ -115,7 +115,14 @@ public class AsteroidHighlighter : MonoBehaviour
 
             Vector3 screenpos = Camera.main.WorldToScreenPoint(objects[i].position);
 
-            if(screenpos.z>0 &&
+            // Clamping for far planing.
+            if (screenpos.z > 100)
+                screenpos.z = 100;
+
+            if (screenpos.z < -100)
+                screenpos.z = -100;
+
+            if (screenpos.z>0 &&
                 screenpos.x > 0 && screenpos.x<Screen.width &&
                 screenpos.y> 0 && screenpos.y < Screen.height)
             {

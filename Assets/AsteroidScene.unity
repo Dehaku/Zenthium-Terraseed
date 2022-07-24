@@ -2917,15 +2917,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroidManager: {fileID: 874864272}
-  playerTransform: {fileID: 306507255}
   maxDesiredTrackedAtOnce: 10
-  spriteOnScreen: {fileID: 0}
-  spriteEdgeScreen: {fileID: 0}
+  minimumMarkerDisplayDistance: 100
+  playerTransform: {fileID: 306507255}
   markerPF: {fileID: 3443159674085821731, guid: 93facd660799ff249848ab874480390e,
     type: 3}
+  closestColor: {r: 1, g: 1, b: 1, a: 1}
+  normalColor: {r: 0, g: 1, b: 1, a: 1}
   displayTrackers: 1
   trackedObjectsRefreshInterval: 1.3
-  turnOn: 0
 --- !u!1001 &1115525932
 PrefabInstance:
   m_ObjectHideFlags: 0

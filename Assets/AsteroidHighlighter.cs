@@ -43,6 +43,8 @@ public class AsteroidHighlighter : MonoBehaviour
     public Transform playerTransform;
     int maxTrackedAtOnce = 10;
     public GameObject markerPF;
+    public Color closestColor;
+    public Color normalColor;
     public bool displayTrackers = true;
 
     public float trackedObjectsRefreshInterval = 1.3f;
@@ -114,6 +116,12 @@ public class AsteroidHighlighter : MonoBehaviour
             else
                 markers[i].gameObject.SetActive(true);
 
+            if(i == 0)
+            { // Closest Marker
+                markers[i].SetColor(closestColor);
+            }
+            else
+                markers[i].SetColor(normalColor);
 
             Vector3 screenpos = Camera.main.WorldToScreenPoint(objects[i].position);
 

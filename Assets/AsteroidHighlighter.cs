@@ -37,8 +37,10 @@ public class AsteroidHighlighter : MonoBehaviour
     List<Transform> _trackedObjects = new List<Transform>(); // Objects actually being tracked/rendered on screen.
 
     [Header("Tracker Stats")]
-    public Transform playerTransform;
     public int maxDesiredTrackedAtOnce = 10;
+    public float minimumMarkerDisplayDistance = 100;
+    [Space]
+    public Transform playerTransform;
     int maxTrackedAtOnce = 10;
     public GameObject markerPF;
     public bool displayTrackers = true;
@@ -102,8 +104,16 @@ public class AsteroidHighlighter : MonoBehaviour
         //foreach (var item in objects)
         for(int i = 0; i < objects.Count; i++)
         {
+            // Hide the marker if we're close enough.
             float distance = Vector3.Distance(objects[i].position, playerTransform.position);
-            //Debug.Log(objects[i].name + " Dist: " + distance);
+            if (distance < minimumMarkerDisplayDistance)
+            {
+                markers[i].gameObject.SetActive(false);
+                continue;
+            }
+            else
+                markers[i].gameObject.SetActive(true);
+
 
             Vector3 screenpos = Camera.main.WorldToScreenPoint(objects[i].position);
 

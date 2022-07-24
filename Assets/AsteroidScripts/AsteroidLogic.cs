@@ -47,6 +47,11 @@ public class AsteroidLogic : MonoBehaviour
         return ast;
     }
 
+    public List<Rigidbody> GetObjectRBs()
+    {
+        return objectsRB;
+    }
+
     void OnTakeAsteroidFromPool(Asteroid asteroid)
     {
         asteroid.gameObject.SetActive(true);

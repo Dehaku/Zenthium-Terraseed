@@ -757,6 +757,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f5cd609f-20ca-448a-9fd7-3bf99dd147c2
     m_ActionName: Ship Controls/InertialDampener[/Keyboard/r,/XInputControllerWindows/leftStickPress,/LogitechDualAction/leftStickPress]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fa322b17-4f93-484c-a26f-ded024aef6c8
+    m_ActionName: Ship Controls/Tracker[/Keyboard/t,/XInputControllerWindows/rightStickPress,/LogitechDualAction/rightStickPress]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Ship Controls
@@ -1784,6 +1788,7 @@ RectTransform:
   m_Children:
   - {fileID: 869722200}
   - {fileID: 1965347732}
+  - {fileID: 1070868650}
   m_Father: {fileID: 1479360315}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2856,6 +2861,59 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!1 &1070868649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1070868650}
+  - component: {fileID: 1070868651}
+  m_Layer: 0
+  m_Name: AsteroidHighlighter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1070868650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070868649}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 733724932}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1070868651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070868649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b84164e5181c3049a6fe2986b1c8bbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  asteroidManager: {fileID: 874864272}
+  playerTransform: {fileID: 306507255}
+  maxTrackedAtOnce: 3
+  spriteOnScreen: {fileID: 0}
+  spriteEdgeScreen: {fileID: 0}
+  markerPF: {fileID: 3443159674085821731, guid: 93facd660799ff249848ab874480390e,
+    type: 3}
+  displayTrackers: 0
+  trackedObjectsRefreshInterval: 1.3
+  turnOn: 0
 --- !u!1001 &1115525932
 PrefabInstance:
   m_ObjectHideFlags: 0

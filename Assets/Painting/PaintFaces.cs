@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(-9)]
 public class PaintFaces : MonoBehaviour
 {
 	[Header("Base?")]

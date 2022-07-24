@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class ShipMovementRB : MonoBehaviour
 {
@@ -41,6 +42,30 @@ public class ShipMovementRB : MonoBehaviour
     float roll1D;
     Vector2 pitchYaw;
 
+    [Header("References")]
+    Camera cam;
+    public GameObject camGO;
+    Cinemachine3rdPersonFollow vBody;
+
+    Cinemachine3rdPersonFollow GetCam()
+    {
+        if (!vBody)
+        {
+            if (!camGO)
+                Debug.LogError("No camGO");
+            var vCam = camGO.GetComponent<CinemachineVirtualCamera>();
+            if (!vCam)
+                Debug.LogError("No vCam");
+            vBody = vCam.GetCinemachineComponent<Cinemachine3rdPersonFollow>();
+            if(!vBody)
+                Debug.LogError("No vBody");
+
+        }
+
+
+
+        return vBody;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +78,22 @@ public class ShipMovementRB : MonoBehaviour
     {
         HandleBoosting();
         HandleMovement();
+        HandleCamera();
+    }
+
+    void HandleCamera()
+    {
+        return;
+        if (!GetCam())
+            return;
+        if(boosting)
+        {
+            GetCam().Damping.z = 0.4f;
+        }
+        else
+        {
+            GetCam().Damping.z = 0.1f;
+        }
     }
 
     void HandleBoosting()

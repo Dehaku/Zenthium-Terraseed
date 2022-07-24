@@ -23,9 +23,14 @@ public class UISpeedMeter : MonoBehaviour
     public bool isBoosting = false;
     public bool isInHyperspace = false;
     [Header("Box Color - Optional")]
-    public bool colorBoxWhenHyper = true;
+    public bool colorBoxWithText = true;
     public Image box;
     public Color boxColor;
+
+    [Header("Ship Stats for Boost")]
+    public ShipMovementRB shipStats;
+
+
 
     float _speed;
     
@@ -38,22 +43,56 @@ public class UISpeedMeter : MonoBehaviour
             Debug.Log("No Rigidbody set for UISpeedMeter");
             return;
         }
+        if(!shipStats)
+        {
+            Debug.Log("No ShipStats set for UISpeedMeter");
+            return;
+        }
 
         // Getting magnitude and setting speed
         _speed = rb.velocity.magnitude;
-        
-        
+
+
 
         // Text Colors based on speeds
-        if (isBoosting)
-            text.color = boostColor;
-        else if (_speed > tooFastSpeed)
-            text.color = tooFastColor;
-        else if (_speed > stopSpeed)
-            text.color = goingColor;
-        else
-            text.color = stopColor;
+        if(box && colorBoxWithText)
+        {
+            if (shipStats.boosting)
+            {
+                text.color = boostColor;
+                box.color = boostColor;
+            }
+            else if (_speed > tooFastSpeed)
+            {
+                text.color = tooFastColor;
+                box.color = tooFastColor;
+            }
+            else if (_speed > stopSpeed)
+            {
+                text.color = goingColor;
+                box.color = goingColor;
 
+            }
+            else
+            {
+                text.color = stopColor;
+                box.color = stopColor;
+            }
+        }
+        else
+        {
+            if (shipStats.boosting)
+                text.color = boostColor;
+            else if (_speed > tooFastSpeed)
+                text.color = tooFastColor;
+            else if (_speed > stopSpeed)
+                text.color = goingColor;
+            else
+                text.color = stopColor;
+        }
+        
+
+        
 
         // Warping to other star systems.
         if(isInHyperspace)
@@ -68,15 +107,10 @@ public class UISpeedMeter : MonoBehaviour
             _speed = hyperSpeed;
             text.color = tooFastColor;
 
-            if(box && colorBoxWhenHyper)
+            if(box && colorBoxWithText)
             {
                 box.color = tooFastColor;
             }
-        }
-        else
-        {
-            if (box)
-                box.color = boxColor;
         }
 
         // Setting the numeric display with the prefixes and suffixes, allowing for language support.

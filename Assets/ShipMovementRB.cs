@@ -99,16 +99,16 @@ public class ShipMovementRB : MonoBehaviour
     void HandleCamera()
     {
         return;
-        if (!GetCam())
-            return;
-        if(boosting)
-        {
-            GetCam().Damping.z = 0.4f;
-        }
-        else
-        {
-            GetCam().Damping.z = 0.1f;
-        }
+        //if (!GetCam())
+        //    return;
+        //if(boosting)
+        //{
+        //    GetCam().Damping.z = 0.4f;
+        //}
+        //else
+        //{
+        //    GetCam().Damping.z = 0.1f;
+        //}
     }
 
     void HandleBoosting()

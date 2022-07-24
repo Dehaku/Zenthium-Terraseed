@@ -28,7 +28,6 @@ public class PaintBoss : MonoBehaviour
     void Start()
     {
 
-        Debug.Log("Lock the brush to synced X/Y when it's within the brushes range of corners.");
     }
 
     bool _triggerSave = false;

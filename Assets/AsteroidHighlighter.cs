@@ -40,8 +40,6 @@ public class AsteroidHighlighter : MonoBehaviour
     public Transform playerTransform;
     public int maxDesiredTrackedAtOnce = 10;
     int maxTrackedAtOnce = 10;
-    public Sprite spriteOnScreen;
-    public Sprite spriteEdgeScreen;
     public GameObject markerPF;
     public bool displayTrackers = true;
 
@@ -60,8 +58,6 @@ public class AsteroidHighlighter : MonoBehaviour
         }
     }
 
-
-    
     void FillTrackedTimer() // We refresh the list every so often to account for dead/disabled objects.
     {
         _trackFillTimer += Time.deltaTime;
@@ -80,7 +76,6 @@ public class AsteroidHighlighter : MonoBehaviour
         {
             _trackedObjects = _trackedObjects.OrderBy(trans => Vector3.Distance(trans.position, playerTransform.position)).ToList();
         }
-            
     }
 
     List<Transform> GetNearestObjects(int amountToGrab)
@@ -95,9 +90,6 @@ public class AsteroidHighlighter : MonoBehaviour
         }
         return nearestTransforms;
     }
-
-    
-
 
     void DisplayTrackedObjects(List<Transform> objects)
     {
@@ -187,10 +179,6 @@ public class AsteroidHighlighter : MonoBehaviour
         }
     }
 
-
-    public bool turnOn = false;
-
-
     void UpdateMarkers()
     {
         if (markers == null)
@@ -237,9 +225,6 @@ public class AsteroidHighlighter : MonoBehaviour
         UpdateMarkers();
 
         FillTrackedTimer();
-        
-            
-
     }
 
     private void FixedUpdate()
@@ -255,9 +240,6 @@ public class AsteroidHighlighter : MonoBehaviour
                 DisplayTrackedObjects(nearest);
         }
     }
-
-
-
 
     public void OnTracker(InputAction.CallbackContext context)
     {

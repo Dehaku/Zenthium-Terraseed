@@ -102,7 +102,6 @@ public class AsteroidHighlighter : MonoBehaviour
     {
         if (markers.Count < maxTrackedAtOnce)
         {
-            Debug.Log("Not enough yet");
             return;
         }
             
@@ -200,8 +199,9 @@ public class AsteroidHighlighter : MonoBehaviour
         }
         if (markers.Count > maxTrackedAtOnce)
         {
-            //var marker = Instantiate(markerPF, this.transform);
-            Destroy(markers.Last());
+            var mark = markers.Last();
+            markers.Remove(mark);
+            Destroy(mark.gameObject);
         }
     }
 

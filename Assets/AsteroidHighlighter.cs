@@ -38,7 +38,8 @@ public class AsteroidHighlighter : MonoBehaviour
 
     [Header("Tracker Stats")]
     public Transform playerTransform;
-    public int maxTrackedAtOnce = 10;
+    public int maxDesiredTrackedAtOnce = 10;
+    int maxTrackedAtOnce = 10;
     public Sprite spriteOnScreen;
     public Sprite spriteEdgeScreen;
     public GameObject markerPF;
@@ -192,6 +193,9 @@ public class AsteroidHighlighter : MonoBehaviour
 
     void UpdateMarkers()
     {
+        if (markers == null)
+            return;
+
         while(markers.Count < maxTrackedAtOnce)
         {
             var marker = Instantiate(markerPF, this.transform);
@@ -215,6 +219,14 @@ public class AsteroidHighlighter : MonoBehaviour
     {
         if (!displayTrackers)
             return;
+        
+        // Update max so we don't have loose markers.
+        if(maxTrackedAtOnce < maxDesiredTrackedAtOnce)
+            maxTrackedAtOnce = maxDesiredTrackedAtOnce;
+        if (maxTrackedAtOnce > _trackedObjects.Count)
+            maxTrackedAtOnce = _trackedObjects.Count-1;
+        if (maxTrackedAtOnce < 0)
+            maxTrackedAtOnce = 0;
 
         UpdateMarkers();
 

@@ -47,6 +47,21 @@ public class ShipMovementRB : MonoBehaviour
     public GameObject camGO;
     Cinemachine3rdPersonFollow vBody;
 
+    public float GetBoostMax()
+    {
+        return maxBoostAmount;
+    }
+
+    public float GetBoost()
+    {
+        return currentBoostAmount;
+    }
+
+    public float GetBoostPercentFull()
+    {
+        return currentBoostAmount / maxBoostAmount;
+    }
+
     Cinemachine3rdPersonFollow GetCam()
     {
         if (!vBody)

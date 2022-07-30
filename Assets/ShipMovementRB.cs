@@ -112,7 +112,7 @@ public class ShipMovementRB : MonoBehaviour
 
             // Cast our ray from camera center.
             RaycastHit hit;
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 100.0f))
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 10000.0f))
             {
                 velocityTarget = hit.collider.gameObject;
                 velocityMatch = true;

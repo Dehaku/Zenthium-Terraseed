@@ -17,6 +17,9 @@ public class ShipMovementRB : MonoBehaviour
     [SerializeField] float thrustDeadZone = 0.1f;
     [SerializeField] bool inertialDampener = false;
     [SerializeField] float inertialDampenerAmount = 0.5f;
+    [SerializeField] bool velocityMatch = false;
+    [SerializeField] float velocityMatchClamp = 1f;
+
 
     [Header("=== Boost Settings ===")]
     [SerializeField] float maxBoostAmount = 2f; // Storage
@@ -43,9 +46,10 @@ public class ShipMovementRB : MonoBehaviour
     Vector2 pitchYaw;
 
     [Header("References")]
-    Camera cam;
     public GameObject camGO;
+    Camera cam;
     Cinemachine3rdPersonFollow vBody;
+    public GameObject velocityTarget;
 
     public float GetBoostMax()
     {
@@ -91,10 +95,49 @@ public class ShipMovementRB : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        MatchVelocityWithVelocityTarget();
         HandleBoosting();
         HandleMovement();
         HandleCamera();
     }
+
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            // Wipe old target
+            velocityTarget = null;
+            velocityMatch = false;
+
+            // Cast our ray from camera center.
+            RaycastHit hit;
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 100.0f))
+            {
+                velocityTarget = hit.collider.gameObject;
+                velocityMatch = true;
+            }
+        }
+    }
+
+    void MatchVelocityWithVelocityTarget()
+    {
+        if (!velocityMatch)
+            return;
+        // Make sure we have valid target, and they have a rigid body.
+        if (!velocityTarget)
+            return;
+        var tarRB = velocityTarget.GetComponent<Rigidbody>();
+        if (!tarRB)
+            return;
+
+        float xVelDiff = Mathf.Clamp(tarRB.velocity.x - rb.velocity.x,-velocityMatchClamp, velocityMatchClamp);
+        float yVelDiff = Mathf.Clamp(tarRB.velocity.y - rb.velocity.y,-velocityMatchClamp, velocityMatchClamp);
+        float zVelDiff = Mathf.Clamp(tarRB.velocity.z - rb.velocity.z,-velocityMatchClamp, velocityMatchClamp);
+
+        rb.AddForce(new Vector3(xVelDiff, yVelDiff, zVelDiff), ForceMode.VelocityChange);
+    }
+
 
     void HandleCamera()
     {

@@ -816,6 +816,8 @@ MonoBehaviour:
   thrustDeadZone: 0.1
   inertialDampener: 0
   inertialDampenerAmount: 0.5
+  velocityMatch: 0
+  velocityMatchClamp: 20
   maxBoostAmount: 20
   boostDepreciationRate: 0.1
   boostRechargeRate: 0.15
@@ -827,6 +829,7 @@ MonoBehaviour:
   upDownGlideReduction: 0.111
   leftRightGlideReduction: 0.111
   camGO: {fileID: 1912183725}
+  velocityTarget: {fileID: 0}
 --- !u!1 &336873692
 GameObject:
   m_ObjectHideFlags: 0
@@ -3250,7 +3253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd6043bde05a7fc4cba197d06915c1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damping: {x: 0.1, y: 0.1, z: 0.1}
+  Damping: {x: 0.01, y: 0.01, z: 0.1}
   ShoulderOffset: {x: 0, y: 0, z: 0}
   VerticalArmLength: 0.4
   CameraSide: 1

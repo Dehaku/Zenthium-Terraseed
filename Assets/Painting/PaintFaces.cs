@@ -504,14 +504,10 @@ public class PaintFaces : MonoBehaviour
 		Texture2D tex = baseMaterial.mainTexture as Texture2D;
 
 		var pixelsMain = tex.GetPixels32();
-
-		Color32 colorMain = new Color32();
-
 		for (int x = 0; x < tex.width; x++)
 		{
 			for (int y = 0; y < tex.width; y++)
 			{
-				colorMain = pixelsMain[y + tex.width * x];
 				pixelsMain[y + tex.width * x] = brushColor;
 			}
 		}
@@ -519,36 +515,245 @@ public class PaintFaces : MonoBehaviour
 		tex.Apply();
 	}
 
-	public void ApplyNoiseToCanvas(Color32 brushColor)
+	public float Noise(float x, float y, float scale = 1f)
+    {
+		x = x * scale;
+		y = y * scale;
+		return Mathf.PerlinNoise(x, y);
+	}
+
+	public float NoiseDivide(float x, float y, float width, float height, float scale = 1f)
 	{
-		if (firstCall)
-		{
-			firstCall = false;
-			return;
+		x = x / width;
+		y = y / height;
+		x = x * scale;
+		y = y * scale;
+		return Mathf.PerlinNoise(x, y);
+	}
+
+	public float DistanceFromEdge(int x, int y, int width, int height)
+	{
+		if (x < width / 2)
+		{ // left half
+			if (y < height / 2)
+			{ // upper half
+				if (x < y)
+					return x;
+				else
+					return y;
+			}
+			else
+			{ // lower half
+			  // Flip y to make calculation easier.
+				y = height - y;
+				if (x < y)
+					return x;
+				else
+					return y;
+			}
 		}
-		return;
+		else
+		{ // right half
+		  // flip x to make calculation easier.
+			x = width - x;
+
+			if (y < height / 2)
+			{ // upper half
+				if (x < y)
+					return x;
+				else
+					return y;
+			}
+			else
+			{ // lower half
+			  // Flip y to make calculation easier.
+				y = height - y;
+				if (x < y) 
+					return x;
+				else
+					return y;
+			}
+		}
+	}
+
+	public void ApplyNoiseToCanvas(Color32 brushColor, float noiseScale, float noiseEdgeIntensity)
+	{
+
+		Texture2D tex = baseMaterial.mainTexture as Texture2D;
+		var pixelsMain = tex.GetPixels32();
+		Color32 colorMain = new Color32();
+
+		float noiseX, noiseY;
+		noiseX = UnityEngine.Random.Range(-10000f, 10000f);
+		noiseY = UnityEngine.Random.Range(-10000f, 10000f);
+
+		float edgeLevel = (255/2)-15;
+
+		for (int x = 0; x < tex.width; x++)
+		{
+			for (int y = 0; y < tex.height; y++)
+			{
+				//colorMain = pixelsMain[y + tex.width * x];
+				var sample = (byte)(255 * Noise((float)x / tex.width, (float)y / tex.height, noiseScale)); ;
+
+				bool isEdge = false;
+				float dist = 0;
+				
+				float edgeDist = DistanceFromEdge(x, y, tex.width, tex.height);
+				if(edgeDist <= noiseEdgeIntensity)
+                {
+					isEdge = true;
+					dist = (float)edgeDist / noiseEdgeIntensity;
+				}
+
+
+				if (isEdge)
+                {
+					if (dist < 0)
+						dist = -dist;
+					sample = (byte)(Mathf.Lerp(edgeLevel, sample, dist));
+					//Debug.Log("Dist: " + dist + "samp: " + sample);
+				}
+
+				if (x <= 1 || x >= tex.width - 2)
+				{
+					sample = (byte)edgeLevel;
+				}
+				if (y <= 1 || y >= tex.height - 2)
+				{
+					sample = (byte)edgeLevel;
+				}
+
+				
+				colorMain.r = sample;
+				colorMain.g = sample;
+				colorMain.b = sample;
+
+
+				pixelsMain[y + tex.width * x] = colorMain;
+			}
+		}
+		tex.SetPixels32(pixelsMain);
+		tex.Apply();
+	}
+
+	public void ApplyCoolNoiseToCanvas(Color32 brushColor, float noiseScale, float noiseEdgeIntensity)
+	{ // Makes a wicked shaped cube. https://i.gyazo.com/f1b55b8c306d09c1eb6c060d7201f444.mp4
 
 		Debug.Log("Applying Noise " + gameObject.name);
 
 		Texture2D tex = baseMaterial.mainTexture as Texture2D;
-
 		var pixelsMain = tex.GetPixels32();
-
 		Color32 colorMain = new Color32();
+
+		float noiseX, noiseY;
+		noiseX = UnityEngine.Random.Range(-10000f, 10000f);
+		noiseY = UnityEngine.Random.Range(-10000f, 10000f);
+
+		float edgeLevel = 255;
 
 		for (int x = 0; x < tex.width; x++)
 		{
-			for (int y = 0; y < tex.width; y++)
+			for (int y = 0; y < tex.height; y++)
 			{
-				colorMain = pixelsMain[y + tex.width * x];
-				pixelsMain[y + tex.width * x] = brushColor;
+
+
+
+				//colorMain = pixelsMain[y + tex.width * x];
+				var sample = (byte)(255 * Noise((float)x / tex.width, (float)y / tex.height, noiseScale)); ;
+
+
+
+				bool isEdge = false;
+				float dist = 0;
+
+				if (x <= noiseEdgeIntensity)
+				{
+					isEdge = true;
+					float newDist = (float)x / noiseEdgeIntensity;
+					if (newDist < 0)
+						newDist = -newDist;
+					dist += newDist;
+					//Debug.Log(x + ":" + y + ", dist: " + dist);
+				}
+				if (y <= noiseEdgeIntensity)
+				{
+					isEdge = true;
+					float newDist = (float)y / noiseEdgeIntensity;
+					if (newDist < 0)
+						newDist = -newDist;
+					dist += newDist;
+				}
+				if (x >= tex.width - noiseEdgeIntensity)
+				{
+					isEdge = true;
+					float newDist = ((float)x - tex.width) / (tex.width - (tex.width - noiseEdgeIntensity));
+					if (newDist < 0)
+						newDist = -newDist;
+					dist += newDist;
+				}
+				if (y >= tex.height - noiseEdgeIntensity)
+				{
+					isEdge = true;
+					float newDist = ((float)y - tex.height) / (tex.height - (tex.height - noiseEdgeIntensity));
+					if (newDist < 0)
+						newDist = -newDist;
+					dist += newDist;
+				}
+
+				if (isEdge)
+				{
+					if (dist < 0)
+						dist = -dist;
+					sample = (byte)(Mathf.Lerp(edgeLevel, 0, dist));
+					//Debug.Log("Dist: " + dist + "samp: " + sample);
+				}
+
+				if (x == 0 || x == tex.width - 1)
+				{
+					sample = (byte)edgeLevel;
+				}
+				if (y == 0 || y == tex.height - 1)
+				{
+					sample = (byte)edgeLevel;
+				}
+
+				/*
+				if (x <= noiseEdgeIntensity)
+                {
+					float dist = (float)x / noiseEdgeIntensity;
+					sample = (byte)(Mathf.Lerp(edgeLevel, 0, dist));
+                }
+				if (y <= noiseEdgeIntensity)
+				{
+					float dist = (float)y / noiseEdgeIntensity;
+					sample = (byte)(Mathf.Lerp(edgeLevel, 0, dist));
+				}
+				if (x >= tex.width-noiseEdgeIntensity)
+				{
+					float dist = (float)x / (tex.width - (tex.width - noiseEdgeIntensity));
+					sample = (byte)(Mathf.Lerp(edgeLevel, 0, dist));
+				}
+				if (y >= tex.height - noiseEdgeIntensity)
+				{
+					float dist = (float)y / (tex.height - (tex.height - noiseEdgeIntensity));
+					sample = (byte)(Mathf.Lerp(edgeLevel, 0, dist));
+				}
+				*/
+
+
+
+				colorMain.r = sample;
+				colorMain.g = sample;
+				colorMain.b = sample;
+
+
+				pixelsMain[y + tex.width * x] = colorMain;
 			}
 		}
 		tex.SetPixels32(pixelsMain);
 		tex.Apply();
 	}
-
-
 
 
 	void MatchEdges()

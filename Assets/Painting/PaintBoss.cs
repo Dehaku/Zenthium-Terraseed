@@ -14,6 +14,8 @@ public class PaintBoss : MonoBehaviour
     public GameObject cursor;
 
     public Color32 seaLevel;
+    public float noiseScale;
+    public float noiseEdgeIntensity;
 
     public bool collapseCorners; // For Corner Collapsing the brushes position in PaintFaces(To avoid seam snailshelling)
     [Range(0f,1f)]
@@ -24,11 +26,7 @@ public class PaintBoss : MonoBehaviour
     
     public Camera sceneCamera;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    
 
     bool _triggerSave = false;
     bool _isPainting = false;
@@ -178,10 +176,10 @@ public class PaintBoss : MonoBehaviour
 
             
             StartCoroutine(SetPlanetsideTextureToRenderTexture(ps, painter, 1f)); // Delay the texture so it has time to setup.
-            
+
             // Starting to feel like these delays may be dangerous.
-            StartCoroutine(ChangeCanvasesBlankColor(paintTag, seaLevel, 1.5f));
-            StartCoroutine(ApplyNoiseToCanvas(paintTag, 2f));
+            //StartCoroutine(ChangeCanvasesBlankColor(paintTag, seaLevel, 1.5f));
+            StartCoroutine(ApplyNoiseToCanvas(paintTag, 2f, noiseScale, noiseEdgeIntensity));
 
             if (disableRendersShortlyAfterSpawn)
                 StartCoroutine(DisableRendersAfterTime(painterGO, 3f));
@@ -316,17 +314,17 @@ public class PaintBoss : MonoBehaviour
         ChangeCanvasesBlankColor(painter, blankColor);
     }
 
-    void ApplyNoiseToCanvas(PaintTag painter)
+    void ApplyNoiseToCanvas(PaintTag painter, float noiseScale, float noiseEdgeIntensity)
     {
-        painter.owner.ApplyNoiseToCanvas(Color.red);
+        painter.owner.ApplyNoiseToCanvas(Color.red, noiseScale, noiseEdgeIntensity);
 
         StartCoroutine(DelayTriggerTerrainMorph(painter, 0.1f));
     }
 
-    IEnumerator ApplyNoiseToCanvas(PaintTag painter, float waitTime)
+    IEnumerator ApplyNoiseToCanvas(PaintTag painter, float waitTime, float noiseScale, float noiseEdgeIntensity)
     {
         yield return new WaitForSeconds(waitTime);
-        ApplyNoiseToCanvas(painter);
+        ApplyNoiseToCanvas(painter, noiseScale, noiseEdgeIntensity);
     }
     
 
@@ -617,4 +615,5 @@ public class PaintBoss : MonoBehaviour
         }
         return null;
     }
+
 }

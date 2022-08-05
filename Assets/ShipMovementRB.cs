@@ -118,6 +118,11 @@ public class ShipMovementRB : MonoBehaviour
                 velocityMatch = true;
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Z))
+        {
+            rb.velocity = Vector3.zero;
+        }
     }
 
     void MatchVelocityWithVelocityTarget()

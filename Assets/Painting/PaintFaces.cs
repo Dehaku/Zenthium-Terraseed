@@ -515,10 +515,10 @@ public class PaintFaces : MonoBehaviour
 		tex.Apply();
 	}
 
-	public float Noise(float x, float y, float scale = 1f)
+	public float Noise(float x, float y, float scale = 1f, float offsetX = 100f, float offsetY = 100f)
     {
-		x = x * scale;
-		y = y * scale;
+		x = x * scale + offsetX;
+		y = y * scale + offsetY;
 		return Mathf.PerlinNoise(x, y);
 	}
 
@@ -594,7 +594,7 @@ public class PaintFaces : MonoBehaviour
 			for (int y = 0; y < tex.height; y++)
 			{
 				//colorMain = pixelsMain[y + tex.width * x];
-				var sample = (byte)(255 * Noise((float)x / tex.width, (float)y / tex.height, noiseScale)); ;
+				var sample = (byte)(255 * Noise((float)x / tex.width, (float)y / tex.height, noiseScale, noiseX, noiseY)); ;
 
 				bool isEdge = false;
 				float dist = 0;

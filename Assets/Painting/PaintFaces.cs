@@ -181,7 +181,7 @@ public class PaintFaces : MonoBehaviour
 		else
 			brushColor = Color.black;
 
-
+		
 		timeSinceLastInput = 0;
 		hasAutoSaved = false;
 		if (saving || needsDelete)

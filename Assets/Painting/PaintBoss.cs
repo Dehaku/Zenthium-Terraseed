@@ -81,6 +81,7 @@ public class PaintBoss : MonoBehaviour
                 Debug.Log("Cursor is hitting: " + hit.collider.name + ", at " + hit.point + ", norm: " + hit.normal);
             }
             if (Input.GetKeyDown(KeyCode.U))
+            //if (Input.GetMouseButton(0))
             {
 
                 var hitParent = hit.collider.transform.parent;
@@ -144,7 +145,7 @@ public class PaintBoss : MonoBehaviour
         painterGO.SetActive(false);
     }
 
-    void MakePlanetPaintable(GameObject planetObject)
+    public void MakePlanetPaintable(GameObject planetObject)
     {
         PaintFaces painterCenter = null;
         PaintFaces painterLeft = null;
@@ -336,6 +337,7 @@ public class PaintBoss : MonoBehaviour
             PaintTag newTarget = CheckForPaintTargets();
             if (targetHit != null && targetHit != newTarget)
             {
+                
                 //Debug.Log("Not drawing on same target now!");
                 SaveLastTarget();
             }
@@ -361,6 +363,7 @@ public class PaintBoss : MonoBehaviour
 
             targetHit = newTarget;
             _isPainting = true;
+            Debug.Log("brushPaint");
             brushFull = PaintTarget();
         }
         

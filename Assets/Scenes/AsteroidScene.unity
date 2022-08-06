@@ -3835,3 +3835,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isMouseConfined: 0
   isMouseHidden: 0
+  RMBFreesMouse: 1

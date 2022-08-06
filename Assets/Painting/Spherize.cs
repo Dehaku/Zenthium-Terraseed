@@ -20,7 +20,6 @@ public class Spherize : MonoBehaviour
     public bool collisionOnByDefault = true;
 
 
-
     static GameObject _virginPlaneContainer; // For clean hierarchy
 
     void Start()

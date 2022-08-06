@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 4857272413072896481}
   - component: {fileID: 2604544934043400105}
   - component: {fileID: 5699596556803228484}
-  m_Layer: 0
+  m_Layer: 27
   m_Name: PlanetEntity
   m_TagString: Untagged
   m_Icon: {fileID: 0}

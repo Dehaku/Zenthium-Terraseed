@@ -19,5 +19,4 @@ public class Asteroid : MonoBehaviour
     {
         _pool.Release(this);
     }
-
 }

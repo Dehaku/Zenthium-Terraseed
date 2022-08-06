@@ -55,6 +55,11 @@ public class PaintBoss : MonoBehaviour
         
         PaintLoop(paintable);
 
+        
+    }
+
+    private void LateUpdate()
+    {
         UpdateCursor();
     }
 
@@ -69,33 +74,20 @@ public class PaintBoss : MonoBehaviour
         Ray cursorRay = sceneCamera.ScreenPointToRay(cursorPos);
         if (Physics.Raycast(cursorRay, out hit, 20000))
         {
-            cursor.SetActive(true);
-            cursor.transform.position = hit.point;
-            if (cursorOverride != Vector3.zero)
-                cursor.transform.position = cursorOverride;
-            cursor.transform.eulerAngles = hit.normal;
-            cursor.transform.localScale = Vector3.one * brushSize;
-
-            if (Input.GetKey(KeyCode.I))
+            var hitParent = hit.collider.transform.parent;
+            if (hitParent)
             {
-                Debug.Log("Cursor is hitting: " + hit.collider.name + ", at " + hit.point + ", norm: " + hit.normal);
-            }
-            if (Input.GetKeyDown(KeyCode.U))
-            //if (Input.GetMouseButton(0))
-            {
-
-                var hitParent = hit.collider.transform.parent;
-                if (hitParent)
+                var spherize = hit.collider.transform.parent.GetComponentInChildren<Spherize>();
+                if (spherize)
                 {
-                    var spherize = hit.collider.transform.parent.GetComponentInChildren<Spherize>();
-                    if (spherize)
-                    {
-                        spherize.EnableFaceColliders(true);
-                    }
+                    cursor.SetActive(true);
+                    cursor.transform.position = hit.point;
+                    if (cursorOverride != Vector3.zero)
+                        cursor.transform.position = cursorOverride;
+                    cursor.transform.eulerAngles = hit.normal;
+                    cursor.transform.localScale = Vector3.one * brushSize;
                 }
-                
             }
-
         }
         else
         {

@@ -6,11 +6,12 @@ public class LockMouse : MonoBehaviour
 {
     public bool isMouseConfined;
     public bool isMouseHidden;
+    public bool RMBFreesMouse;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        LockTheMouse();
     }
 
     public void HideTheMouse()
@@ -51,6 +52,8 @@ public class LockMouse : MonoBehaviour
         }
     }
 
+    
+
     // Update is called once per frame
     void Update()
     {
@@ -65,5 +68,35 @@ public class LockMouse : MonoBehaviour
             ToggleMouse();
         }
 
+        FreeMouse();
+
+    }
+
+    bool _previousHidden = false;
+    bool _holdingRMB = false;
+    void FreeMouse()
+    {
+        if (!RMBFreesMouse)
+            return;
+
+        if (Input.GetMouseButton(1))
+        {
+            if (!_holdingRMB)
+            {
+                _holdingRMB = true;
+                _previousHidden = isMouseHidden;
+            }
+
+            ShowTheMouse();
+        }
+        else
+        {
+            if (_holdingRMB)
+            {
+                _holdingRMB = false;
+                if (_previousHidden == true)
+                    HideTheMouse();
+            }
+        }
     }
 }

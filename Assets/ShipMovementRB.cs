@@ -51,6 +51,8 @@ public class ShipMovementRB : MonoBehaviour
     Cinemachine3rdPersonFollow vBody;
     public GameObject velocityTarget;
 
+    LockMouse _mouseLock;
+
     public float GetBoostMax()
     {
         return maxBoostAmount;
@@ -90,6 +92,7 @@ public class ShipMovementRB : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        _mouseLock = FindObjectOfType<LockMouse>();
     }
 
     // Update is called once per frame
@@ -189,6 +192,9 @@ public class ShipMovementRB : MonoBehaviour
 
     void HandleMovement()
     {
+        if (!_mouseLock.isMouseHidden)
+            return;
+
         // Roll
         rb.AddRelativeTorque(Vector3.back * roll1D * rollTorque * Time.deltaTime);
         // Pitch

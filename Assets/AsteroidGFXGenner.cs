@@ -28,6 +28,9 @@ public class AsteroidGFXGenner : MonoBehaviour
 
             if (Vector3.Distance(trans.position,item.position) <= checkRange)
             {
+                if (!hitParent)
+                    continue;
+
                 PlanetSide ps = hitParent.GetComponentInChildren<PlanetSide>();
                 if(ps != null)
                 {

@@ -15,6 +15,7 @@ public class AsteroidLogic : MonoBehaviour
     
     [Header("===Initial Spawn===")]
     public List<GameObject> spawnPrefabs;
+    public RandomSubstanceListCollectionSO substanceLists;
     public float spawnRadius = 10;
     public float velocityDeleteRadius = 10000; // If a rigidbody is further than this distance, it's velocity is deleted so it can return.
     public int spawnAmount = 1;
@@ -44,6 +45,8 @@ public class AsteroidLogic : MonoBehaviour
         var obj = Instantiate(spawnPrefabs[UnityEngine.Random.Range(0, spawnPrefabs.Count)]);
         var ast = obj.GetComponent<Asteroid>();
         ast.SetPool(_asteroidPool);
+        ast.mass.GetComponent<RandomMass>().randomSubstancesSO = substanceLists.GetRandomList();
+        ast.mass.Reset();
         return ast;
     }
 
@@ -59,7 +62,10 @@ public class AsteroidLogic : MonoBehaviour
 
         // Remove momentum.
         asteroid.mass.GetComponent<Rigidbody>().velocity = Vector3.zero;
+
+
         // Reset substances and the like.
+        asteroid.mass.GetComponent<RandomMass>().randomSubstancesSO = substanceLists.GetRandomList();
         asteroid.mass.Reset();
     }
 

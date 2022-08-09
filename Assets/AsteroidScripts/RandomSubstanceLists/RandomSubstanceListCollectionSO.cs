@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+[CreateAssetMenu(menuName = "PlanetGen/RandomSubstanceListCollection")]
 public class RandomSubstanceListCollectionSO : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public string nameSO;
+    public List<RandomSubstancesSO> rEntries = new List<RandomSubstancesSO>();
 
-    // Update is called once per frame
-    void Update()
+    public RandomSubstancesSO GetRandomList() 
     {
-        
+        return rEntries[Random.Range(0, rEntries.Count)];
     }
 }
+

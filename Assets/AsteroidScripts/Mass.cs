@@ -124,6 +124,8 @@ public class Mass : MonoBehaviour
     {
         bodies = 1;
 
+        substances.Clear();
+
         var rMass = GetComponent<RandomMass>();
         if (rMass)
             rMass.AddRandomSubstances();

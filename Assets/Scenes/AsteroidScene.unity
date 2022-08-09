@@ -2042,8 +2042,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78cc6d2e3fa28ca4b9c2a80807546678, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyDistanceMultiplier: 1
-  blackbodyCooling: 0.001
+  energyDistanceMultiplier: 0.5
+  blackbodyCooling: 1
   backgroundTemperature: -270
   astLogic: {fileID: 874864272}
   stars:

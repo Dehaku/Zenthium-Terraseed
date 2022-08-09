@@ -71,8 +71,9 @@ public class AsteroidEnergyLogic : MonoBehaviour
         foreach (var ast in _asteroids)
         {
             temp = Temperature.CelsiusToKelvin(ast._energy);
-            temp *= (1 - blackbodyCooling);
-            ast._energy = Temperature.KelvinToCelsius(temp);
+            temp *= blackbodyCooling;
+            temp = temp / ast.GetMass(false);
+            ast._energy -= temp;
         }
     }
 

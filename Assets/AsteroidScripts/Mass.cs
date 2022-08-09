@@ -69,7 +69,12 @@ public class Mass : MonoBehaviour
             else if (item.SO.isLiquid(GetEnergy()))
                 massLiquid += item.amount;
         }
-
+        // Divide by 0 protection
+        if(massLiquid == 0 || massSolid == 0)
+        {
+            _oceanLevel = massLiquid;
+            return _oceanLevel;
+        }
         _oceanLevel = massLiquid / massSolid;
         return _oceanLevel;
     }

@@ -129,8 +129,20 @@ public class Mass : MonoBehaviour
         var rMass = GetComponent<RandomMass>();
         if (rMass)
             rMass.AddRandomSubstances();
-        
+
+        StartCoroutine(ForceOrbitScript(1f,Random.Range(0.7f,1.3f),1f));
+
         AffectTransforms();
+    }
+
+    public IEnumerator ForceOrbitScript(float initialWaitTime, float velocityMultiply, float destroyTime)
+    {
+        yield return new WaitForSeconds(initialWaitTime);
+        var fO = gameObject.AddComponent<ForceOrbit>();
+        yield return new WaitForSeconds(0.25f);
+        rb.velocity *= velocityMultiply;
+
+        Destroy(fO, destroyTime);
     }
 
     public void AffectTransforms()

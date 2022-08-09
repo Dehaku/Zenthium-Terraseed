@@ -26,7 +26,7 @@ public class Substance : ScriptableObject
     {
         // Only return above 0 if this element is a gas.
         if(isGas(celsius))
-            return _globalWarmingPotential * amount;
+            return _globalWarmingPotential;
 
         return 0;
     }

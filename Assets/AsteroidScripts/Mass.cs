@@ -84,6 +84,13 @@ public class Mass : MonoBehaviour
         _energy += energy / GetMass(false);
     }
 
+    public float arbitrarySunMultiplier = 1; // For White/Black surface terraform tools.
+
+    public void AddSolarEnergy(float energy)
+    {
+        _energy += (energy * arbitrarySunMultiplier) / GetMass(false);
+    }
+
     public float GetEnergy(bool recalc = true)
     {
         if (!recalc)
@@ -216,6 +223,7 @@ public class Mass : MonoBehaviour
 
     public float energyAverage = 0;
     public float energyDelta = 0;
+    public float rawSolarEnergy = 0;
     List<float> temperatureStorage = new List<float>();
     public void EnergyDelta()
     {
@@ -225,11 +233,12 @@ public class Mass : MonoBehaviour
         foreach (var item in temperatureStorage)
         {
             energyDelta += item;
-            energyDelta = energyDelta / temperatureStorage.Count;
-            energyAverage = energyDelta;
-
-            energyDelta -= temperatureStorage[0]; // Oldest temperature.
         }
+        
+        energyDelta = energyDelta / temperatureStorage.Count;
+        energyAverage = energyDelta;
+
+        energyDelta -= temperatureStorage[0]; // Oldest temperature.
     }
 
 

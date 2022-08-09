@@ -38,9 +38,8 @@ public class AsteroidEnergyLogic : MonoBehaviour
 
     public void RunAsteroidEnergyLogic()
     {
-        float processTime = Time.realtimeSinceStartup;
+        //float processTime = Time.realtimeSinceStartup;
             
-
         foreach (var star in stars)
         {
             Vector3 starPos = star.transform.position;
@@ -55,11 +54,15 @@ public class AsteroidEnergyLogic : MonoBehaviour
 
 
                 if (dist > 1) // Divide by 0 protection... probably.
+                {
                     starEnergy = star.GetStarOutput() * (1 / Mathf.Sqrt(dist * energyDistanceMultiplier));
+                    ast.rawSolarEnergy = starEnergy;
+                }
+                    
                 else
                     starEnergy = star.GetStarOutput();
 
-                ast.AddEnergy(starEnergy);
+                ast.AddSolarEnergy(starEnergy);
             }
         }
 

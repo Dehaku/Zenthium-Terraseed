@@ -240,13 +240,13 @@ MonoBehaviour:
   rb: {fileID: 4857272413072896481}
   trans: {fileID: 4857272413072896485}
   _mass: 0
+  _energy: 0
+  _energyLossOverTime: 0
+  _gasPressure: 0
+  _GWP: 0
+  _oceanLevel: 0
+  distanceFromNearestStar: 0
   substances:
-  - SO: {fileID: 11400000, guid: 001a3e6670f138446959f0cd8024b75c, type: 2}
-    amount: 15
-    id: 
-    weightPerUnit: 0
-    color: {r: 0, g: 0, b: 0, a: 0}
-    icon: {fileID: 0}
   - SO: {fileID: 11400000, guid: b12b795da1198644888784009b2f20c3, type: 2}
     amount: 5
     id: 
@@ -255,6 +255,11 @@ MonoBehaviour:
     icon: {fileID: 0}
   scaleOffset: 0.6
   _physicsMassOffset: 100
+  starEnergyOutput: 10000
+  starSurfaceDist: 0
+  starIgnited: 0
+  energyAverage: 0
+  energyDelta: 0
 --- !u!114 &4857272413072896484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,31 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d1123859a04f9147a05dcbb86eed714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rEntries:
-  - substanceSO: {fileID: 11400000, guid: 001a3e6670f138446959f0cd8024b75c, type: 2}
-    chance: 100
-    amountMinMax: {x: 10, y: 25}
-  - substanceSO: {fileID: 11400000, guid: 001a3e6670f138446959f0cd8024b75c, type: 2}
-    chance: 50
-    amountMinMax: {x: 25, y: 50}
-  - substanceSO: {fileID: 11400000, guid: 001a3e6670f138446959f0cd8024b75c, type: 2}
-    chance: 25
-    amountMinMax: {x: 50, y: 75}
-  - substanceSO: {fileID: 11400000, guid: 001a3e6670f138446959f0cd8024b75c, type: 2}
-    chance: 12.5
-    amountMinMax: {x: 75, y: 100}
-  - substanceSO: {fileID: 11400000, guid: b12b795da1198644888784009b2f20c3, type: 2}
-    chance: 100
-    amountMinMax: {x: 10, y: 25}
-  - substanceSO: {fileID: 11400000, guid: b12b795da1198644888784009b2f20c3, type: 2}
-    chance: 50
-    amountMinMax: {x: 25, y: 50}
-  - substanceSO: {fileID: 11400000, guid: b12b795da1198644888784009b2f20c3, type: 2}
-    chance: 25
-    amountMinMax: {x: 50, y: 75}
-  - substanceSO: {fileID: 11400000, guid: b12b795da1198644888784009b2f20c3, type: 2}
-    chance: 12.5
-    amountMinMax: {x: 75, y: 100}
+  randomSubstancesSO: {fileID: 11400000, guid: 12a443eabb1c42e47bf6ff43d5bd468c, type: 2}
 --- !u!54 &4857272413072896481
 Rigidbody:
   m_ObjectHideFlags: 0

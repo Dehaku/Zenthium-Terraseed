@@ -17,25 +17,23 @@ public class RandomMass : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (!randomSubstancesSO)
+            Debug.LogError("Missing SO listing.");
         AddRandomSubstances();
     }
     //[EButton]
 
-    public List<RandomEntry> rEntries = new List<RandomEntry>();
+    public RandomSubstancesSO randomSubstancesSO;
     public void AddRandomSubstances()
     {
-        foreach (var item in rEntries)
+        foreach (var item in randomSubstancesSO.rEntries)
         {
             float roll = Random.Range(0, 100f);
-            //Debug.Log(item.substanceSO.id + "Rolled: " + roll + ", against " + item.chance);
             if(roll <= item.chance)
             {
                 //Debug.Log("Success!");
                 mass.AddSubstance(item.substanceSO, Random.Range(item.amountMinMax.x, item.amountMinMax.y));
             }
-
-                //Random.Range(item.amountMinMax.x, item.amountMinMax.y);
         }
     }
 

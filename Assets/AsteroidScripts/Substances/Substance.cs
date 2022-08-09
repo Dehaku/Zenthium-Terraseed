@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-[CreateAssetMenu(menuName = "Substance")]
+[CreateAssetMenu(menuName = "PlanetGen/Substance")]
 public class Substance : ScriptableObject
 {
     public float amount;

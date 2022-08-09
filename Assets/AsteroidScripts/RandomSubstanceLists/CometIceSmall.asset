@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afb28a42ea402374ab0133784bc36074, type: 3}
+  m_Name: CometIceSmall
+  m_EditorClassIdentifier: 
+  nameSO: CometIceSmall
+  rEntries:
+  - substanceSO: {fileID: 11400000, guid: 001a3e6670f138446959f0cd8024b75c, type: 2}
+    chance: 100
+    amountMinMax: {x: 10, y: 25}
+  - substanceSO: {fileID: 11400000, guid: 001a3e6670f138446959f0cd8024b75c, type: 2}
+    chance: 50
+    amountMinMax: {x: 25, y: 50}
+  - substanceSO: {fileID: 11400000, guid: 001a3e6670f138446959f0cd8024b75c, type: 2}
+    chance: 25
+    amountMinMax: {x: 50, y: 75}
+  - substanceSO: {fileID: 11400000, guid: 001a3e6670f138446959f0cd8024b75c, type: 2}
+    chance: 12.5
+    amountMinMax: {x: 75, y: 100}
+  - substanceSO: {fileID: 11400000, guid: b12b795da1198644888784009b2f20c3, type: 2}
+    chance: 100
+    amountMinMax: {x: 10, y: 25}
+  - substanceSO: {fileID: 11400000, guid: b12b795da1198644888784009b2f20c3, type: 2}
+    chance: 50
+    amountMinMax: {x: 25, y: 50}
+  - substanceSO: {fileID: 11400000, guid: b12b795da1198644888784009b2f20c3, type: 2}
+    chance: 25
+    amountMinMax: {x: 50, y: 75}
+  - substanceSO: {fileID: 11400000, guid: b12b795da1198644888784009b2f20c3, type: 2}
+    chance: 12.5
+    amountMinMax: {x: 75, y: 100}

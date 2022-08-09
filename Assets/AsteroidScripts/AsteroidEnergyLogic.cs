@@ -16,26 +16,6 @@ public class AsteroidEnergyLogic : MonoBehaviour
     void Start()
     {
         objectsRB = astLogic.GetObjectRBs();
-
-        Debug.Log("10000 sqrtdivide 1: " +     Mathf.Sqrt(10000/ 1));
-        Debug.Log("10000 sqrtdivide 10: " +    Mathf.Sqrt(10000/ 10));
-        Debug.Log("10000 sqrtdivide 100: " +   Mathf.Sqrt(10000/ 100));
-        Debug.Log("10000 sqrtdivide 1000: " +  Mathf.Sqrt(10000/ 1000));
-        Debug.Log("10000 sqrtdivide 10000: " + Mathf.Sqrt(10000/ 10000));
-
-        Debug.Log("sqrt 1: " +     Mathf.Sqrt(1));
-        Debug.Log("sqrt 10: " +    Mathf.Sqrt(10));
-        Debug.Log("sqrt 100: " +   Mathf.Sqrt(100));
-        Debug.Log("sqrt 1000: " +  Mathf.Sqrt(1000));
-        Debug.Log("sqrt 10000: " + Mathf.Sqrt(10000));
-
-        Debug.Log("1 / 1: " +     1 / Mathf.Sqrt(1));
-        Debug.Log("1 / 10: " +    1 / Mathf.Sqrt(10));
-        Debug.Log("1 / 100: " +   1 / Mathf.Sqrt(100));
-        Debug.Log("1 / 1000: " +  1 / Mathf.Sqrt(1000));
-        Debug.Log("1 / 10000: " + 1 / Mathf.Sqrt(10000));
-
-
     }
 
     public void CacheStars()

@@ -58,7 +58,7 @@ public class PaintBoss : MonoBehaviour
         
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         UpdateCursor();
     }
@@ -119,14 +119,21 @@ public class PaintBoss : MonoBehaviour
         return false;
     }    
 
-    IEnumerator SetPlanetsideTextureToRenderTexture(PlanetSide ps, PaintFaces painter, float waitTime)
+    IEnumerator SetPlanetsideTextureToRenderTexture(PlanetSide ps, PaintFaces painter, PaintTag paintTag, float waitTime)
     {
-        yield return new WaitForSeconds(waitTime);
+        //yield return new WaitForSeconds(waitTime);
+        yield return new WaitUntil(() => painter.canvasTexture != null);
         var meshRend = ps.GetComponent<MeshRenderer>();
         meshRend.material = new Material(meshRend.material);
         meshRend.material.SetTexture("_HeightMap", painter.canvasTexture);
 
         painter.TriggerSaveMethod();
+
+
+        ApplyNoiseToCanvas(paintTag, noiseScale, noiseEdgeIntensity);
+        //ApplyNoiseToCanvas(paintTag, 0.1f, noiseScale, noiseEdgeIntensity);
+
+        //StartCoroutine(ApplyNoiseToCanvas(paintTag, 0.1f, noiseScale, noiseEdgeIntensity));
     }
 
     Vector3 _painterOffsets = Vector3.zero; // We spawn them spaced out so they don't overlap and influence eachother.
@@ -168,11 +175,11 @@ public class PaintBoss : MonoBehaviour
             paintTag.owner = painter;
 
             
-            StartCoroutine(SetPlanetsideTextureToRenderTexture(ps, painter, 1f)); // Delay the texture so it has time to setup.
+            StartCoroutine(SetPlanetsideTextureToRenderTexture(ps, painter, paintTag, 1f)); // Delay the texture so it has time to setup.
 
             // Starting to feel like these delays may be dangerous.
             //StartCoroutine(ChangeCanvasesBlankColor(paintTag, seaLevel, 1.5f));
-            StartCoroutine(ApplyNoiseToCanvas(paintTag, 2f, noiseScale, noiseEdgeIntensity));
+            
 
             if (disableRendersShortlyAfterSpawn)
                 StartCoroutine(DisableRendersAfterTime(painterGO, 3f));

@@ -13,6 +13,7 @@ public class OrbitRenderer : MonoBehaviour
     public int countPerFrame = 1000;
     public int simplify = 100;
     int privateMaxCount;
+    public LineRenderer lineRendererPF;
     LineRenderer lineRenderer;
     public bool rebuildTrajectory = false;
     public float fadeRate = 1;
@@ -46,7 +47,7 @@ public class OrbitRenderer : MonoBehaviour
         lineRenderer.endColor = fadeColor;
         yield return new WaitUntil(() => lineRenderer.startColor.a <= 1);
         if (lineRenderer)
-            Destroy(lineRenderer);
+            Destroy(lineRenderer.gameObject);
     }
 
     void Init()
@@ -54,7 +55,8 @@ public class OrbitRenderer : MonoBehaviour
         startingVelocity = GetComponent<Rigidbody>().velocity;
         privateMaxCount = maxCount;
         orbitPoints = new Vector3[privateMaxCount];
-        lineRenderer = gameObject.AddComponent<LineRenderer>();
+        LineRenderer lR = Instantiate(lineRendererPF, this.transform);
+        lineRenderer = lR;
         lineRenderer.startWidth = 5f;
         lineRenderer.endWidth = 5f;
     }

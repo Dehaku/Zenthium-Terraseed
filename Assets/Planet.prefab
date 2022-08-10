@@ -100,7 +100,6 @@ MonoBehaviour:
   planePF: {fileID: 919132149155446097, guid: c806ab3797514d045880d78e7e1253b3, type: 3}
   localScaleOffset: 10
   radius: 1
-  radiusOffset: 0
   bend: 1
   faces: []
   virginFaces: []
@@ -258,8 +257,10 @@ MonoBehaviour:
   starEnergyOutput: 10000
   starSurfaceDist: 0
   starIgnited: 0
+  arbitrarySunMultiplier: 1
   energyAverage: 0
   energyDelta: 0
+  rawSolarEnergy: 0
 --- !u!114 &4857272413072896484
 MonoBehaviour:
   m_ObjectHideFlags: 0

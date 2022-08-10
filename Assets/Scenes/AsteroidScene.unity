@@ -1187,8 +1187,10 @@ MonoBehaviour:
   starEnergyOutput: 10000
   starSurfaceDist: 500
   starIgnited: 1
+  arbitrarySunMultiplier: 1
   energyAverage: 0
   energyDelta: 0
+  rawSolarEnergy: 0
 --- !u!1 &445753504
 GameObject:
   m_ObjectHideFlags: 0

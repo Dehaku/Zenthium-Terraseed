@@ -125,7 +125,13 @@ public class PaintFaces : MonoBehaviour
 
     IEnumerator planetFaces(float waitTime)
 	{
-		yield return new WaitForSeconds(waitTime);
+		
+		//yield return new WaitForSeconds(waitTime);
+		Debug.Log("Canvas: " + canvasTexture);
+		yield return new WaitUntil(() => canvasTexture != null); // If this is the issue, use the wait for seconds yield.
+		Debug.Log("Passed Canvas: " + canvasTexture);
+
+
 		foreach (var face in planet.faces)
 		{
 			face.GetComponent<MeshRenderer>().material.SetTexture("_NoiseTexture", canvasTexture);

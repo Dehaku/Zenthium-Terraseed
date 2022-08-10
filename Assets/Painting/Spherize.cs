@@ -8,7 +8,6 @@ public class Spherize : MonoBehaviour
     public GameObject planePF;
     public float localScaleOffset = 1;
     public float radius;
-    public float radiusOffset;
     public bool bend = false;
     public List<GameObject> faces;
     public List<GameObject> virginFaces;
@@ -22,7 +21,7 @@ public class Spherize : MonoBehaviour
 
     static GameObject _virginPlaneContainer; // For clean hierarchy
 
-    void Start()
+    void Awake()
     {
         Vector3[] positionArr = {
              new Vector3(0,0.5f,0),

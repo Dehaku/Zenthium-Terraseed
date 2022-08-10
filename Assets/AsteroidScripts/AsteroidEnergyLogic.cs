@@ -31,7 +31,8 @@ public class AsteroidEnergyLogic : MonoBehaviour
         foreach (var ast in objectsRB)
         {
             if (ast.gameObject.activeInHierarchy)
-                newAsteroids.Add(ast.GetComponent<Mass>());
+                if(ast.GetComponent<Mass>()) // The ship doesn't have a mass class, but is included for gravity
+                    newAsteroids.Add(ast.GetComponent<Mass>());
         }
         _asteroids = newAsteroids;
     }

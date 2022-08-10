@@ -279,7 +279,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170287434}
   m_LocalRotation: {x: -0, y: -0.46313056, z: -0, w: 0.8862901}
-  m_LocalPosition: {x: 1479.8601, y: 0.5799999, z: -542.4797}
+  m_LocalPosition: {x: 1473.9493, y: -0.5450001, z: -538.3683}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1233999192}
@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 306507257}
   - component: {fileID: 306507258}
   - component: {fileID: 306507256}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -408,7 +408,7 @@ Transform:
   m_GameObject: {fileID: 306507254}
   m_LocalRotation: {x: -0, y: -0.46313056, z: -0, w: 0.8862901}
   m_LocalPosition: {x: 1471.6508, y: -1.07, z: -536.7695}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 1881876075}
   - {fileID: 1516223215}
@@ -584,7 +584,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 306507254}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.01
   m_Drag: 0
   m_AngularDrag: 0.5
   m_UseGravity: 0
@@ -604,13 +604,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc3bfdabad487f94c8347a6917998213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  yawTorque: 100
+  yawTorque: 0.01
   invertPitch: 0
-  pitchTorque: 100
-  rollTorque: 100
-  thrust: 1000
-  upThrust: 500
-  strafeThrust: 500
+  pitchTorque: 0.01
+  rollTorque: 0.01
+  thrust: 10
+  upThrust: 5
+  strafeThrust: 5
   thrustDeadZone: 0.1
   inertialDampener: 0
   inertialDampenerAmount: 0.5
@@ -850,7 +850,7 @@ GameObject:
   - component: {fileID: 364948613}
   - component: {fileID: 364948612}
   - component: {fileID: 364948611}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Helm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1150,7 +1150,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 423785046}
   serializedVersion: 2
-  m_Mass: 100000
+  m_Mass: 10000
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -1270,7 +1270,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 445753504}
   m_LocalRotation: {x: 0, y: -0.46313056, z: 0, w: 0.8862901}
-  m_LocalPosition: {x: 1479.8601, y: 0.5799999, z: -542.4797}
+  m_LocalPosition: {x: 1473.9493, y: -0.5450001, z: -538.3683}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1426,7 +1426,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 731316445}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2195,7 +2195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1061503850}
   - component: {fileID: 1061503851}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TrailLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2261,7 +2261,7 @@ TrailRenderer:
   m_Time: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -2386,7 +2386,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1202019569}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CamFollow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2574,7 +2574,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1299442515}
   - component: {fileID: 1299442516}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: AsteroidGFXGenner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2625,7 +2625,7 @@ GameObject:
   - component: {fileID: 1332695550}
   - component: {fileID: 1332695549}
   - component: {fileID: 1332695548}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: EngineMount
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2880,7 +2880,7 @@ GameObject:
   - component: {fileID: 1369377698}
   - component: {fileID: 1369377697}
   - component: {fileID: 1369377696}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: EngineRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3080,7 +3080,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1516223215}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CamLookTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3215,7 +3215,7 @@ GameObject:
   - component: {fileID: 1850537230}
   - component: {fileID: 1850537229}
   - component: {fileID: 1850537228}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: EngineLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3359,7 +3359,7 @@ GameObject:
   - component: {fileID: 1868315154}
   - component: {fileID: 1868315153}
   - component: {fileID: 1868315152}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3452,7 +3452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1881876075}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: ShipGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3486,7 +3486,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1885342596}
   - component: {fileID: 1885342597}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: TrailRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3552,7 +3552,7 @@ TrailRenderer:
   m_Time: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -3678,7 +3678,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1912183725}
   m_LocalRotation: {x: -0, y: -0.46313056, z: -0, w: 0.8862901}
-  m_LocalPosition: {x: 1479.8601, y: 0.5799999, z: -542.4797}
+  m_LocalPosition: {x: 1473.9493, y: -0.5450001, z: -538.3683}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 170318924}

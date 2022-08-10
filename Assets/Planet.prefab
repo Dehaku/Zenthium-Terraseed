@@ -253,7 +253,7 @@ MonoBehaviour:
     color: {r: 0, g: 0, b: 0, a: 0}
     icon: {fileID: 0}
   scaleOffset: 0.6
-  _physicsMassOffset: 100
+  _physicsMassOffset: 10000
   starEnergyOutput: 10000
   starSurfaceDist: 0
   starIgnited: 0

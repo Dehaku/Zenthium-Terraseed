@@ -21,7 +21,7 @@ public class Mass : MonoBehaviour
     [SerializeField] public List<Substance.sub> substances;
 
     public float scaleOffset = 1;
-    [SerializeField] float _physicsMassOffset = 100f;
+    [SerializeField] float _physicsMassOffset = 1000f;
 
     public float starEnergyOutput = 10000;
     public float starSurfaceDist = 0;

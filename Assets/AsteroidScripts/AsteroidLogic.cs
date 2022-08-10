@@ -25,6 +25,7 @@ public class AsteroidLogic : MonoBehaviour
 
     List<GameObject> objectsGO = new List<GameObject>();
     List<Rigidbody> objectsRB = new List<Rigidbody>();
+    List<Mass> objectsMass = new List<Mass>();
 
     static GameObject _planetContainer;
 
@@ -91,6 +92,8 @@ public class AsteroidLogic : MonoBehaviour
         foreach (var item in OtherObjectsToGrav)
         {
             objectsRB.Add(item);
+            if (item.GetComponent<Mass>())
+                objectsMass.Add(item.GetComponent<Mass>());
         }
         
     }
@@ -143,6 +146,12 @@ public class AsteroidLogic : MonoBehaviour
                 //var obj = _asteroidPool.Get();
                 var obj = CreateAsteroid(); // This needs to stay as Create instead of .Get() due to race conditions. Sometimes I make myself sad.
                 objectsGO.Add(obj.gameObject);
+                if(obj.GetComponentInChildren<Mass>())
+                    objectsMass.Add(obj.GetComponentInChildren<Mass>());
+                else
+                {
+                    Debug.Log("obj didn't have a mass, strange");
+                }
                 obj.transform.parent = _planetContainer.transform;
 
                 var objRB = obj.GetComponentInChildren<Rigidbody>();
@@ -161,6 +170,22 @@ public class AsteroidLogic : MonoBehaviour
         }
         
     }
+
+    public List<Rigidbody> GetStarRigidbodies()
+    {
+        List<Rigidbody> rbList = new List<Rigidbody>();
+        foreach (var item in objectsMass)
+        {
+            if (item.starIgnited)
+            {
+                if (item.GetComponent<Rigidbody>())
+                    rbList.Add(item.GetComponent<Rigidbody>());
+            }
+        }
+
+        return rbList;
+    }
+
 
     private void OnDrawGizmosSelected()
     {

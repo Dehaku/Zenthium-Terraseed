@@ -15,7 +15,9 @@ public class OrbitRenderer : MonoBehaviour
     int privateMaxCount;
     LineRenderer lineRenderer;
     public bool rebuildTrajectory = false;
+    public float fadeRate = 1;
 
+    public Color col = Color.blue;
 
     // Start is called before the first frame update
     void Start()
@@ -23,13 +25,28 @@ public class OrbitRenderer : MonoBehaviour
         BuildTrajectory();
     }
 
+
+    Color fadeColor;
     void BuildTrajectory()
     {
+        fadeColor = col;
+
+        StopAllCoroutines();
+
+        if(lineRenderer)
+            StartCoroutine(FadeDestroyOldLineRenderer());
+        var co = StartCoroutine(ComputeTrajectory());
+    }
+
+    
+    IEnumerator FadeDestroyOldLineRenderer()
+    {
+        fadeColor.a = lineRenderer.startColor.a-(fadeRate*Time.deltaTime);
+        lineRenderer.startColor = fadeColor;
+        lineRenderer.endColor = fadeColor;
+        yield return new WaitUntil(() => lineRenderer.startColor.a <= 1);
         if (lineRenderer)
             Destroy(lineRenderer);
-
-        
-        StartCoroutine(ComputeTrajectory());
     }
 
     void Init()

@@ -226,6 +226,8 @@ public class PaintBoss : MonoBehaviour
             //painter.NeighborDown
         }
 
+        //planetObject.GetComponentInParent<PlanetShaderController>();
+
         // Center
         painterCenter.NeighborLeft = painterRight;
         painterCenter.NeighborLeftRotate = new Vector3(0, 0, 0);

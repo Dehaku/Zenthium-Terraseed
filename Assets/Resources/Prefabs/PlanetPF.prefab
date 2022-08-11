@@ -149,6 +149,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4857272412844325179}
   - component: {fileID: 6661188199725782708}
+  - component: {fileID: 4093287803718045302}
   m_Layer: 0
   m_Name: PlanetPF
   m_TagString: Untagged
@@ -186,6 +187,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mass: {fileID: 4857272413072896487}
   spherize: {fileID: 3923134884140388053}
+--- !u!114 &4093287803718045302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857272412844325176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46523ea328ec6b94aa3c0e320570437a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mass: {fileID: 4857272413072896487}
+  materials: []
+  rb: {fileID: 4857272413072896481}
 --- !u!1 &4857272413072896538
 GameObject:
   m_ObjectHideFlags: 0

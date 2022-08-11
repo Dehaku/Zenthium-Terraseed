@@ -153,7 +153,7 @@ Material:
     - IceCapReach: 1
     - IceCapSoftness: 1.35
     - IceMultiply: 19.69
-    - IceNoiseIntensity: 0.3
+    - IceNoiseIntensity: 80
     - IceStepLimit: 0.05
     - IceWaterBlend: 1
     - Metallic: 0.5

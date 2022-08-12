@@ -9,7 +9,9 @@ public class PlanetShaderController : MonoBehaviour
     public Rigidbody rb;
     public GameObject planetOceanPF;
     Transform planetOcean;
-
+    [SerializeField] Transform planetGFX;
+    Transform planetAtmosphere;
+    
     public float iceCoverageMultiplier = -0.75f;
     public float icePower = 1;
     public float iceNoiseIntensity = 80;
@@ -18,6 +20,7 @@ public class PlanetShaderController : MonoBehaviour
     public float oceanMinLevel = 2f;
     public float oceanMaxAdditionalLevel = 1f;
     public float oceanArbitraryMulti = 3;
+    public bool shrinkLandByPercentage = false;
 
     // Start is called before the first frame update
     void Start()
@@ -122,5 +125,14 @@ public class PlanetShaderController : MonoBehaviour
         var oceanScale = (oceanMinLevel + (oceanMaxAdditionalLevel * mass.GetOceanLevel(false))) * oceanArbitraryMulti;
 
         planetOcean.localScale =  Vector3.one * oceanScale;
+
+        if(shrinkLandByPercentage)
+            CounterScaleLandAndSea();
+    }
+
+    void CounterScaleLandAndSea()
+    {
+        var percents = mass.GetPercentageOfMatterStates();
+        planetGFX.localScale = Vector3.one * percents[0];
     }
 }

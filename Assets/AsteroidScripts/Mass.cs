@@ -53,6 +53,48 @@ public class Mass : MonoBehaviour
         return _GWP;
     }
 
+    public float[] GetPercentageOfMatterStates()
+    {
+        float[] returnArray = new float[3];
+        float[] matterArray = GetAmountOfMatterStates();
+
+        float totalMass = 0;
+        foreach (var item in matterArray)
+        {
+            totalMass += item;
+        }
+
+        if(totalMass == 0)
+        {
+            Debug.Log("How the hell does this have 0 matter?", this);
+            return null;
+        }
+
+        returnArray[0] = matterArray[0] / totalMass; // Solids;
+        returnArray[1] = matterArray[1] / totalMass; // Liquids;
+        returnArray[2] = matterArray[2] / totalMass; // Gases;
+
+        return returnArray;
+    }
+
+    public float[] GetAmountOfMatterStates()
+    {
+        float[] returnArray = new float[3];
+        returnArray[0] = 0; // Solids;
+        returnArray[1] = 0; // Liquids;
+        returnArray[2] = 0; // Gases;
+        foreach (var item in substances)
+        {
+            if (item.SO.isSolid(GetEnergy()))
+                returnArray[0] += item.amount;
+            else if (item.SO.isLiquid(GetEnergy()))
+                returnArray[1] += item.amount;
+            else if (item.SO.isGas(GetEnergy()))
+                returnArray[2] += item.amount;
+        }
+        return returnArray;
+    }
+
     public float GetOceanLevel(bool recalc = true)
     {
         if (!recalc)

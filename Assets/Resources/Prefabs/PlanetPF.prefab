@@ -204,6 +204,7 @@ MonoBehaviour:
   rb: {fileID: 4857272413072896481}
   planetOceanPF: {fileID: 2859714562404869469, guid: 1c7cd0802a7d7fd4f9cf3433b9663bc2,
     type: 3}
+  planetGFX: {fileID: 3923134884140388052}
   iceCoverageMultiplier: -0.75
   icePower: 1
   iceNoiseIntensity: 80

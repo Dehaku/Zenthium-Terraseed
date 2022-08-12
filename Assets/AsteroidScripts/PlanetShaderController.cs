@@ -15,7 +15,8 @@ public class PlanetShaderController : MonoBehaviour
     public float iceNoiseIntensity = 80;
 
     [Header("Ocean")]
-    public float oceanMinLevel = 0.5f;
+    public float oceanMinLevel = 2f;
+    public float oceanMaxAdditionalLevel = 1f;
     public float oceanArbitraryMulti = 3;
 
     // Start is called before the first frame update
@@ -98,7 +99,7 @@ public class PlanetShaderController : MonoBehaviour
         if(planetOcean == null)
         {
             
-            planetOcean = Instantiate(planetOceanPF, GetComponentInChildren<Spherize>().transform).transform;
+            planetOcean = Instantiate(planetOceanPF, transform).transform;
         }
     }
 
@@ -118,6 +119,8 @@ public class PlanetShaderController : MonoBehaviour
             return;
         }
 
-        planetOcean.localScale = (Vector3.one * mass.GetOceanLevel(false)) * oceanArbitraryMulti;
+        var oceanScale = (oceanMinLevel + (oceanMaxAdditionalLevel * mass.GetOceanLevel(false))) * oceanArbitraryMulti;
+
+        planetOcean.localScale =  Vector3.one * oceanScale;
     }
 }

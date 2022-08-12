@@ -48,9 +48,9 @@ public class Mass : MonoBehaviour
         {
             gwpCalc += item.SO.CalculateGlobalWarmingPotential(GetEnergy()) * item.amount;
         }
-        _GWP = gwpCalc;
+        _GWP = (gwpCalc/GetMass(false));
 
-        return gwpCalc;
+        return _GWP;
     }
 
     public float GetOceanLevel(bool recalc = true)
@@ -72,12 +72,11 @@ public class Mass : MonoBehaviour
         // Divide by 0 protection
         if(massLiquid == 0 || massSolid == 0)
         {
-            _oceanLevel = massLiquid;
+            _oceanLevel = Mathf.Clamp(massLiquid, 0, 1); ;
             return _oceanLevel;
         }
-        _oceanLevel = massLiquid / massSolid;
+        _oceanLevel = Mathf.Clamp(massLiquid / massSolid,0,1);
 
-        Debug.Log("Mathf.Clamp(sphereMinimum,SphereMaximum)");
         return _oceanLevel;
     }
 
@@ -114,9 +113,9 @@ public class Mass : MonoBehaviour
             if(item.SO.isGas(GetEnergy()))
                 pressureCalc += item.amount * 800; 
         }
-        _gasPressure = pressureCalc;
+        _gasPressure = (pressureCalc/GetMass(false));
 
-        return pressureCalc;
+        return _gasPressure;
     }
 
     public float GetMass(bool recalc = true)
@@ -131,7 +130,7 @@ public class Mass : MonoBehaviour
         }
         _mass = massCalc;
 
-        return massCalc;
+        return _mass;
     }
 
     public void Reset() // Reset ourselves after being pooled.

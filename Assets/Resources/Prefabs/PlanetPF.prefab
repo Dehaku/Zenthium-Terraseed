@@ -202,6 +202,9 @@ MonoBehaviour:
   mass: {fileID: 4857272413072896487}
   materials: []
   rb: {fileID: 4857272413072896481}
+  iceCoverageMultiplier: -0.75
+  icePower: 1
+  iceNoiseIntensity: 80
 --- !u!1 &4857272413072896538
 GameObject:
   m_ObjectHideFlags: 0

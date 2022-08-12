@@ -8,12 +8,16 @@ public class PlanetShaderController : MonoBehaviour
     public List<Material> materials;
     public Rigidbody rb;
 
-    public float iceCoverageMultiplier = 1;
+    public float iceCoverageMultiplier = -0.75f;
+    public float icePower = 1;
+    public float iceNoiseIntensity = 80;
 
     // Start is called before the first frame update
     void Start()
     {
         CacheMaterials();
+        if (Random.Range(0, 1000) == 1)
+            Debug.Log("Find a way to make a numerical gradiant with multiple points, and sample from it for polar ice caps scaling");
     }
 
     public void CacheMaterials()
@@ -40,13 +44,15 @@ public class PlanetShaderController : MonoBehaviour
     {
         if (materials.Count == 0)
             return;
-
-        float iceCoverage = rb.transform.localScale.x * iceCoverageMultiplier;
+        float iceCoverage = (transform.localScale.x) * (iceCoverageMultiplier);
         foreach (var item in materials)
         {
 
             item.SetFloat("IceCapReach", iceCoverage);
             item.SetVector("WorldPos", rb.position);
+            item.SetFloat("IceNoiseIntensity", iceNoiseIntensity);
+
+
 
         }
 

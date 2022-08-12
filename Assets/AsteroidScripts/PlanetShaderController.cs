@@ -26,6 +26,10 @@ public class PlanetShaderController : MonoBehaviour
         {
             Debug.Log("Find a way to make a numerical gradiant with multiple points, and sample from it for polar ice caps scaling");
             Debug.Log("Make Nebulas by using 'cloud generator' type assets free floating in space.");
+            Debug.Log("How to blend between multiple values, sampling");
+            Debug.Log("Reflections for ocean");
+            Debug.Log("How to convert colors to HDR colors and vice versa.");
+            Debug.Log("How to average colors");
         }
             
     }

@@ -76,6 +76,8 @@ public class Mass : MonoBehaviour
             return _oceanLevel;
         }
         _oceanLevel = massLiquid / massSolid;
+
+        Debug.Log("Mathf.Clamp(sphereMinimum,SphereMaximum)");
         return _oceanLevel;
     }
 

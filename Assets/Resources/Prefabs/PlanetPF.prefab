@@ -207,6 +207,8 @@ MonoBehaviour:
   iceCoverageMultiplier: -0.75
   icePower: 1
   iceNoiseIntensity: 80
+  oceanMinLevel: 0.5
+  oceanArbitraryMulti: 3
 --- !u!1 &4857272413072896538
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,13 +29,16 @@ public class PlanetShaderController : MonoBehaviour
         if (Random.Range(0, 1000) == 1)
         {
             Debug.Log("Find a way to make a numerical gradiant with multiple points, and sample from it for polar ice caps scaling");
+            // https://stackoverflow.com/questions/66522629/given-3-or-more-numbers-or-vectors-how-do-i-interpolate-between-them-based-on-a
             Debug.Log("Make Nebulas by using 'cloud generator' type assets free floating in space.");
-            Debug.Log("How to blend between multiple values, sampling");
             Debug.Log("Reflections for ocean");
             Debug.Log("How to convert colors to HDR colors and vice versa.");
+            // https://forum.unity.com/threads/how-to-change-hdr-color-intensity-on-custom-material-via-script.1075846/
+            // https://answers.unity.com/questions/1084467/assigning-hdr-color-to-material-property-via-scrip.html
             Debug.Log("How to average colors");
+            // https://answers.unity.com/questions/725895/best-way-to-mix-color-values.html
         }
-            
+
     }
 
     public void CacheMaterials()
